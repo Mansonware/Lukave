@@ -32,6 +32,8 @@ document.querySelectorAll('.reveal').forEach(element => observer.observe(element
 
 const dockTabs = [...document.querySelectorAll('.dock-link[data-tab]')];
 const tabPanels = [...document.querySelectorAll('.tab-content')];
+const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
+const motionAllowed = matchMedia('(hover: hover) and (prefers-reduced-motion: no-preference)');
 
 function activateTab(targetId, shouldScroll = true, updateHash = true) {
   const targetPanel = document.getElementById(targetId);
@@ -44,11 +46,22 @@ function activateTab(targetId, shouldScroll = true, updateHash = true) {
     tab.setAttribute('tabindex', isActive ? '0' : '-1');
   });
 
+  const activeDock = dockTabs.find(tab => tab.dataset.tab === targetId);
+  if (activeDock && !reducedMotion.matches) {
+    activeDock.classList.remove('nav-pop');
+    requestAnimationFrame(() => activeDock.classList.add('nav-pop'));
+  }
+
   tabPanels.forEach(panel => {
     const isActive = panel === targetPanel;
     panel.classList.toggle('active', isActive);
     panel.setAttribute('aria-hidden', String(mobileQuery.matches && !isActive));
   });
+
+  if (mobileQuery.matches && !reducedMotion.matches) {
+    targetPanel.classList.remove('tab-enter');
+    requestAnimationFrame(() => targetPanel.classList.add('tab-enter'));
+  }
 
   if (mobileQuery.matches && updateHash && location.hash !== `#${targetId}`) {
     history.replaceState(null, '', `#${targetId}`);
@@ -99,7 +112,6 @@ addEventListener('hashchange', () => {
 syncTabMode();
 
 // Lightweight liquid-glass reflection for precise pointer devices only.
-const motionAllowed = matchMedia('(hover: hover) and (prefers-reduced-motion: no-preference)');
 const liquidCards = document.querySelectorAll([
   '.app-window', '.creator-row article', '.mini-cta', '.community-feature',
   '.community-card', '.moderation-card', '.market-card', '.seller-card',
@@ -117,8 +129,8 @@ if (motionAllowed.matches) {
         const bounds = card.getBoundingClientRect();
         const x = event.clientX - bounds.left;
         const y = event.clientY - bounds.top;
-        const rotateY = ((x / bounds.width) - .5) * 2.2;
-        const rotateX = (.5 - (y / bounds.height)) * 2.2;
+        const rotateY = ((x / bounds.width) - .5) * 3.8;
+        const rotateX = (.5 - (y / bounds.height)) * 3.8;
 
         card.style.setProperty('--mx', `${x}px`);
         card.style.setProperty('--my', `${y}px`);
@@ -134,5 +146,12 @@ if (motionAllowed.matches) {
       card.style.removeProperty('--rx');
       card.style.removeProperty('--ry');
     });
+  });
+}
+
+// PWA Service Worker Registration
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('./service-worker.js').catch(err => console.log('SW reg failed', err));
   });
 }

@@ -2,10 +2,16 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="NEXUS — o app para criar, conectar e monetizar comunidades.">
-  <meta name="theme-color" content="#06070b">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="description" content="NEXUS — O app premium para criar, conectar e monetizar comunidades de forma nativa.">
+  <meta name="theme-color" content="#8B5CF6">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <title>NEXUS — Crie. Conecte. Monetize.</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" type="image/svg+xml" href="icon-192.svg">
+  <link rel="apple-touch-icon" href="icon-192.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
@@ -15,6 +21,7 @@
   <div class="noise" aria-hidden="true"></div><div class="ambient-grid" aria-hidden="true"></div><div class="ambient ambient-a" aria-hidden="true"></div><div class="ambient ambient-b" aria-hidden="true"></div><div class="ambient ambient-c" aria-hidden="true"></div>
   <header class="header" id="inicio"><div class="container navbar">
     <a class="logo" href="#inicio" aria-label="NEXUS, início"><span class="logo-mark">N</span><span>NEXUS</span></a>
+    <div class="app-actions" aria-label="Ações rápidas"><button type="button" aria-label="Notificações"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9M10 21h4"/></svg><i></i></button><span>MA</span></div>
     <button class="menu" aria-label="Abrir menu" aria-expanded="false" aria-controls="nav"><i></i><i></i></button>
     <nav id="nav" aria-label="Navegação principal"><a href="#tab-comunidades">Comunidades</a><a href="#tab-marketplace">Marketplace</a><a href="#tab-roadmap">Roadmap</a></nav>
     <a class="button button-ghost header-cta" href="#tab-perfil">Ver perfil <span>↗</span></a>
@@ -23,15 +30,16 @@
   <main>
     <section class="hero section tab-content active" id="tab-inicio" role="tabpanel" aria-labelledby="dock-inicio">
       <div class="container hero-grid">
-        <div class="hero-copy reveal"><span class="eyebrow"><i></i> A nova economia criativa</span><h1>Crie. Conecte.<br><em>Monetize.</em></h1><p>Crie conteúdo, reúna sua comunidade e monetize no mesmo lugar.</p><div class="hero-actions"><a class="button button-primary" href="#tab-perfil" data-open-tab="tab-perfil">Criar meu espaço <span>→</span></a><a class="button button-ghost" href="#tab-roadmap" data-open-tab="tab-roadmap"><small>▶</small> Ver roadmap</a></div><div class="proof"><div class="avatars" aria-hidden="true"><i>AM</i><i>JS</i><i>LV</i><i>+</i></div><p><strong>Feito para quem cria.</strong><br>Conexões que geram valor.</p></div></div>
+        <div class="hero-copy reveal"><span class="eyebrow"><i></i> Seu ecossistema está vivo</span><h1>Crie o que vem<br><em>depois.</em></h1><p>Conteúdo, comunidade e receita. Tudo conectado.</p><div class="hero-actions"><a class="button button-primary" href="#tab-perfil" data-open-tab="tab-perfil">Criar agora <span>→</span></a><a class="button button-ghost" href="#tab-roadmap" data-open-tab="tab-roadmap"><small>▶</small> Explorar</a></div><div class="proof"><div class="avatars" aria-hidden="true"><i>AM</i><i>JS</i><i>LV</i><i>+</i></div><p><strong>24,8 mil criadores</strong><br>construindo em público.</p></div></div>
         <div class="product reveal" aria-label="Prévia visual do feed NEXUS"><div class="product-glow" aria-hidden="true"></div><div class="app-window"><div class="app-top"><span class="app-logo"><b>N</b>NEXUS</span><span class="app-search">⌕ &nbsp; Buscar no NEXUS</span><i>MA</i></div><div class="app-body"><aside class="app-nav"><strong>⌂ <span>Feed</span></strong><p>◎ <span>Explorar</span></p><p>◇ <span>Comunidades</span></p><p>▣ <span>Mensagens</span></p><p>□ <span>Marketplace</span></p><hr><small>SEUS ESPAÇOS</small><p><b class="dot purple"></b><span>Design Lab</span></p></aside><div class="feed"><div class="composer"><i>MA</i><span>Compartilhe uma ideia...</span><button type="button">Publicar</button></div><article class="post"><div class="post-head"><i>LC</i><p><strong>Laura Costa <b>✓</b></strong><small>Design Lab · 12 min</small></p><span>•••</span></div><p>Do rascunho à comunidade: bastidores do nosso novo projeto criativo ✦</p><div class="post-art"><strong>BUILD<br>WHAT<br><em>MATTERS.</em></strong><b>N<span>∞</span></b></div><footer>♥ 248 &nbsp;&nbsp; ◯ 32 &nbsp;&nbsp; ↗ Compartilhar</footer></article></div><aside class="trending"><small>EM ALTA</small><strong>#economiacriativa</strong><span>2,4 mil publicações</span><strong>#designcommunity</strong><span>1,8 mil publicações</span><div><small>CRIADOR EM DESTAQUE</small><p><i>RN</i><b>Rafa Nunes<span>12,8k seguidores</span></b></p><button type="button">Seguir</button></div></aside></div></div><div class="float-card float-community"><i>◇</i><p><small>COMUNIDADE</small><strong>Design Lab</strong><span>+124 novos membros</span></p></div><div class="float-card float-sale"><i>↗</i><p><small>NOVA VENDA</small><strong>R$ 149,00</strong><span>Workshop Criativo</span></p></div></div>
-        <div class="home-extras reveal"><div class="app-section-title"><div><small>CRIADORES EM ALTA</small><strong>Descubra novas vozes</strong></div><button type="button">Ver todos</button></div><div class="creator-row"><article><i class="avatar avatar-purple">LC</i><div><strong>Laura Costa</strong><span>Design & produto</span></div><button type="button">＋</button></article><article><i class="avatar avatar-blue">RN</i><div><strong>Rafa Nunes</strong><span>Creator economy</span></div><button type="button">＋</button></article></div><div class="mini-cta"><i>✦</i><div><strong>Seu espaço começa aqui</strong><span>Publique, conecte e monetize no mesmo app.</span></div><button type="button" data-open-tab="tab-perfil">Começar</button></div></div>
+        <div class="home-extras reveal"><div class="signal-row"><span><i>↗</i><b>38,4k</b><small>alcance</small></span><span><i>◇</i><b>3,2k</b><small>membros</small></span><span><i>R$</i><b>8,4k</b><small>receita</small></span></div><div class="app-section-title"><div><small>CRIADORES EM ALTA</small><strong>Novas vozes</strong></div><button type="button">Ver todos</button></div><div class="creator-row"><article><i class="avatar avatar-purple">LC<b></b></i><div><strong>Laura Costa <em>✓</em></strong><span>Design · 18,2k</span></div><button type="button">Seguir</button></article><article><i class="avatar avatar-blue">RN<b></b></i><div><strong>Rafa Nunes <em>✓</em></strong><span>Creator · 12,8k</span></div><button type="button">Seguir</button></article></div><div class="mini-cta"><i>✦</i><div><strong>Seu espaço começa aqui</strong><span>Publique. Conecte. Monetize.</span></div><button type="button" data-open-tab="tab-perfil">Começar</button></div></div>
       </div>
     </section>
 
     <section class="section tab-content communities-panel" id="tab-comunidades" role="tabpanel" aria-labelledby="dock-comunidades"><div class="container">
       <div class="app-page-head reveal"><span class="kicker">ESPAÇOS QUE MOVEM IDEIAS</span><h2>Suas <em>comunidades.</em></h2><p>Participe, converse e cresça junto.</p></div>
       <div class="community-feature reveal"><div class="community-cover"><span>DESTAQUE DA SEMANA</span><strong>Design Lab</strong><p>Produto, interface e criatividade aplicada.</p></div><div class="community-meta"><div class="member-stack"><i>LC</i><i>RN</i><i>AM</i></div><span><b>8,4 mil</b> membros</span><span><b>92%</b> engajamento</span><button type="button">Participar</button></div></div>
+      <div class="live-strip reveal"><span><i></i> AGORA NO NEXUS</span><div><b>84</b> em conversa</div><div><b>12</b> salas ao vivo</div><div><b>+218</b> novos hoje</div></div>
       <div class="community-grid"><article class="community-card purple-card reveal"><header><i>◇</i><span>PÚBLICA</span></header><h3>Creators BR</h3><p>Estratégias e conexões para viver de conteúdo.</p><footer><span>12,8k membros</span><b>+218 hoje</b></footer></article><article class="community-card blue-card reveal"><header><i>✦</i><span>PÚBLICA</span></header><h3>Build in Public</h3><p>Projetos reais, feedback rápido e evolução compartilhada.</p><footer><span>6,2k membros</span><b>84 online</b></footer></article><article class="community-card green-card reveal"><header><i>◈</i><span>PRIVADA</span></header><h3>Nexus Pro</h3><p>Mentorias, encontros e conteúdo aprofundado.</p><footer><span>1,9k membros</span><b>Por assinatura</b></footer></article></div>
       <div class="moderation-card reveal"><i>⬡</i><div><small>MODERAÇÃO INTELIGENTE</small><strong>Comunidades saudáveis por padrão</strong><span>Regras, cargos e relatórios em um painel simples.</span></div><span class="status-dot">Ativa</span></div>
     </div></section>
@@ -58,11 +66,11 @@
   <footer class="site-footer"><div class="container footer-grid"><div class="footer-brand"><a class="logo" href="#inicio"><span class="logo-mark">N</span><span>NEXUS</span></a><p>O ponto de encontro entre criatividade, comunidade e crescimento.</p></div><div class="footer-links"><strong>Explore</strong><a href="#tab-comunidades">Comunidades</a><a href="#tab-marketplace">Marketplace</a><a href="#tab-roadmap">Roadmap</a></div><div class="footer-pillars"><strong>Nossos pilares</strong><div><span>Crie</span><span>Conecte</span><span>Monetize</span><span>Cresça</span></div></div></div><div class="container footer-bottom"><span>© 2026 NEXUS</span><span>Feito para a nova economia criativa.</span></div></footer>
 
   <nav class="mobile-dock" aria-label="Navegação do aplicativo" role="tablist">
-    <button class="dock-link active" id="dock-inicio" data-tab="tab-inicio" type="button" role="tab" aria-controls="tab-inicio" aria-selected="true"><i>⌂</i><span>Início</span></button>
-    <button class="dock-link" id="dock-comunidades" data-tab="tab-comunidades" type="button" role="tab" aria-controls="tab-comunidades" aria-selected="false"><i>◇</i><span>Comunidades</span></button>
-    <button class="dock-link" id="dock-marketplace" data-tab="tab-marketplace" type="button" role="tab" aria-controls="tab-marketplace" aria-selected="false"><i>▱</i><span>Loja</span></button>
-    <button class="dock-link" id="dock-roadmap" data-tab="tab-roadmap" type="button" role="tab" aria-controls="tab-roadmap" aria-selected="false"><i>○</i><span>Roadmap</span></button>
-    <button class="dock-link" id="dock-perfil" data-tab="tab-perfil" type="button" role="tab" aria-controls="tab-perfil" aria-selected="false"><i>◈</i><span>Perfil</span></button>
+    <button class="dock-link active" id="dock-inicio" data-tab="tab-inicio" type="button" role="tab" aria-controls="tab-inicio" aria-selected="true"><i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m4 10 8-6 8 6v9a1 1 0 0 1-1 1h-5v-6h-4v6H5a1 1 0 0 1-1-1Z"/></svg></i><span>Início</span></button>
+    <button class="dock-link" id="dock-comunidades" data-tab="tab-comunidades" type="button" role="tab" aria-controls="tab-comunidades" aria-selected="false"><i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16 20v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M9 10a4 4 0 1 0 0-8 4 4 0 0 0 0 8M22 20v-2a4 4 0 0 0-3-3.87M16 2.13a4 4 0 0 1 0 7.75"/></svg></i><span>Comunidades</span></button>
+    <button class="dock-link" id="dock-marketplace" data-tab="tab-marketplace" type="button" role="tab" aria-controls="tab-marketplace" aria-selected="false"><i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9h18l-1-5H4L3 9Zm1 0v11h16V9M8 20v-6h8v6"/></svg></i><span>Loja</span></button>
+    <button class="dock-link" id="dock-roadmap" data-tab="tab-roadmap" type="button" role="tab" aria-controls="tab-roadmap" aria-selected="false"><i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3v18M5 7h9l-2-2 2-2M5 17h13l-2-2 2-2"/></svg></i><span>Roadmap</span></button>
+    <button class="dock-link" id="dock-perfil" data-tab="tab-perfil" type="button" role="tab" aria-controls="tab-perfil" aria-selected="false"><i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 21a8 8 0 0 0-16 0M12 13a5 5 0 1 0 0-10 5 5 0 0 0 0 10"/></svg></i><span>Perfil</span></button>
   </nav>
   <script src="script.js"></script>
 </body>
