@@ -11,5 +11,5 @@ export const isStripeConfigured = Boolean(secretKey);
  * O fluxo de checkout/assinaturas será implementado nas Fases 4 e 5.
  */
 export const stripe: Stripe | null = secretKey
-  ? new Stripe(secretKey, { apiVersion: "2024-12-18.acacia" })
+  ? new Stripe(secretKey, { apiVersion: "2025-02-24.acacia" })
   : null;

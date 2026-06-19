@@ -1,8 +1,16 @@
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
+import { formatDistanceToNowStrict } from "date-fns";
+import { ptBR } from "date-fns/locale";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
+}
+
+/** "há 3 min", "há 2 d" — distância relativa em pt-BR. */
+export function formatTimeAgo(date: Date | string): string {
+  const d = typeof date === "string" ? new Date(date) : date;
+  return formatDistanceToNowStrict(d, { addSuffix: true, locale: ptBR });
 }
 
 /** Formata números de forma compacta (1.2k, 3.4M). */

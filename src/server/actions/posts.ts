@@ -5,7 +5,7 @@ import { revalidatePath } from "next/cache";
 import { prisma } from "@/lib/prisma";
 import { requireUser } from "@/lib/session";
 import { createPostSchema, createCommentSchema } from "@/lib/validations";
-import type { ActionResult } from "@/server/actions/auth";
+import type { ActionResult } from "@/server/action-result";
 
 export async function createPost(input: {
   content: string;
@@ -173,6 +173,25 @@ export async function addComment(input: {
   revalidatePath("/feed");
   revalidatePath(`/post/${postId}`);
   return { ok: true, data: { id: comment.id } };
+}
+
+export async function getComments(postId: string) {
+  const comments = await prisma.comment.findMany({
+    where: { postId },
+    include: {
+      author: {
+        select: { id: true, name: true, username: true, image: true, role: true },
+      },
+    },
+    orderBy: { createdAt: "desc" },
+    take: 100,
+  });
+  return comments.map((c) => ({
+    id: c.id,
+    content: c.content,
+    createdAt: c.createdAt,
+    author: c.author,
+  }));
 }
 
 export async function sharePost(

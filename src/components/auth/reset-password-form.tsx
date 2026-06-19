@@ -9,7 +9,8 @@ import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { resetPassword, type ActionResult } from "@/server/actions/auth";
+import { resetPassword } from "@/server/actions/auth";
+import type { ActionResult } from "@/server/action-result";
 
 function SubmitButton() {
   const { pending } = useFormStatus();

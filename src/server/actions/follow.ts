@@ -4,7 +4,7 @@ import { revalidatePath } from "next/cache";
 
 import { prisma } from "@/lib/prisma";
 import { requireUser } from "@/lib/session";
-import type { ActionResult } from "@/server/actions/auth";
+import type { ActionResult } from "@/server/action-result";
 
 export async function toggleFollow(
   targetUserId: string,
