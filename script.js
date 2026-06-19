@@ -112,11 +112,7 @@ addEventListener('hashchange', () => {
 syncTabMode();
 
 // Lightweight liquid-glass reflection for precise pointer devices only.
-const liquidCards = document.querySelectorAll([
-  '.app-window', '.creator-row article', '.mini-cta', '.community-feature',
-  '.community-card', '.moderation-card', '.market-card', '.seller-card',
-  '.phase', '.profile-shell', '.earnings-card', '.membership-card', '.profile-products'
-].join(','));
+const liquidCards = document.querySelectorAll('.liquid-card');
 
 if (motionAllowed.matches) {
   liquidCards.forEach(card => {
