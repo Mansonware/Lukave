@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="NEXUS — a plataforma para criar, conectar e monetizar comunidades.">
+  <meta name="description" content="NEXUS — o app para criar, conectar e monetizar comunidades.">
   <meta name="theme-color" content="#06070b">
   <title>NEXUS — Crie. Conecte. Monetize.</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -12,135 +12,57 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="noise" aria-hidden="true"></div>
-  <div class="ambient ambient-a" aria-hidden="true"></div>
-  <div class="ambient ambient-b" aria-hidden="true"></div>
-
-  <header class="header" id="inicio">
-    <div class="container navbar">
-      <a class="logo" href="#inicio" aria-label="NEXUS, início"><span class="logo-mark">N</span><span>NEXUS</span></a>
-      <button class="menu" aria-label="Abrir menu" aria-expanded="false" aria-controls="nav"><i></i><i></i></button>
-      <nav id="nav" aria-label="Navegação principal">
-        <a href="#recursos">Recursos</a><a href="#roadmap">Roadmap</a><a href="#monetizacao">Monetização</a>
-      </nav>
-      <a class="button button-ghost header-cta" href="#espera">Lista de espera <span>↗</span></a>
-    </div>
-  </header>
+  <div class="noise" aria-hidden="true"></div><div class="ambient ambient-a" aria-hidden="true"></div><div class="ambient ambient-b" aria-hidden="true"></div>
+  <header class="header" id="inicio"><div class="container navbar">
+    <a class="logo" href="#inicio" aria-label="NEXUS, início"><span class="logo-mark">N</span><span>NEXUS</span></a>
+    <button class="menu" aria-label="Abrir menu" aria-expanded="false" aria-controls="nav"><i></i><i></i></button>
+    <nav id="nav" aria-label="Navegação principal"><a href="#tab-comunidades">Comunidades</a><a href="#tab-marketplace">Marketplace</a><a href="#tab-roadmap">Roadmap</a></nav>
+    <a class="button button-ghost header-cta" href="#tab-perfil">Ver perfil <span>↗</span></a>
+  </div></header>
 
   <main>
-    <section class="hero section">
+    <section class="hero section tab-content active" id="tab-inicio" role="tabpanel" aria-labelledby="dock-inicio">
       <div class="container hero-grid">
-        <div class="hero-copy reveal">
-          <span class="eyebrow"><i></i> O ecossistema da nova economia criativa</span>
-          <h1>Crie. Conecte.<br><em>Monetize.</em></h1>
-          <p>Uma plataforma para transformar ideias em conteúdo, audiência em comunidade e criatividade em receita.</p>
-          <div class="hero-actions">
-            <a class="button button-primary" href="#espera">Entrar na lista <span>→</span></a>
-            <a class="button button-ghost" href="#roadmap"><small>▶</small> Ver roadmap</a>
-          </div>
-          <div class="proof">
-            <div class="avatars" aria-hidden="true"><i>AM</i><i>JS</i><i>LV</i><i>+</i></div>
-            <p><strong>Feito para quem cria.</strong><br>Conexões que geram valor.</p>
-          </div>
-        </div>
-
-        <div class="product reveal" aria-label="Prévia visual da plataforma NEXUS">
-          <div class="product-glow" aria-hidden="true"></div>
-          <div class="app-window">
-            <div class="app-top"><span class="app-logo"><b>N</b>NEXUS</span><span class="app-search">⌕ &nbsp; Buscar no NEXUS</span><i>MA</i></div>
-            <div class="app-body">
-              <aside class="app-nav">
-                <strong>⌂ <span>Feed</span></strong><p>◎ <span>Explorar</span></p><p>◇ <span>Comunidades</span></p><p>▣ <span>Mensagens</span></p><p>□ <span>Marketplace</span></p>
-                <hr><small>SEUS ESPAÇOS</small><p><b class="dot purple"></b><span>Design Lab</span></p><p><b class="dot orange"></b><span>Creators BR</span></p>
-              </aside>
-              <div class="feed">
-                <div class="composer"><i>MA</i><span>Compartilhe uma ideia...</span><button>Publicar</button></div>
-                <article class="post">
-                  <div class="post-head"><i>LC</i><p><strong>Laura Costa <b>✓</b></strong><small>Design Lab · 12 min</small></p><span>•••</span></div>
-                  <p>Do rascunho à comunidade: bastidores do nosso novo projeto criativo ✦</p>
-                  <div class="post-art"><strong>BUILD<br>WHAT<br><em>MATTERS.</em></strong><b>N<span>∞</span></b></div>
-                  <footer>♥ 248 &nbsp;&nbsp; ◯ 32 &nbsp;&nbsp; ↗ Compartilhar</footer>
-                </article>
-              </div>
-              <aside class="trending">
-                <small>EM ALTA</small><strong>#economiacriativa</strong><span>2,4 mil publicações</span><strong>#designcommunity</strong><span>1,8 mil publicações</span>
-                <div><small>CRIADOR EM DESTAQUE</small><p><i>RN</i><b>Rafa Nunes<span>12,8k seguidores</span></b></p><button>Seguir</button></div>
-              </aside>
-            </div>
-          </div>
-          <div class="float-card float-community"><i>◇</i><p><small>COMUNIDADE</small><strong>Design Lab</strong><span>+124 novos membros</span></p></div>
-          <div class="float-card float-sale"><i>↗</i><p><small>NOVA VENDA</small><strong>R$ 149,00</strong><span>Workshop Criativo</span></p></div>
-        </div>
+        <div class="hero-copy reveal"><span class="eyebrow"><i></i> A nova economia criativa</span><h1>Crie. Conecte.<br><em>Monetize.</em></h1><p>Crie conteúdo, reúna sua comunidade e monetize no mesmo lugar.</p><div class="hero-actions"><a class="button button-primary" href="#tab-perfil" data-open-tab="tab-perfil">Criar meu espaço <span>→</span></a><a class="button button-ghost" href="#tab-roadmap" data-open-tab="tab-roadmap"><small>▶</small> Ver roadmap</a></div><div class="proof"><div class="avatars" aria-hidden="true"><i>AM</i><i>JS</i><i>LV</i><i>+</i></div><p><strong>Feito para quem cria.</strong><br>Conexões que geram valor.</p></div></div>
+        <div class="product reveal" aria-label="Prévia visual do feed NEXUS"><div class="product-glow" aria-hidden="true"></div><div class="app-window"><div class="app-top"><span class="app-logo"><b>N</b>NEXUS</span><span class="app-search">⌕ &nbsp; Buscar no NEXUS</span><i>MA</i></div><div class="app-body"><aside class="app-nav"><strong>⌂ <span>Feed</span></strong><p>◎ <span>Explorar</span></p><p>◇ <span>Comunidades</span></p><p>▣ <span>Mensagens</span></p><p>□ <span>Marketplace</span></p><hr><small>SEUS ESPAÇOS</small><p><b class="dot purple"></b><span>Design Lab</span></p></aside><div class="feed"><div class="composer"><i>MA</i><span>Compartilhe uma ideia...</span><button type="button">Publicar</button></div><article class="post"><div class="post-head"><i>LC</i><p><strong>Laura Costa <b>✓</b></strong><small>Design Lab · 12 min</small></p><span>•••</span></div><p>Do rascunho à comunidade: bastidores do nosso novo projeto criativo ✦</p><div class="post-art"><strong>BUILD<br>WHAT<br><em>MATTERS.</em></strong><b>N<span>∞</span></b></div><footer>♥ 248 &nbsp;&nbsp; ◯ 32 &nbsp;&nbsp; ↗ Compartilhar</footer></article></div><aside class="trending"><small>EM ALTA</small><strong>#economiacriativa</strong><span>2,4 mil publicações</span><strong>#designcommunity</strong><span>1,8 mil publicações</span><div><small>CRIADOR EM DESTAQUE</small><p><i>RN</i><b>Rafa Nunes<span>12,8k seguidores</span></b></p><button type="button">Seguir</button></div></aside></div></div><div class="float-card float-community"><i>◇</i><p><small>COMUNIDADE</small><strong>Design Lab</strong><span>+124 novos membros</span></p></div><div class="float-card float-sale"><i>↗</i><p><small>NOVA VENDA</small><strong>R$ 149,00</strong><span>Workshop Criativo</span></p></div></div>
+        <div class="home-extras reveal"><div class="app-section-title"><div><small>CRIADORES EM ALTA</small><strong>Descubra novas vozes</strong></div><button type="button">Ver todos</button></div><div class="creator-row"><article><i class="avatar avatar-purple">LC</i><div><strong>Laura Costa</strong><span>Design & produto</span></div><button type="button">＋</button></article><article><i class="avatar avatar-blue">RN</i><div><strong>Rafa Nunes</strong><span>Creator economy</span></div><button type="button">＋</button></article></div><div class="mini-cta"><i>✦</i><div><strong>Seu espaço começa aqui</strong><span>Publique, conecte e monetize no mesmo app.</span></div><button type="button" data-open-tab="tab-perfil">Começar</button></div></div>
       </div>
     </section>
 
-    <section class="section benefits" id="recursos">
-      <div class="container">
-        <div class="section-head reveal"><div><span class="kicker">UM NEXUS PARA CADA VISÃO</span><h2>Todo mundo cresce<br><em>quando conecta.</em></h2></div><p>Ferramentas para cada parte do ecossistema. Simples para começar, poderosas para escalar.</p></div>
-        <div class="benefit-grid">
-          <article class="benefit-card purple-card reveal"><i>◎</i><small>01</small><h3>Usuários</h3><p>Descubra conteúdos, pessoas e espaços que combinam com você.</p><a href="#roadmap">Explore livremente <b>↗</b></a></article>
-          <article class="benefit-card blue-card reveal"><i>✦</i><small>02</small><h3>Criadores</h3><p>Publique, cresça sua audiência e transforme talento em receita.</p><a href="#roadmap">Amplifique sua voz <b>↗</b></a></article>
-          <article class="benefit-card green-card reveal"><i>◇</i><small>03</small><h3>Comunidades</h3><p>Crie espaços vivos com identidade, propósito e pertencimento.</p><a href="#roadmap">Construa seu espaço <b>↗</b></a></article>
-          <article class="benefit-card orange-card reveal"><i>▱</i><small>04</small><h3>Negócios</h3><p>Venda produtos digitais a quem já acredita no seu trabalho.</p><a href="#monetizacao">Monetize seu valor <b>↗</b></a></article>
-        </div>
-      </div>
-    </section>
+    <section class="section tab-content communities-panel" id="tab-comunidades" role="tabpanel" aria-labelledby="dock-comunidades"><div class="container">
+      <div class="app-page-head reveal"><span class="kicker">ESPAÇOS QUE MOVEM IDEIAS</span><h2>Suas <em>comunidades.</em></h2><p>Participe, converse e cresça junto.</p></div>
+      <div class="community-feature reveal"><div class="community-cover"><span>DESTAQUE DA SEMANA</span><strong>Design Lab</strong><p>Produto, interface e criatividade aplicada.</p></div><div class="community-meta"><div class="member-stack"><i>LC</i><i>RN</i><i>AM</i></div><span><b>8,4 mil</b> membros</span><span><b>92%</b> engajamento</span><button type="button">Participar</button></div></div>
+      <div class="community-grid"><article class="community-card purple-card reveal"><header><i>◇</i><span>PÚBLICA</span></header><h3>Creators BR</h3><p>Estratégias e conexões para viver de conteúdo.</p><footer><span>12,8k membros</span><b>+218 hoje</b></footer></article><article class="community-card blue-card reveal"><header><i>✦</i><span>PÚBLICA</span></header><h3>Build in Public</h3><p>Projetos reais, feedback rápido e evolução compartilhada.</p><footer><span>6,2k membros</span><b>84 online</b></footer></article><article class="community-card green-card reveal"><header><i>◈</i><span>PRIVADA</span></header><h3>Nexus Pro</h3><p>Mentorias, encontros e conteúdo aprofundado.</p><footer><span>1,9k membros</span><b>Por assinatura</b></footer></article></div>
+      <div class="moderation-card reveal"><i>⬡</i><div><small>MODERAÇÃO INTELIGENTE</small><strong>Comunidades saudáveis por padrão</strong><span>Regras, cargos e relatórios em um painel simples.</span></div><span class="status-dot">Ativa</span></div>
+    </div></section>
 
-    <section class="section roadmap" id="roadmap">
-      <div class="container">
-        <div class="section-head reveal"><div><span class="kicker">NOSSO CAMINHO</span><h2>Construindo o futuro,<br><em>fase por fase.</em></h2></div><p>Uma evolução intencional. Cada etapa abre novas possibilidades para todo o ecossistema.</p></div>
-        <div class="roadmap-grid">
-          <article class="phase purple-card reveal"><header><b>01</b><span>EM CONSTRUÇÃO</span></header><i>⬡</i><small>FASE 1</small><h3>Base da Plataforma</h3><p>A fundação para criar sua presença e publicar.</p><ul><li>Perfis personalizados</li><li>Feed de conteúdo</li><li>Descoberta inteligente</li></ul><footer>OBJETIVO<strong>Dar voz a cada ideia.</strong></footer></article>
-          <article class="phase blue-card reveal"><header><b>02</b><span>PRÓXIMA</span></header><i>◎</i><small>FASE 2</small><h3>Socialização</h3><p>Conexões que transformam conteúdo em conversa.</p><ul><li>Seguidores e conexões</li><li>Mensagens diretas</li><li>Interações avançadas</li></ul><footer>OBJETIVO<strong>Aproximar pessoas.</strong></footer></article>
-          <article class="phase green-card reveal"><header><b>03</b><span>PLANEJADA</span></header><i>◇</i><small>FASE 3</small><h3>Comunidades</h3><p>Espaços próprios reunidos por um propósito.</p><ul><li>Grupos públicos e privados</li><li>Gestão de membros</li><li>Eventos e conversas</li></ul><footer>OBJETIVO<strong>Criar pertencimento.</strong></footer></article>
-          <article class="phase orange-card reveal"><header><b>04</b><span>PLANEJADA</span></header><i>▱</i><small>FASE 4</small><h3>Marketplace</h3><p>Produtos digitais integrados à experiência social.</p><ul><li>Loja do criador</li><li>Checkout simplificado</li><li>Avaliações e curadoria</li></ul><footer>OBJETIVO<strong>Transformar valor em venda.</strong></footer></article>
-          <article class="phase pink-card reveal"><header><b>05</b><span>PLANEJADA</span></header><i>◈</i><small>FASE 5</small><h3>Monetização</h3><p>Receita recorrente para criadores e líderes.</p><ul><li>Assinaturas exclusivas</li><li>Conteúdo premium</li><li>Dashboard financeiro</li></ul><footer>OBJETIVO<strong>Gerar independência.</strong></footer></article>
-          <article class="phase cyan-card reveal"><header><b>06</b><span>FUTURO</span></header><i>✦</i><small>FASE 6</small><h3>Expansão</h3><p>Novas fronteiras para um ecossistema sem limites.</p><ul><li>App mobile nativo</li><li>IA para criadores</li><li>Ecossistema global</li></ul><footer>OBJETIVO<strong>Escalar possibilidades.</strong></footer></article>
-        </div>
-      </div>
-    </section>
+    <section class="section tab-content marketplace-panel" id="tab-marketplace" role="tabpanel" aria-labelledby="dock-marketplace"><div class="container">
+      <div class="app-page-head reveal"><span class="kicker">MARKETPLACE NEXUS</span><h2>Conhecimento que<br><em>vira produto.</em></h2><p>Cursos, templates e packs de criadores.</p></div>
+      <div class="market-toolbar reveal"><button class="active" type="button">Em alta</button><button type="button">Cursos</button><button type="button">Templates</button><button type="button">Packs</button></div>
+      <div class="product-grid"><article class="market-card reveal"><div class="market-art art-purple"><span>CURSO</span><strong>Creator<br>Playbook</strong><i>▶</i></div><div class="market-info"><small>por Laura Costa</small><h3>Conteúdo que constrói audiência</h3><div><span>★ 4,9 · 312 alunos</span><strong>R$ 149</strong></div><button type="button">Comprar agora</button></div></article><article class="market-card reveal"><div class="market-art art-orange"><span>TEMPLATES</span><strong>Social<br>System</strong><i>✦</i></div><div class="market-info"><small>por Rafa Nunes</small><h3>Kit visual para creators</h3><div><span>★ 4,8 · 189 vendas</span><strong>R$ 59</strong></div><button type="button">Comprar agora</button></div></article><article class="market-card reveal"><div class="market-art art-green"><span>PACK</span><strong>Notion<br>OS</strong><i>◇</i></div><div class="market-info"><small>por Marina Alves</small><h3>Sistema completo de produção</h3><div><span>★ 5,0 · 94 vendas</span><strong>R$ 89</strong></div><button type="button">Comprar agora</button></div></article></div>
+      <div class="seller-card reveal"><div><small>SUA LOJA NO NEXUS</small><strong>Venda onde sua audiência já está.</strong></div><button type="button">Abrir minha loja →</button></div>
+    </div></section>
 
-    <section class="section journey" id="monetizacao">
-      <div class="container">
-        <div class="center reveal"><span class="kicker">DA IDEIA À RENDA</span><h2>Seu caminho dentro do <em>NEXUS.</em></h2><p>Comece com uma conta. Termine com um ecossistema seu.</p></div>
-        <div class="flow reveal">
-          <div><small>01</small><i>◯</i><strong>Conta</strong><span>Seu ponto de partida</span></div><b>→</b>
-          <div><small>02</small><i>✦</i><strong>Conteúdo</strong><span>Compartilhe ideias</span></div><b>→</b>
-          <div><small>03</small><i>◎</i><strong>Seguidores</strong><span>Crie conexões</span></div><b>→</b>
-          <div><small>04</small><i>◇</i><strong>Comunidade</strong><span>Reúna pessoas</span></div><b>→</b>
-          <div><small>05</small><i>▱</i><strong>Produtos digitais</strong><span>Entregue valor</span></div><b>→</b>
-          <div><small>06</small><i>◈</i><strong>Assinatura</strong><span>Gere recorrência</span></div><b>→</b>
-          <div class="flow-final"><small>07</small><i>↗</i><strong>Monetização</strong><span>Cresça com liberdade</span></div>
-        </div>
-      </div>
-    </section>
+    <section class="section roadmap tab-content" id="tab-roadmap" role="tabpanel" aria-labelledby="dock-roadmap"><div class="container">
+      <div class="app-page-head section-head reveal"><div><span class="kicker">NOSSO CAMINHO</span><h2>Construindo o futuro,<br><em>fase por fase.</em></h2></div><p>Uma evolução intencional para todo o ecossistema.</p></div>
+      <div class="roadmap-grid"><article class="phase purple-card reveal"><header><b>01</b><span>EM CONSTRUÇÃO</span></header><i>⬡</i><small>FASE 1</small><h3>Base da Plataforma</h3><p>Perfis, feed e descoberta.</p><ul><li>Perfis personalizados</li><li>Feed de conteúdo</li></ul><footer>OBJETIVO<strong>Dar voz a cada ideia.</strong></footer></article><article class="phase blue-card reveal"><header><b>02</b><span>PRÓXIMA</span></header><i>◎</i><small>FASE 2</small><h3>Socialização</h3><p>Seguidores, conversas e mensagens.</p><ul><li>Conexões</li><li>Mensagens diretas</li></ul><footer>OBJETIVO<strong>Aproximar pessoas.</strong></footer></article><article class="phase green-card reveal"><header><b>03</b><span>PLANEJADA</span></header><i>◇</i><small>FASE 3</small><h3>Comunidades</h3><p>Espaços públicos e privados.</p><ul><li>Gestão de membros</li><li>Eventos e conversas</li></ul><footer>OBJETIVO<strong>Criar pertencimento.</strong></footer></article><article class="phase orange-card reveal"><header><b>04</b><span>PLANEJADA</span></header><i>▱</i><small>FASE 4</small><h3>Marketplace</h3><p>Produtos digitais integrados.</p><ul><li>Loja do criador</li><li>Checkout simples</li></ul><footer>OBJETIVO<strong>Transformar valor em venda.</strong></footer></article><article class="phase pink-card reveal"><header><b>05</b><span>PLANEJADA</span></header><i>◈</i><small>FASE 5</small><h3>Monetização</h3><p>Receita recorrente e conteúdo premium.</p><ul><li>Assinaturas</li><li>Dashboard financeiro</li></ul><footer>OBJETIVO<strong>Gerar independência.</strong></footer></article><article class="phase cyan-card reveal"><header><b>06</b><span>FUTURO</span></header><i>✦</i><small>FASE 6</small><h3>Expansão</h3><p>Aplicativo nativo e ecossistema global.</p><ul><li>App mobile</li><li>IA para criadores</li></ul><footer>OBJETIVO<strong>Escalar possibilidades.</strong></footer></article></div>
+    </div></section>
 
-    <section class="section final" id="espera">
-      <div class="container cta reveal">
-        <span class="kicker">O PRÓXIMO CAPÍTULO COMEÇA AQUI</span>
-        <h2>Construa sua audiência<br>dentro do <em>NEXUS.</em></h2>
-        <p>Tudo que criadores e comunidades precisam para crescer, vender e se conectar em um só lugar.</p>
-        <a class="button button-primary button-large" href="mailto:contato@nexus.com?subject=Lista%20de%20espera%20NEXUS">Entrar na lista de espera <span>→</span></a>
-        <small>Sem spam. Só novidades que valem a pena.</small>
-      </div>
-    </section>
+    <section class="section tab-content profile-panel" id="tab-perfil" role="tabpanel" aria-labelledby="dock-perfil"><div class="container">
+      <div class="profile-shell reveal"><div class="profile-cover"><span>✦</span></div><div class="profile-identity"><i class="profile-avatar">MA</i><button type="button">Editar perfil</button><h2>Marina Alves <small>✓</small></h2><p>@marina.cria · Produto, design e creator economy.</p><div class="profile-stats"><span><b>24,8k</b> seguidores</span><span><b>1,2k</b> membros</span><span><b>38</b> produtos</span></div></div></div>
+      <div class="profile-dashboard"><article class="earnings-card reveal"><header><div><small>SALDO DO MÊS</small><strong>R$ 8.420,00</strong></div><i>↗ 18%</i></header><div class="chart-bars" aria-label="Gráfico visual de receita"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><footer><span>Produtos <b>R$ 5.680</b></span><span>Assinaturas <b>R$ 2.740</b></span></footer></article><article class="membership-card reveal"><i>◈</i><small>ASSINATURA NEXUS+</small><h3>Conteúdo exclusivo</h3><p>Mentorias, comunidade privada e materiais premium.</p><strong>R$ 29,90 <span>/ mês</span></strong><button type="button">Assinar</button></article></div>
+      <div class="profile-products reveal"><div class="app-section-title"><div><small>MINHA LOJA</small><strong>Produtos publicados</strong></div><button type="button">Gerenciar</button></div><div><span>Creator Playbook <b>R$ 149</b></span><span>Social System <b>R$ 59</b></span><span>Notion OS <b>R$ 89</b></span></div></div>
+    </div></section>
   </main>
 
-  <footer class="site-footer">
-    <div class="container footer-grid">
-      <div class="footer-brand"><a class="logo" href="#inicio"><span class="logo-mark">N</span><span>NEXUS</span></a><p>O ponto de encontro entre criatividade, comunidade e crescimento.</p></div>
-      <div class="footer-links"><strong>Explore</strong><a href="#recursos">Recursos</a><a href="#roadmap">Roadmap</a><a href="#monetizacao">Monetização</a></div>
-      <div class="footer-pillars"><strong>Nossos pilares</strong><div><span>Crie</span><span>Conecte</span><span>Monetize</span><span>Cresça</span></div></div>
-    </div>
-    <div class="container footer-bottom"><span>© 2026 NEXUS</span><span>Feito para a nova economia criativa.</span></div>
-  </footer>
+  <footer class="site-footer"><div class="container footer-grid"><div class="footer-brand"><a class="logo" href="#inicio"><span class="logo-mark">N</span><span>NEXUS</span></a><p>O ponto de encontro entre criatividade, comunidade e crescimento.</p></div><div class="footer-links"><strong>Explore</strong><a href="#tab-comunidades">Comunidades</a><a href="#tab-marketplace">Marketplace</a><a href="#tab-roadmap">Roadmap</a></div><div class="footer-pillars"><strong>Nossos pilares</strong><div><span>Crie</span><span>Conecte</span><span>Monetize</span><span>Cresça</span></div></div></div><div class="container footer-bottom"><span>© 2026 NEXUS</span><span>Feito para a nova economia criativa.</span></div></footer>
 
-  <nav class="mobile-dock" aria-label="Navegação do aplicativo">
-    <a class="active" href="#inicio"><i>⌂</i><span>Feed</span></a>
-    <a href="#recursos"><i>◇</i><span>Comunidades</span></a>
-    <a class="dock-create" href="#espera" aria-label="Criar conteúdo"><i>＋</i></a>
-    <a href="#monetizacao"><i>▱</i><span>Loja</span></a>
-    <a href="#roadmap"><i>○</i><span>Perfil</span></a>
+  <nav class="mobile-dock" aria-label="Navegação do aplicativo" role="tablist">
+    <button class="dock-link active" id="dock-inicio" data-tab="tab-inicio" type="button" role="tab" aria-controls="tab-inicio" aria-selected="true"><i>⌂</i><span>Início</span></button>
+    <button class="dock-link" id="dock-comunidades" data-tab="tab-comunidades" type="button" role="tab" aria-controls="tab-comunidades" aria-selected="false"><i>◇</i><span>Comunidades</span></button>
+    <button class="dock-link" id="dock-marketplace" data-tab="tab-marketplace" type="button" role="tab" aria-controls="tab-marketplace" aria-selected="false"><i>▱</i><span>Loja</span></button>
+    <button class="dock-link" id="dock-roadmap" data-tab="tab-roadmap" type="button" role="tab" aria-controls="tab-roadmap" aria-selected="false"><i>○</i><span>Roadmap</span></button>
+    <button class="dock-link" id="dock-perfil" data-tab="tab-perfil" type="button" role="tab" aria-controls="tab-perfil" aria-selected="false"><i>◈</i><span>Perfil</span></button>
   </nav>
   <script src="script.js"></script>
 </body>
