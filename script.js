@@ -97,3 +97,42 @@ addEventListener('hashchange', () => {
   if (tabPanels.some(panel => panel.id === targetId)) activateTab(targetId, false, false);
 });
 syncTabMode();
+
+// Lightweight liquid-glass reflection for precise pointer devices only.
+const motionAllowed = matchMedia('(hover: hover) and (prefers-reduced-motion: no-preference)');
+const liquidCards = document.querySelectorAll([
+  '.app-window', '.creator-row article', '.mini-cta', '.community-feature',
+  '.community-card', '.moderation-card', '.market-card', '.seller-card',
+  '.phase', '.profile-shell', '.earnings-card', '.membership-card', '.profile-products'
+].join(','));
+
+if (motionAllowed.matches) {
+  liquidCards.forEach(card => {
+    let frameId;
+    card.classList.add('liquid-interactive');
+
+    card.addEventListener('pointermove', event => {
+      cancelAnimationFrame(frameId);
+      frameId = requestAnimationFrame(() => {
+        const bounds = card.getBoundingClientRect();
+        const x = event.clientX - bounds.left;
+        const y = event.clientY - bounds.top;
+        const rotateY = ((x / bounds.width) - .5) * 2.2;
+        const rotateX = (.5 - (y / bounds.height)) * 2.2;
+
+        card.style.setProperty('--mx', `${x}px`);
+        card.style.setProperty('--my', `${y}px`);
+        card.style.setProperty('--rx', `${rotateX}deg`);
+        card.style.setProperty('--ry', `${rotateY}deg`);
+      });
+    }, { passive: true });
+
+    card.addEventListener('pointerleave', () => {
+      cancelAnimationFrame(frameId);
+      card.style.removeProperty('--mx');
+      card.style.removeProperty('--my');
+      card.style.removeProperty('--rx');
+      card.style.removeProperty('--ry');
+    });
+  });
+}
