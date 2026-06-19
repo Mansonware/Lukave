@@ -5,7 +5,7 @@ import type { Metadata } from "next";
 import { requireUser } from "@/lib/session";
 import { getFeedPosts } from "@/server/queries";
 import { PostComposer } from "@/components/feed/post-composer";
-import { PostCard } from "@/components/feed/post-card";
+import { InfiniteFeed } from "@/components/feed/infinite-feed";
 import { PageHeader } from "@/components/layout/page-header";
 import { EmptyState } from "@/components/layout/empty-state";
 import { SuggestedUsers } from "@/components/profile/suggested-users";
@@ -43,26 +43,7 @@ export default async function FeedPage({
             description="Faça sua primeira publicação ou siga criadores para ver conteúdo aqui."
           />
         ) : (
-          <div>
-            {posts.map((post) => (
-              <PostCard
-                key={post.id}
-                viewer={viewer}
-                post={{
-                  id: post.id,
-                  content: post.content,
-                  createdAt: post.createdAt,
-                  likesCount: post.likesCount,
-                  commentsCount: post.commentsCount,
-                  sharesCount: post.sharesCount,
-                  author: post.author,
-                  media: post.media,
-                  likedByMe: post.likedByMe,
-                  sharedByMe: post.sharedByMe,
-                }}
-              />
-            ))}
-          </div>
+          <InfiniteFeed initialPosts={posts} viewer={viewer} />
         )}
       </div>
 
