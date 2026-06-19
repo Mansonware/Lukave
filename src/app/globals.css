@@ -1,0 +1,105 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* NEXUS é dark por padrão; estes tokens são o tema escuro. */
+    --background: 222 30% 4%;
+    --foreground: 240 17% 96%;
+
+    --card: 226 24% 8%;
+    --card-foreground: 240 17% 96%;
+
+    --popover: 226 28% 7%;
+    --popover-foreground: 240 17% 96%;
+
+    --primary: 258 100% 70%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 226 20% 14%;
+    --secondary-foreground: 240 17% 96%;
+
+    --muted: 226 18% 13%;
+    --muted-foreground: 230 9% 62%;
+
+    --accent: 217 100% 63%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 72% 58%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 230 20% 16%;
+    --input: 230 20% 16%;
+    --ring: 258 100% 70%;
+
+    --radius: 0.85rem;
+  }
+
+  /* Tema claro opcional (o app inicia em dark). */
+  .light {
+    --background: 240 20% 99%;
+    --foreground: 222 30% 8%;
+    --card: 0 0% 100%;
+    --card-foreground: 222 30% 8%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 30% 8%;
+    --primary: 258 90% 60%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 240 10% 94%;
+    --secondary-foreground: 222 30% 8%;
+    --muted: 240 10% 94%;
+    --muted-foreground: 230 9% 40%;
+    --accent: 217 90% 56%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 240 10% 88%;
+    --input: 240 10% 88%;
+    --ring: 258 90% 60%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@layer components {
+  /* Superfície "liquid glass" reaproveitada do protótipo. */
+  .glass {
+    @apply border border-white/10 bg-white/[0.04] backdrop-blur-xl;
+  }
+  .glass-strong {
+    @apply border border-white/10 bg-[hsl(var(--card))]/80 backdrop-blur-2xl;
+  }
+  .text-gradient {
+    @apply bg-nexus-gradient bg-clip-text text-transparent;
+  }
+  .nexus-ring {
+    @apply ring-1 ring-white/10;
+  }
+}
+
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .ambient-bg {
+    background-image:
+      radial-gradient(60% 50% at 80% -10%, rgba(145, 101, 255, 0.16), transparent 60%),
+      radial-gradient(50% 50% at 0% 110%, rgba(67, 140, 255, 0.14), transparent 60%);
+  }
+}
