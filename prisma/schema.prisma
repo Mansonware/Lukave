@@ -41,6 +41,22 @@ enum NotificationType {
   LIKE
   COMMENT
   FOLLOW
+  PURCHASE
+}
+
+enum ProductType {
+  COURSE
+  EBOOK
+  TEMPLATE
+  AI_PROMPT
+  DIGITAL_FILE
+}
+
+enum OrderStatus {
+  PENDING
+  PAID
+  FAILED
+  REFUNDED
 }
 
 // ── Contas & Perfis ─────────────────────────────────────────────
@@ -84,6 +100,11 @@ model User {
   following Follow[] @relation("Follower") // quem este usuário segue
   conversationMembers ConversationMember[]
   messages            Message[]            @relation("MessageAuthor")
+
+  // Marketplace
+  products    Product[]     @relation("CreatorProducts")
+  orders      Order[]       @relation("BuyerOrders")
+  library     LibraryItem[]
 
   // Notificações
   notifications          Notification[] @relation("NotificationRecipient")
@@ -287,6 +308,80 @@ model Message {
 
   @@index([conversationId, createdAt])
   @@index([authorId])
+}
+
+// ── Marketplace ─────────────────────────────────────────────────
+
+model Product {
+  id          String      @id @default(cuid())
+  creatorId   String
+  title       String
+  description String      @db.Text
+  type        ProductType
+  priceCents  Int
+  currency    String      @default("brl")
+  fileUrl     String?
+  coverUrl    String?
+  published   Boolean     @default(false)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  creator    User          @relation("CreatorProducts", fields: [creatorId], references: [id], onDelete: Cascade)
+  orderItems OrderItem[]
+  library    LibraryItem[]
+
+  @@index([creatorId, published])
+  @@index([published, createdAt])
+}
+
+model Order {
+  id                    String      @id @default(cuid())
+  buyerId               String
+  stripeCheckoutId      String      @unique
+  stripePaymentIntentId String?
+  status                OrderStatus @default(PENDING)
+  totalCents            Int
+  currency              String      @default("brl")
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  buyer   User          @relation("BuyerOrders", fields: [buyerId], references: [id])
+  items   OrderItem[]
+  library LibraryItem[]
+
+  @@index([buyerId])
+  @@index([stripeCheckoutId])
+  @@index([status, createdAt])
+}
+
+model OrderItem {
+  id         String @id @default(cuid())
+  orderId    String
+  productId  String
+  priceCents Int
+
+  order   Order   @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  product Product @relation(fields: [productId], references: [id])
+
+  @@index([orderId])
+  @@index([productId])
+}
+
+model LibraryItem {
+  id        String   @id @default(cuid())
+  userId    String
+  productId String
+  orderId   String
+  createdAt DateTime @default(now())
+
+  user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  product Product @relation(fields: [productId], references: [id])
+  order   Order   @relation(fields: [orderId], references: [id])
+
+  @@unique([userId, productId])
+  @@index([userId, createdAt])
 }
 
 // ── Notificações ────────────────────────────────────────────────

@@ -83,8 +83,24 @@ export const createStorySchema = z.object({
   mediaType: z.enum(["IMAGE", "VIDEO"]).default("IMAGE"),
 });
 
+export const createProductSchema = z.object({
+  title: z.string().min(3, "Mínimo de 3 caracteres").max(120),
+  description: z.string().min(10, "Descreva melhor o produto").max(5000),
+  type: z.enum(["COURSE", "EBOOK", "TEMPLATE", "AI_PROMPT", "DIGITAL_FILE"]),
+  priceCents: z.number().int().min(100, "Preço mínimo de R$ 1,00").max(99999900),
+  currency: z.string().default("brl"),
+  fileUrl: z.string().url().optional().or(z.literal("")),
+  coverUrl: z.string().url().optional().or(z.literal("")),
+  published: z.boolean().default(false),
+});
+
+export const updateProductSchema = createProductSchema.partial().extend({
+  id: z.string().min(1),
+});
+
 export type RegisterInput = z.infer<typeof registerSchema>;
 export type LoginInput = z.infer<typeof loginSchema>;
 export type UpdateProfileInput = z.infer<typeof updateProfileSchema>;
 export type CreatePostInput = z.infer<typeof createPostSchema>;
 export type CreateStoryInput = z.infer<typeof createStorySchema>;
+export type CreateProductInput = z.infer<typeof createProductSchema>;
