@@ -20,6 +20,7 @@ function makeLimiter(requests: number, window: `${number} ${"s" | "m" | "h" | "d
 
 export const limiters = {
   createPost: makeLimiter(5, "1 m", "nexus:rl:post"),
+  createStory: makeLimiter(8, "10 m", "nexus:rl:story"),
   toggleLike: makeLimiter(30, "1 m", "nexus:rl:like"),
   toggleFollow: makeLimiter(10, "1 m", "nexus:rl:follow"),
 };
