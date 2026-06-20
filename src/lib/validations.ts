@@ -78,7 +78,13 @@ export const createCommentSchema = z.object({
   content: z.string().min(1, "Escreva um comentário").max(500),
 });
 
+export const createStorySchema = z.object({
+  mediaUrl: z.string().url("URL inválida"),
+  mediaType: z.enum(["IMAGE", "VIDEO"]).default("IMAGE"),
+});
+
 export type RegisterInput = z.infer<typeof registerSchema>;
 export type LoginInput = z.infer<typeof loginSchema>;
 export type UpdateProfileInput = z.infer<typeof updateProfileSchema>;
 export type CreatePostInput = z.infer<typeof createPostSchema>;
+export type CreateStoryInput = z.infer<typeof createStorySchema>;

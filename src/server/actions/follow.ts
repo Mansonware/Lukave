@@ -4,12 +4,16 @@ import { revalidatePath } from "next/cache";
 
 import { prisma } from "@/lib/prisma";
 import { requireUser } from "@/lib/session";
+import { limiters, rateLimit } from "@/lib/rate-limit";
 import type { ActionResult } from "@/server/action-result";
 
 export async function toggleFollow(
   targetUserId: string,
 ): Promise<ActionResult<{ following: boolean }>> {
   const user = await requireUser();
+
+  const rl = await rateLimit(limiters.toggleFollow, user.id);
+  if (!rl.ok) return rl;
 
   if (user.id === targetUserId) {
     return { ok: false, error: "Você não pode seguir a si mesmo." };

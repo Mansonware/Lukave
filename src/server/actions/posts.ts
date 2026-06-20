@@ -4,6 +4,7 @@ import { revalidatePath } from "next/cache";
 
 import { prisma } from "@/lib/prisma";
 import { requireUser } from "@/lib/session";
+import { limiters, rateLimit } from "@/lib/rate-limit";
 import { createPostSchema, createCommentSchema } from "@/lib/validations";
 import type { ActionResult } from "@/server/action-result";
 
@@ -13,6 +14,9 @@ export async function createPost(input: {
   visibility?: "PUBLIC" | "FOLLOWERS" | "PRIVATE";
 }): Promise<ActionResult<{ id: string }>> {
   const user = await requireUser();
+
+  const rl = await rateLimit(limiters.createPost, user.id);
+  if (!rl.ok) return rl;
 
   const parsed = createPostSchema.safeParse(input);
   if (!parsed.success) {
@@ -77,6 +81,9 @@ export async function toggleLike(
   postId: string,
 ): Promise<ActionResult<{ liked: boolean; likesCount: number }>> {
   const user = await requireUser();
+
+  const rl = await rateLimit(limiters.toggleLike, user.id);
+  if (!rl.ok) return rl;
 
   const existing = await prisma.like.findUnique({
     where: { userId_postId: { userId: user.id, postId } },
