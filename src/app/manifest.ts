@@ -7,13 +7,27 @@ export default function manifest(): MetadataRoute.Manifest {
     description:
       "A plataforma tudo-em-um para criadores de conteúdo, comunidades e monetização.",
     start_url: "/feed",
+    id: "/?source=pwa",
     display: "standalone",
     orientation: "portrait",
     background_color: "#06070b",
     theme_color: "#9165ff",
     categories: ["social", "entertainment"],
     prefer_related_applications: false,
-    screenshots: [],
+    screenshots: [
+      {
+        src: "/screenshots/screenshot-1.png",
+        sizes: "1080x2400",
+        type: "image/png",
+        form_factor: "narrow",
+      },
+      {
+        src: "/screenshots/screenshot-2.png",
+        sizes: "1080x2400",
+        type: "image/png",
+        form_factor: "narrow",
+      },
+    ],
     icons: [
       {
         src: "/icon.svg",
