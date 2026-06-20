@@ -1,27 +1,36 @@
-/**
- * Envio de e-mail com degradação graciosa.
- * Se não houver SMTP configurado (EMAIL_SERVER_HOST), o conteúdo é apenas
- * registrado no console — útil em desenvolvimento e no CI. Para produção,
- * basta plugar um provedor (Resend, SES, SMTP) nesta função.
- */
+import { Resend } from "resend";
+
+let resend: Resend | null = null;
+if (process.env.RESEND_API_KEY) {
+  resend = new Resend(process.env.RESEND_API_KEY);
+}
+
 export async function sendEmail(opts: {
   to: string;
   subject: string;
   html: string;
   text?: string;
 }): Promise<{ delivered: boolean }> {
-  const host = process.env.EMAIL_SERVER_HOST;
-
-  if (!host) {
+  if (!resend) {
     console.info(
       `\n[mail:dev] Para: ${opts.to}\n[mail:dev] Assunto: ${opts.subject}\n[mail:dev] Conteúdo:\n${opts.text ?? opts.html}\n`,
     );
     return { delivered: false };
   }
 
-  // Integração real de SMTP/provedor deve ser implementada aqui.
-  // Mantido como ponto de extensão para não acoplar a Fase 1 a um provedor.
-  console.info(`[mail] Enviando e-mail para ${opts.to} via ${host}`);
+  const { error } = await resend.emails.send({
+    from: process.env.EMAIL_FROM ?? "NEXUS <no-reply@nexus.app>",
+    to: opts.to,
+    subject: opts.subject,
+    html: opts.html,
+    text: opts.text,
+  });
+
+  if (error) {
+    console.error("[mail] Falha ao enviar e-mail:", error);
+    return { delivered: false };
+  }
+
   return { delivered: true };
 }
 
