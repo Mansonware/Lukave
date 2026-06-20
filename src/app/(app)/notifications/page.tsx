@@ -13,14 +13,30 @@ import { cn, formatTimeAgo, getInitials } from "@/lib/utils";
 export const metadata: Metadata = { title: "Notificações" };
 
 const config = {
-  LIKE: { icon: Heart, color: "text-nexus-pink", verb: "curtiu sua publicação" },
+  LIKE: {
+    icon: Heart,
+    color: "text-nexus-pink",
+    bg: "bg-nexus-pink/15 border-nexus-pink/20",
+    verb: "curtiu sua publicação",
+  },
   COMMENT: {
     icon: MessageCircle,
     color: "text-accent",
+    bg: "bg-accent/15 border-accent/20",
     verb: "comentou na sua publicação",
   },
-  FOLLOW: { icon: UserPlus, color: "text-nexus-green", verb: "começou a seguir você" },
-  PURCHASE: { icon: ShoppingBag, color: "text-nexus-purple", verb: "compra confirmada" },
+  FOLLOW: {
+    icon: UserPlus,
+    color: "text-nexus-green",
+    bg: "bg-nexus-green/15 border-nexus-green/20",
+    verb: "começou a seguir você",
+  },
+  PURCHASE: {
+    icon: ShoppingBag,
+    color: "text-nexus-purple",
+    bg: "bg-nexus-purple/15 border-nexus-purple/20",
+    verb: "compra confirmada",
+  },
 } as const;
 
 export default async function NotificationsPage() {
@@ -42,7 +58,7 @@ export default async function NotificationsPage() {
         />
       ) : (
         <div>
-          {notifications.map((n) => {
+          {notifications.map((n, i) => {
             const c = config[n.type];
             const Icon = c.icon;
             const actorName = n.actor?.name ?? n.actor?.username ?? "Alguém";
@@ -56,15 +72,22 @@ export default async function NotificationsPage() {
               <Link
                 key={n.id}
                 href={href}
+                style={{ animationDelay: `${Math.min(i, 12) * 0.04}s` }}
                 className={cn(
-                  "flex items-center gap-3 border-b border-border px-4 py-3.5 transition-colors hover:bg-white/[0.02] sm:px-5",
+                  "flex animate-slide-up items-center gap-3 border-b border-border-subtle px-4 py-3.5 transition-colors hover:bg-white/[0.025] sm:px-5",
                   !n.read && "bg-primary/[0.06]",
                 )}
               >
-                <div className={cn("shrink-0", c.color)}>
-                  <Icon className="h-5 w-5" />
+                <div
+                  className={cn(
+                    "grid h-9 w-9 shrink-0 place-items-center rounded-xl border",
+                    c.bg,
+                    c.color,
+                  )}
+                >
+                  <Icon className="h-[18px] w-[18px]" />
                 </div>
-                <Avatar className="h-9 w-9">
+                <Avatar size="sm">
                   {n.actor?.image && (
                     <AvatarImage src={n.actor.image} alt={n.actor.username} />
                   )}
@@ -78,7 +101,10 @@ export default async function NotificationsPage() {
                   </span>
                 </div>
                 {!n.read && (
-                  <span className="h-2 w-2 shrink-0 rounded-full bg-nexus-gradient" />
+                  <span className="relative flex h-2.5 w-2.5 shrink-0">
+                    <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-75" />
+                    <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-nexus-gradient" />
+                  </span>
                 )}
               </Link>
             );

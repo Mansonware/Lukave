@@ -2,6 +2,7 @@
 
 import { useState, useTransition } from "react";
 import Link from "next/link";
+import { motion, AnimatePresence } from "framer-motion";
 import { Heart, MessageCircle, Share2, MoreHorizontal, Trash2, Link2 } from "lucide-react";
 import { toast } from "sonner";
 
@@ -33,6 +34,7 @@ export function PostCard({
 }) {
   const [liked, setLiked] = useState(post.likedByMe);
   const [likes, setLikes] = useState(post.likesCount);
+  const [burst, setBurst] = useState(0);
   const [shared, setShared] = useState(post.sharedByMe);
   const [shares, setShares] = useState(post.sharesCount);
   const [comments, setComments] = useState(post.commentsCount);
@@ -46,6 +48,7 @@ export function PostCard({
     const next = !liked;
     setLiked(next);
     setLikes((n) => n + (next ? 1 : -1));
+    if (next) setBurst((b) => b + 1);
     startTransition(async () => {
       const res = await toggleLike(post.id);
       if (!res.ok) {
@@ -94,10 +97,14 @@ export function PostCard({
   if (deleted) return null;
 
   return (
-    <article className="border-b border-border px-4 py-4 transition-colors hover:bg-white/[0.015] sm:px-5">
+    <article className="group/post relative border-b border-border-subtle px-4 py-4 transition-colors hover:bg-white/[0.02] sm:px-5">
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-y-0 left-0 w-0.5 origin-top scale-y-0 bg-nexus-gradient transition-transform duration-300 group-hover/post:scale-y-100"
+      />
       <div className="flex gap-3">
         <Link href={`/${post.author.username}`} className="shrink-0">
-          <Avatar className="h-11 w-11 nexus-ring">
+          <Avatar ring>
             {post.author.image && (
               <AvatarImage src={post.author.image} alt={post.author.username} />
             )}
@@ -176,38 +183,82 @@ export function PostCard({
             <button
               onClick={handleLike}
               className={cn(
-                "group flex items-center gap-1.5 rounded-full px-2.5 py-1.5 text-sm transition-colors hover:bg-nexus-pink/10 hover:text-nexus-pink",
+                "group/like relative flex items-center gap-1.5 rounded-full px-2.5 py-2 text-sm transition-colors hover:bg-nexus-pink/10 hover:text-nexus-pink active:scale-95",
                 liked && "text-nexus-pink",
               )}
               aria-pressed={liked}
+              aria-label="Curtir"
             >
-              <Heart className={cn("h-[18px] w-[18px]", liked && "fill-current")} />
-              {likes > 0 && formatCompactNumber(likes)}
+              <span className="relative grid place-items-center">
+                <Heart
+                  className={cn(
+                    "h-[18px] w-[18px] transition-transform",
+                    liked && "fill-current animate-heart-pop",
+                  )}
+                />
+                {/* explosão de partículas */}
+                <AnimatePresence>
+                  {burst > 0 && (
+                    <span
+                      key={burst}
+                      className="pointer-events-none absolute inset-0 grid place-items-center"
+                    >
+                      {Array.from({ length: 6 }).map((_, i) => {
+                        const angle = (i / 6) * Math.PI * 2;
+                        return (
+                          <motion.span
+                            key={i}
+                            initial={{ opacity: 1, x: 0, y: 0, scale: 0.4 }}
+                            animate={{
+                              opacity: 0,
+                              x: Math.cos(angle) * 16,
+                              y: Math.sin(angle) * 16,
+                              scale: 1,
+                            }}
+                            transition={{ duration: 0.5, ease: "easeOut" }}
+                            className="absolute h-1.5 w-1.5 rounded-full bg-nexus-pink"
+                          />
+                        );
+                      })}
+                    </span>
+                  )}
+                </AnimatePresence>
+              </span>
+              {likes > 0 && (
+                <span className="tabular-nums">{formatCompactNumber(likes)}</span>
+              )}
             </button>
 
             <button
               onClick={() => setShowComments((s) => !s)}
-              className="flex items-center gap-1.5 rounded-full px-2.5 py-1.5 text-sm transition-colors hover:bg-accent/10 hover:text-accent"
+              className="flex items-center gap-1.5 rounded-full px-2.5 py-2 text-sm transition-colors hover:bg-accent/10 hover:text-accent active:scale-95"
+              aria-label="Comentar"
             >
               <MessageCircle className="h-[18px] w-[18px]" />
-              {comments > 0 && formatCompactNumber(comments)}
+              {comments > 0 && (
+                <span className="tabular-nums">{formatCompactNumber(comments)}</span>
+              )}
             </button>
 
             <button
               onClick={handleShare}
               className={cn(
-                "flex items-center gap-1.5 rounded-full px-2.5 py-1.5 text-sm transition-colors hover:bg-nexus-green/10 hover:text-nexus-green",
+                "flex items-center gap-1.5 rounded-full px-2.5 py-2 text-sm transition-colors hover:bg-nexus-green/10 hover:text-nexus-green active:scale-95",
                 shared && "text-nexus-green",
               )}
               aria-pressed={shared}
+              aria-label="Compartilhar"
             >
               <Share2 className="h-[18px] w-[18px]" />
-              {shares > 0 && formatCompactNumber(shares)}
+              {shares > 0 && (
+                <span className="tabular-nums">{formatCompactNumber(shares)}</span>
+              )}
             </button>
 
             <Link
               href={`/post/${post.id}`}
-              className="ml-auto flex items-center gap-1.5 rounded-full px-2.5 py-1.5 text-sm transition-colors hover:bg-white/[0.06] hover:text-foreground"
+              className="ml-auto flex items-center gap-1.5 rounded-full px-2.5 py-2 text-sm transition-colors hover:bg-white/[0.06] hover:text-foreground active:scale-95"
+              aria-label="Ver publicação"
             >
               <Link2 className="h-[18px] w-[18px]" />
             </Link>

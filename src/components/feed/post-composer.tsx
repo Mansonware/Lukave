@@ -86,9 +86,9 @@ export function PostComposer({
   const remaining = MAX_CHARS - content.length;
 
   return (
-    <div className="border-b border-border px-4 py-4 sm:px-5">
+    <div className="border-b border-border-subtle px-4 py-4 transition-colors focus-within:bg-white/[0.015] sm:px-5">
       <div className="flex gap-3">
-        <Avatar className="h-11 w-11 nexus-ring">
+        <Avatar ring>
           {viewer.image && <AvatarImage src={viewer.image} alt={viewer.username} />}
           <AvatarFallback>{getInitials(viewer.name ?? viewer.username)}</AvatarFallback>
         </Avatar>
@@ -194,10 +194,11 @@ export function PostComposer({
               </span>
               <Button
                 onClick={submit}
-                disabled={pending || uploading || (!content.trim() && media.length === 0)}
+                disabled={uploading || (!content.trim() && media.length === 0)}
+                loading={pending}
+                variant="gradient"
                 size="sm"
               >
-                {pending && <Loader2 className="animate-spin" />}
                 Publicar
               </Button>
             </div>
