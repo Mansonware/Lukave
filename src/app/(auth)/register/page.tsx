@@ -8,7 +8,7 @@ export const metadata: Metadata = { title: "Criar conta" };
 
 export default function RegisterPage() {
   return (
-    <Card className="animate-fade-in">
+    <Card variant="glass" className="animate-scale-in shadow-premium-xl">
       <CardHeader className="text-center">
         <CardTitle className="text-2xl">Criar sua conta</CardTitle>
         <CardDescription>

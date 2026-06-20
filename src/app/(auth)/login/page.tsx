@@ -9,7 +9,7 @@ export const metadata: Metadata = { title: "Entrar" };
 
 export default function LoginPage() {
   return (
-    <Card className="animate-fade-in">
+    <Card variant="glass" className="animate-scale-in shadow-premium-xl">
       <CardHeader className="text-center">
         <CardTitle className="text-2xl">Entrar no NEXUS</CardTitle>
         <CardDescription>

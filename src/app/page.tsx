@@ -13,6 +13,8 @@ import { Logo } from "@/components/brand/logo";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { FadeIn } from "@/components/motion/fade-in";
+import { AnimatedBackground } from "@/components/effects/animated-background";
+import { TiltCard } from "@/components/effects/tilt-card";
 import { getSession } from "@/lib/session";
 
 const features = [
@@ -54,6 +56,7 @@ export default async function LandingPage() {
 
   return (
     <div className="relative flex min-h-dvh flex-col">
+      <AnimatedBackground />
       <header className="sticky top-0 z-50 border-b border-white/5 bg-background/70 backdrop-blur-xl">
         <div className="container flex h-16 items-center justify-between">
           <Logo />
@@ -80,15 +83,14 @@ export default async function LandingPage() {
         {/* HERO */}
         <section className="container relative pt-20 pb-24 text-center md:pt-32">
           <FadeIn>
-            <Badge variant="outline" className="mb-6 gap-2 py-1.5">
-              <span className="h-1.5 w-1.5 rounded-full bg-nexus-green" />
+            <Badge variant="success" dot className="mb-6 py-1.5">
               A nova casa dos criadores
             </Badge>
           </FadeIn>
           <FadeIn delay={0.05}>
             <h1 className="mx-auto max-w-4xl font-display text-4xl font-bold leading-[1.05] tracking-tight sm:text-6xl md:text-7xl">
               Crie. Conecte.{" "}
-              <span className="text-gradient">Monetize.</span>
+              <span className="text-gradient-animated">Monetize.</span>
             </h1>
           </FadeIn>
           <FadeIn delay={0.1}>
@@ -100,13 +102,13 @@ export default async function LandingPage() {
           </FadeIn>
           <FadeIn delay={0.15}>
             <div className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
-              <Button asChild size="lg" className="w-full sm:w-auto">
+              <Button asChild size="lg" variant="gradient" className="w-full sm:w-auto">
                 <Link href={ctaHref}>
                   Criar minha conta
                   <ArrowRight />
                 </Link>
               </Button>
-              <Button asChild size="lg" variant="outline" className="w-full sm:w-auto">
+              <Button asChild size="lg" variant="glass" className="w-full sm:w-auto">
                 <Link href="/login">Já tenho conta</Link>
               </Button>
             </div>
@@ -126,16 +128,16 @@ export default async function LandingPage() {
           </FadeIn>
           <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {features.map((f, i) => (
-              <FadeIn key={f.title} delay={i * 0.05}>
-                <div className="glass group h-full rounded-2xl p-6 transition-colors hover:border-white/20">
-                  <div className="mb-4 grid h-11 w-11 place-items-center rounded-xl bg-nexus-gradient text-white shadow-lg shadow-primary/20">
+              <FadeIn key={f.title} delay={i * 0.05} className="h-full">
+                <TiltCard className="p-6">
+                  <div className="mb-4 grid h-11 w-11 place-items-center rounded-xl bg-nexus-gradient text-white shadow-lg shadow-primary/20 transition-all duration-300 group-hover:shadow-glow-purple group-hover:scale-110">
                     <f.icon className="h-5 w-5" />
                   </div>
                   <h3 className="mb-1.5 font-display text-lg font-semibold">
                     {f.title}
                   </h3>
                   <p className="text-sm text-muted-foreground">{f.desc}</p>
-                </div>
+                </TiltCard>
               </FadeIn>
             ))}
           </div>
@@ -166,7 +168,12 @@ export default async function LandingPage() {
                   </Badge>
                 ))}
               </div>
-              <Button asChild size="lg" className="mt-9">
+              <Button
+                asChild
+                size="lg"
+                variant="gradient"
+                className="mt-9 animate-pulse-glow"
+              >
                 <Link href={ctaHref}>
                   Entrar no NEXUS
                   <ArrowRight />

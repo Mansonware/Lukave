@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { signIn } from "next-auth/react";
-import { Loader2 } from "lucide-react";
+import { Mail, Lock } from "lucide-react";
 import { toast } from "sonner";
 
 import { Button } from "@/components/ui/button";
@@ -48,6 +48,7 @@ export function LoginForm() {
           type="email"
           autoComplete="email"
           placeholder="voce@exemplo.com"
+          icon={<Mail />}
           required
         />
       </div>
@@ -67,11 +68,17 @@ export function LoginForm() {
           type="password"
           autoComplete="current-password"
           placeholder="••••••••"
+          icon={<Lock />}
           required
         />
       </div>
-      <Button type="submit" className="w-full" disabled={loading}>
-        {loading && <Loader2 className="animate-spin" />}
+      <Button
+        type="submit"
+        variant="gradient"
+        size="lg"
+        className="w-full"
+        loading={loading}
+      >
         Entrar
       </Button>
     </form>

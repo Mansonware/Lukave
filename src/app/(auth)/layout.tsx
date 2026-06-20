@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 import { Logo } from "@/components/brand/logo";
+import { AnimatedBackground } from "@/components/effects/animated-background";
 import { getSession } from "@/lib/session";
 import { redirect } from "next/navigation";
 
@@ -14,7 +15,7 @@ export default async function AuthLayout({
 
   return (
     <div className="relative flex min-h-dvh flex-col items-center justify-center px-5 py-10">
-      <div className="absolute inset-0 -z-10 ambient-bg" />
+      <AnimatedBackground variant="intense" />
       <header className="absolute left-0 top-0 w-full">
         <div className="container flex h-16 items-center justify-between">
           <Logo />
@@ -26,7 +27,14 @@ export default async function AuthLayout({
           </Link>
         </div>
       </header>
-      <main className="w-full max-w-md">{children}</main>
+      <main className="relative w-full max-w-md">
+        {/* halo de brilho atrás do card */}
+        <div
+          aria-hidden
+          className="pointer-events-none absolute -inset-4 -z-10 rounded-[2rem] bg-nexus-gradient opacity-20 blur-3xl"
+        />
+        {children}
+      </main>
     </div>
   );
 }

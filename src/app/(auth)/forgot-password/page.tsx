@@ -8,7 +8,7 @@ export const metadata: Metadata = { title: "Recuperar senha" };
 
 export default function ForgotPasswordPage() {
   return (
-    <Card className="animate-fade-in">
+    <Card variant="glass" className="animate-scale-in shadow-premium-xl">
       <CardHeader className="text-center">
         <CardTitle className="text-2xl">Recuperar senha</CardTitle>
         <CardDescription>
