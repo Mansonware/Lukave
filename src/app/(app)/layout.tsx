@@ -24,22 +24,25 @@ export default async function AppLayout({
   };
 
   return (
-    <div className="mx-auto flex w-full max-w-7xl">
+    <div className="relative mx-auto flex w-full max-w-7xl">
+      {/* Background ambiente premium para envolver todas as rotas internas */}
+      <div className="fixed inset-0 -z-10 ambient-bg pointer-events-none" />
+
       <Sidebar unreadCount={unreadCount} />
 
       <div className="flex min-h-dvh w-full flex-col">
         {/* Top bar (mobile) */}
-        <header className="sticky top-0 z-30 flex h-14 items-center justify-between border-b border-border bg-background/80 px-4 backdrop-blur-xl lg:hidden">
+        <header className="sticky top-0 z-30 flex h-16 items-center justify-between border-b border-white/5 bg-background/50 px-5 backdrop-blur-2xl lg:hidden">
           <Logo />
           <UserMenu user={safeUser} />
         </header>
 
         {/* Top bar (desktop) */}
-        <header className="sticky top-0 z-30 hidden h-16 items-center justify-end gap-3 border-b border-border bg-background/70 px-6 backdrop-blur-xl lg:flex">
+        <header className="sticky top-0 z-30 hidden h-16 items-center justify-end gap-3 border-b border-white/5 bg-background/50 px-8 backdrop-blur-2xl lg:flex">
           <UserMenu user={safeUser} />
         </header>
 
-        <main className="flex-1 pb-24 lg:pb-10">{children}</main>
+        <main className="flex-1 pb-28 lg:pb-10 pt-4 lg:pt-8 px-4 sm:px-6">{children}</main>
       </div>
 
       <MobileNav unreadCount={unreadCount} />

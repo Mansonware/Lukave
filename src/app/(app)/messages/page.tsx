@@ -19,7 +19,7 @@ export default async function MessagesPage() {
 
   return (
     <div className="flex gap-6">
-      <div className="mx-auto w-full max-w-2xl border-x border-border min-h-screen bg-background">
+      <div className="mx-auto w-full max-w-2xl lg:border-x border-white/5 bg-background/20 backdrop-blur-md rounded-none lg:rounded-3xl lg:my-6 overflow-hidden min-h-screen lg:min-h-0">
         <PageHeader title="Mensagens" description="Suas conversas no NEXUS" />
 
         {conversations.length === 0 ? (

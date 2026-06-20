@@ -78,7 +78,7 @@ export default async function LandingPage() {
 
       <main className="flex-1">
         {/* HERO */}
-        <section className="container relative pt-32 pb-20 text-center md:pt-48 md:pb-32 flex flex-col items-center">
+        <section className="container relative pt-28 pb-16 text-center md:pt-48 md:pb-32 flex flex-col items-center">
           <FadeIn>
             <Badge variant="outline" className="mb-8 gap-2 py-1.5 px-3 border-white/10 bg-white/5 backdrop-blur-md">
               <span className="h-1.5 w-1.5 rounded-full bg-nexus-green animate-pulse" />
