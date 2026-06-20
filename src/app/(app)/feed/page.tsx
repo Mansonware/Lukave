@@ -29,6 +29,7 @@ export default async function FeedPage({
   };
 
   const posts = await getFeedPosts({ viewerId: user.id, take: 30 });
+  const initialCursor = posts[posts.length - 1]?.nextCursor ?? null;
 
   return (
     <div className="flex gap-6">
@@ -43,7 +44,7 @@ export default async function FeedPage({
             description="Faça sua primeira publicação ou siga criadores para ver conteúdo aqui."
           />
         ) : (
-          <InfiniteFeed initialPosts={posts} viewer={viewer} />
+          <InfiniteFeed initialPosts={posts} initialCursor={initialCursor} viewer={viewer} />
         )}
       </div>
 

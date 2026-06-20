@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 
 import { auth } from "@/auth";
 import { getFeedPosts } from "@/server/queries";
+import type { PostCardData } from "@/types/post";
 
 const DEFAULT_TAKE = 15;
 const MAX_TAKE = 30;
@@ -23,9 +24,10 @@ export async function GET(request: Request) {
 
   const posts = await getFeedPosts({ viewerId, cursor, take });
   const nextCursor = posts[posts.length - 1]?.nextCursor ?? null;
+  const items: PostCardData[] = posts.map(({ nextCursor: _, ...post }) => post);
 
   return NextResponse.json({
-    posts,
+    posts: items,
     nextCursor,
   });
 }
