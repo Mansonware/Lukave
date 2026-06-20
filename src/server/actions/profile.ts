@@ -120,3 +120,20 @@ export async function changePassword(
 
   return { ok: true };
 }
+
+export async function deleteAccount(): Promise<ActionResult> {
+  const user = await requireUser();
+
+  // In a real app we might soft-delete or anonymize data.
+  // For Play Store compliance, full deletion is requested.
+  // Prisma will cascade delete if relations are set up, otherwise we delete manually.
+  try {
+    // We try to delete the user.
+    await prisma.user.delete({
+      where: { id: user.id },
+    });
+    return { ok: true };
+  } catch (err: any) {
+    return { ok: false, error: "Erro ao excluir conta: " + err.message };
+  }
+}

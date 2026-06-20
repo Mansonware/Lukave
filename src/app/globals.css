@@ -67,6 +67,8 @@
   body {
     @apply bg-background text-foreground antialiased;
     font-feature-settings: "rlig" 1, "calt" 1;
+    overscroll-behavior-y: none;
+    -webkit-tap-highlight-color: transparent;
   }
   html {
     scroll-behavior: smooth;
@@ -101,5 +103,9 @@
     background-image:
       radial-gradient(60% 50% at 80% -10%, rgba(145, 101, 255, 0.16), transparent 60%),
       radial-gradient(50% 50% at 0% 110%, rgba(67, 140, 255, 0.14), transparent 60%);
+  }
+  .no-select {
+    user-select: none;
+    -webkit-user-select: none;
   }
 }
