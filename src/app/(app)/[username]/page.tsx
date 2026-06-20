@@ -15,6 +15,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { FollowButton } from "@/components/profile/follow-button";
+import { StartConversationButton } from "@/components/profile/start-conversation-button";
 import { PostCard } from "@/components/feed/post-card";
 import { EmptyState } from "@/components/layout/empty-state";
 import {
@@ -102,10 +103,13 @@ export default async function ProfilePage({
                 </Link>
               </Button>
             ) : (
-              <FollowButton
-                targetUserId={profile.id}
-                initialFollowing={profile.isFollowing}
-              />
+              <div className="flex items-center">
+                <FollowButton
+                  targetUserId={profile.id}
+                  initialFollowing={profile.isFollowing}
+                />
+                <StartConversationButton targetUserId={profile.id} />
+              </div>
             )}
           </div>
         </div>
