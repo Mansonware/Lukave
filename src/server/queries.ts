@@ -184,3 +184,85 @@ export async function getSuggestedUsers(viewerId?: string, take = 5) {
     take,
   });
 }
+
+// ── Marketplace ──────────────────────────────────────────────────
+
+export async function getPublishedProducts(opts: {
+  creatorId?: string;
+  type?: string;
+  cursor?: string;
+  take?: number;
+}) {
+  const { creatorId, type, cursor, take = 24 } = opts;
+
+  const rows = await prisma.product.findMany({
+    where: {
+      published: true,
+      ...(creatorId ? { creatorId } : {}),
+      ...(type ? { type: type as never } : {}),
+    },
+    select: {
+      id: true,
+      title: true,
+      description: true,
+      type: true,
+      priceCents: true,
+      currency: true,
+      coverUrl: true,
+      createdAt: true,
+      creator: { select: { id: true, name: true, username: true, image: true } },
+    },
+    orderBy: { createdAt: "desc" },
+    take: take + 1,
+    ...(cursor ? { cursor: { id: cursor }, skip: 1 } : {}),
+  });
+
+  const hasMore = rows.length > take;
+  const items = hasMore ? rows.slice(0, take) : rows;
+  return { items, nextCursor: hasMore ? items[items.length - 1]?.id : null };
+}
+
+export async function getProductById(id: string, viewerId?: string) {
+  const product = await prisma.product.findUnique({
+    where: { id },
+    include: {
+      creator: { select: { id: true, name: true, username: true, image: true } },
+    },
+  });
+  if (!product) return null;
+
+  let ownedByViewer = false;
+  if (viewerId) {
+    const item = await prisma.libraryItem.findUnique({
+      where: { userId_productId: { userId: viewerId, productId: id } },
+    });
+    ownedByViewer = !!item;
+  }
+
+  return { ...product, ownedByViewer };
+}
+
+export async function getUserLibrary(userId: string, cursor?: string, take = 24) {
+  const rows = await prisma.libraryItem.findMany({
+    where: { userId },
+    include: {
+      product: {
+        select: {
+          id: true,
+          title: true,
+          type: true,
+          coverUrl: true,
+          fileUrl: true,
+          creator: { select: { id: true, name: true, username: true } },
+        },
+      },
+    },
+    orderBy: { createdAt: "desc" },
+    take: take + 1,
+    ...(cursor ? { cursor: { id: cursor }, skip: 1 } : {}),
+  });
+
+  const hasMore = rows.length > take;
+  const items = hasMore ? rows.slice(0, take) : rows;
+  return { items, nextCursor: hasMore ? items[items.length - 1]?.id : null };
+}

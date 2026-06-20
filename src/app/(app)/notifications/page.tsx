@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Bell, Heart, MessageCircle, UserPlus } from "lucide-react";
+import { Bell, Heart, MessageCircle, ShoppingBag, UserPlus } from "lucide-react";
 import type { Metadata } from "next";
 
 import { requireUser } from "@/lib/session";
@@ -20,6 +20,7 @@ const config = {
     verb: "comentou na sua publicação",
   },
   FOLLOW: { icon: UserPlus, color: "text-nexus-green", verb: "começou a seguir você" },
+  PURCHASE: { icon: ShoppingBag, color: "text-nexus-purple", verb: "compra confirmada" },
 } as const;
 
 export default async function NotificationsPage() {
