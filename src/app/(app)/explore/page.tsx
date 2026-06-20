@@ -32,9 +32,9 @@ function UserRow({
   showFollow: boolean;
 }) {
   return (
-    <div className="flex items-center gap-3 px-4 py-3 transition-colors hover:bg-white/[0.015] sm:px-5">
+    <div className="flex items-center gap-3 px-4 py-3 transition-colors hover:bg-white/[0.025] sm:px-5">
       <Link href={`/${u.username}`} className="shrink-0">
-        <Avatar className="h-11 w-11 nexus-ring">
+        <Avatar ring>
           {u.image && <AvatarImage src={u.image} alt={u.username} />}
           <AvatarFallback>{getInitials(u.name ?? u.username)}</AvatarFallback>
         </Avatar>

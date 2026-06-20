@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Sparkles } from "lucide-react";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { FollowButton } from "@/components/profile/follow-button";
@@ -10,13 +11,21 @@ export async function SuggestedUsers({ viewerId }: { viewerId: string }) {
   if (users.length === 0) return null;
 
   return (
-    <div className="glass rounded-2xl p-4">
-      <h2 className="mb-3 font-display text-sm font-semibold">Quem seguir</h2>
-      <div className="space-y-3">
+    <div className="glass-card rounded-2xl p-4">
+      <h2 className="mb-3 flex items-center gap-2 font-display text-sm font-semibold">
+        <span className="grid h-6 w-6 place-items-center rounded-lg bg-nexus-gradient text-white shadow-glow-purple">
+          <Sparkles className="h-3.5 w-3.5" />
+        </span>
+        Quem seguir
+      </h2>
+      <div className="space-y-1">
         {users.map((u) => (
-          <div key={u.id} className="flex items-center gap-3">
+          <div
+            key={u.id}
+            className="flex items-center gap-3 rounded-xl p-2 transition-colors hover:bg-white/[0.04]"
+          >
             <Link href={`/${u.username}`} className="shrink-0">
-              <Avatar className="h-10 w-10">
+              <Avatar ring>
                 {u.image && <AvatarImage src={u.image} alt={u.username} />}
                 <AvatarFallback>
                   {getInitials(u.name ?? u.username)}

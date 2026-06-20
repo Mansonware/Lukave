@@ -22,11 +22,12 @@ export function UserMenu({
 }) {
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger className="rounded-full outline-none ring-offset-background focus-visible:ring-2 focus-visible:ring-ring">
-        <Avatar className="h-9 w-9 nexus-ring">
+      <DropdownMenuTrigger className="group relative rounded-full outline-none ring-offset-background transition-transform hover:scale-105 focus-visible:ring-2 focus-visible:ring-ring">
+        <Avatar size="sm" ring>
           {user.image && <AvatarImage src={user.image} alt={user.username} />}
           <AvatarFallback>{getInitials(user.name ?? user.username)}</AvatarFallback>
         </Avatar>
+        <span className="absolute bottom-0 right-0 h-2.5 w-2.5 rounded-full border-2 border-background bg-nexus-green" />
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
         <DropdownMenuLabel>
