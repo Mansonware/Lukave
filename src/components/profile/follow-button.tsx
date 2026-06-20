@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useTransition } from "react";
-import { Loader2 } from "lucide-react";
+import { UserPlus, UserCheck } from "lucide-react";
 import { toast } from "sonner";
 
 import { Button, type ButtonProps } from "@/components/ui/button";
@@ -39,12 +39,17 @@ export function FollowButton({
   return (
     <Button
       onClick={onClick}
-      disabled={pending}
+      loading={pending}
       size={size}
-      variant={following ? "outline" : "default"}
-      className={cn(className)}
+      variant={following ? "outline" : "gradient"}
+      className={cn("group/follow", className)}
     >
-      {pending && <Loader2 className="animate-spin" />}
+      {!pending &&
+        (following ? (
+          <UserCheck className="transition-transform group-hover/follow:scale-110" />
+        ) : (
+          <UserPlus className="transition-transform group-hover/follow:scale-110" />
+        ))}
       {following ? "Seguindo" : "Seguir"}
     </Button>
   );

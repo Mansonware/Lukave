@@ -18,10 +18,8 @@ import { FollowButton } from "@/components/profile/follow-button";
 import { StartConversationButton } from "@/components/profile/start-conversation-button";
 import { PostCard } from "@/components/feed/post-card";
 import { EmptyState } from "@/components/layout/empty-state";
-import {
-  formatCompactNumber,
-  getInitials,
-} from "@/lib/utils";
+import { CountUp } from "@/components/effects/count-up";
+import { getInitials } from "@/lib/utils";
 import { format } from "date-fns";
 import { ptBR } from "date-fns/locale";
 import type { Viewer } from "@/types/post";
@@ -70,30 +68,35 @@ export default async function ProfilePage({
   const socialEntries = Object.entries(social).filter(([, v]) => v);
 
   return (
-    <div className="mx-auto w-full max-w-2xl border-x border-border">
+    <div className="mx-auto w-full max-w-2xl border-x border-border-subtle">
       {/* Banner */}
-      <div className="relative h-40 w-full bg-gradient-to-br from-primary/30 to-accent/20 sm:h-52">
+      <div className="relative h-40 w-full overflow-hidden sm:h-52">
+        <div className="absolute inset-0 bg-[var(--gradient-mesh)] bg-background" />
         {profile.bannerUrl && (
           // eslint-disable-next-line @next/next/no-img-element
           <img
             src={profile.bannerUrl}
             alt="Banner"
-            className="h-full w-full object-cover"
+            className="relative h-full w-full object-cover"
           />
         )}
+        {/* overlay gradiente para legibilidade */}
+        <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-background/10 to-transparent" />
       </div>
 
       {/* Cabeçalho */}
       <div className="px-4 pb-4 sm:px-5">
         <div className="flex items-end justify-between">
-          <Avatar className="-mt-12 h-24 w-24 border-4 border-background sm:h-28 sm:w-28">
-            {profile.image && (
-              <AvatarImage src={profile.image} alt={profile.username} />
-            )}
-            <AvatarFallback className="text-2xl">
-              {getInitials(profile.name ?? profile.username)}
-            </AvatarFallback>
-          </Avatar>
+          <div className="-mt-12 rounded-full bg-nexus-gradient p-[3px] shadow-glow-purple sm:-mt-14">
+            <Avatar className="h-24 w-24 border-4 border-background sm:h-28 sm:w-28">
+              {profile.image && (
+                <AvatarImage src={profile.image} alt={profile.username} />
+              )}
+              <AvatarFallback className="text-2xl">
+                {getInitials(profile.name ?? profile.username)}
+              </AvatarFallback>
+            </Avatar>
+          </div>
 
           <div className="mt-3">
             {profile.isMe ? (
@@ -164,25 +167,23 @@ export default async function ProfilePage({
           </div>
         )}
 
-        <div className="mt-4 flex gap-5 text-sm">
-          <span>
-            <strong className="text-foreground">
-              {formatCompactNumber(profile.followingCount)}
-            </strong>{" "}
-            <span className="text-muted-foreground">seguindo</span>
-          </span>
-          <span>
-            <strong className="text-foreground">
-              {formatCompactNumber(profile.followersCount)}
-            </strong>{" "}
-            <span className="text-muted-foreground">seguidores</span>
-          </span>
-          <span>
-            <strong className="text-foreground">
-              {formatCompactNumber(profile.postsCount)}
-            </strong>{" "}
-            <span className="text-muted-foreground">publicações</span>
-          </span>
+        <div className="mt-5 flex gap-2.5 text-sm">
+          {[
+            { value: profile.followingCount, label: "seguindo" },
+            { value: profile.followersCount, label: "seguidores" },
+            { value: profile.postsCount, label: "publicações" },
+          ].map((stat) => (
+            <div
+              key={stat.label}
+              className="flex flex-1 flex-col items-center rounded-xl border border-border-subtle bg-white/[0.02] py-2.5 transition-colors hover:border-white/10 hover:bg-white/[0.04]"
+            >
+              <CountUp
+                value={stat.value}
+                className="font-display text-lg font-bold text-foreground"
+              />
+              <span className="text-xs text-muted-foreground">{stat.label}</span>
+            </div>
+          ))}
         </div>
       </div>
 

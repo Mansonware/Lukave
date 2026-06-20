@@ -12,9 +12,13 @@ export function Toaster(props: ToasterProps) {
       toastOptions={{
         classNames: {
           toast:
-            "group glass-strong !rounded-xl !border-border !text-foreground",
+            "group glass-strong !rounded-xl !border-white/10 !text-foreground !shadow-premium-xl",
+          title: "!font-semibold",
           description: "!text-muted-foreground",
-          actionButton: "!bg-nexus-gradient !text-white",
+          actionButton: "!bg-nexus-gradient !text-white !rounded-lg",
+          success: "!text-nexus-green",
+          error: "!text-destructive",
+          icon: "!text-primary",
         },
       }}
       {...props}
