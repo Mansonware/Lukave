@@ -15,7 +15,7 @@ export default function OfflinePage() {
       </div>
       <h1 className="text-2xl font-bold tracking-tight mb-2">Você está offline</h1>
       <p className="text-muted-foreground max-w-[300px] mb-8">
-        Parece que você perdeu a conexão com a internet. O NEXUS precisa de uma conexão ativa para carregar os posts e mensagens mais recentes.
+        Parece que você perdeu a conexão com a internet. O Núk precisa de uma conexão ativa para carregar os posts e mensagens mais recentes.
       </p>
       
       {/* 

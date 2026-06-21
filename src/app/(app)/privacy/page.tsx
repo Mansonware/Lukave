@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Política de Privacidade",
-  description: "Política de Privacidade e Termos de Uso do NEXUS.",
+  description: "Política de Privacidade e Termos de Uso do Núk.",
 };
 
 export default function PrivacyPage() {
@@ -17,7 +17,7 @@ export default function PrivacyPage() {
         <section className="space-y-3">
           <h2 className="text-lg font-semibold text-foreground">1. Coleta de Dados</h2>
           <p>
-            O NEXUS coleta informações básicas de perfil (como nome, username, e-mail e foto) 
+            O Núk coleta informações básicas de perfil (como nome, username, e-mail e foto) 
             quando você cria uma conta através dos nossos provedores de autenticação (OAuth).
             Esses dados são utilizados exclusivamente para identificar você dentro da plataforma, 
             permitindo a interação social (seguir, curtir, comentar e enviar mensagens).

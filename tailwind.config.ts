@@ -67,7 +67,7 @@ const config: Config = {
         sm: "calc(var(--radius) - 4px)",
       },
       backgroundImage: {
-        "nexus-gradient": "linear-gradient(135deg, #9165ff 0%, #438cff 100%)",
+        "nexus-gradient": "linear-gradient(135deg, #7447e8 0%, #1f6fe5 100%)",
         "nexus-radial":
           "radial-gradient(120% 120% at 50% 0%, rgba(145,101,255,0.18) 0%, rgba(6,7,11,0) 55%)",
       },

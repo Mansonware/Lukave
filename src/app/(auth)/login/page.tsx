@@ -11,7 +11,7 @@ export default function LoginPage() {
   return (
     <Card className="animate-fade-in">
       <CardHeader className="text-center">
-        <CardTitle className="text-2xl">Entrar no NEXUS</CardTitle>
+        <CardTitle className="text-2xl">Entrar no Núk</CardTitle>
         <CardDescription>
           Acesse sua conta para criar, conectar e monetizar.
         </CardDescription>

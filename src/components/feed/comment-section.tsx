@@ -82,7 +82,7 @@ export function CommentSection({
           onChange={(e) => setValue(e.target.value)}
           placeholder="Escreva um comentário..."
           maxLength={500}
-          className="h-10"
+          className="h-11"
         />
         <Button type="submit" size="icon" disabled={pending || !value.trim()}>
           {pending ? <Loader2 className="animate-spin" /> : <Send />}

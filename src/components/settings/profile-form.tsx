@@ -100,7 +100,7 @@ export function ProfileForm({ user }: ProfileFormProps) {
           <button
             type="button"
             onClick={() => bannerRef.current?.click()}
-            className="absolute right-3 top-3 grid h-9 w-9 place-items-center rounded-full bg-black/55 text-white backdrop-blur hover:bg-black/75"
+            className="absolute right-3 top-3 grid h-11 w-11 place-items-center rounded-full bg-black/55 text-white backdrop-blur hover:bg-black/75 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
             aria-label="Alterar banner"
           >
             {uploading === "banner" ? (
@@ -129,7 +129,7 @@ export function ProfileForm({ user }: ProfileFormProps) {
             <button
               type="button"
               onClick={() => avatarRef.current?.click()}
-              className="absolute bottom-0 right-0 grid h-7 w-7 place-items-center rounded-full bg-nexus-gradient text-white shadow"
+              className="absolute -bottom-1 -right-1 grid h-11 w-11 place-items-center rounded-full bg-nexus-gradient text-white shadow focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
               aria-label="Alterar foto"
             >
               {uploading === "image" ? (

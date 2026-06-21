@@ -69,7 +69,7 @@ export default async function LandingPage() {
             <Button asChild variant="ghost" size="sm" className="hidden sm:flex">
               <Link href="/login">Entrar</Link>
             </Button>
-            <Button asChild size="sm" className="h-9 px-4 rounded-lg">
+            <Button asChild size="sm" className="px-4 rounded-lg">
               <Link href={ctaHref}>Começar</Link>
             </Button>
           </div>
@@ -191,7 +191,7 @@ export default async function LandingPage() {
       <footer className="border-t border-white/5 py-12 mt-auto">
         <div className="container flex flex-col items-center justify-between gap-6 sm:flex-row">
           <Logo />
-          <p className="text-sm text-muted-foreground">© {new Date().getFullYear()} NEXUS. Todos os direitos reservados.</p>
+          <p className="text-sm text-muted-foreground">© {new Date().getFullYear()} Núk. Todos os direitos reservados.</p>
         </div>
       </footer>
     </div>

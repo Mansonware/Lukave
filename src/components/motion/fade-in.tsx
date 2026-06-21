@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, type HTMLMotionProps } from "framer-motion";
+import { motion, useReducedMotion, type HTMLMotionProps } from "framer-motion";
 
 interface FadeInProps extends HTMLMotionProps<"div"> {
   delay?: number;
@@ -8,12 +8,18 @@ interface FadeInProps extends HTMLMotionProps<"div"> {
 }
 
 export function FadeIn({ delay = 0, y = 16, children, ...props }: FadeInProps) {
+  const shouldReduceMotion = useReducedMotion();
+
   return (
     <motion.div
-      initial={{ opacity: 0, y }}
+      initial={shouldReduceMotion ? false : { opacity: 0, y }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-60px" }}
-      transition={{ duration: 0.55, delay, ease: [0.21, 0.47, 0.32, 0.98] }}
+      transition={
+        shouldReduceMotion
+          ? { duration: 0 }
+          : { duration: 0.55, delay, ease: [0.21, 0.47, 0.32, 0.98] }
+      }
       {...props}
     >
       {children}

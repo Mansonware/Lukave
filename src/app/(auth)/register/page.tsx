@@ -12,7 +12,7 @@ export default function RegisterPage() {
       <CardHeader className="text-center">
         <CardTitle className="text-2xl">Criar sua conta</CardTitle>
         <CardDescription>
-          Junte-se ao NEXUS e comece a criar hoje mesmo.
+          Junte-se ao Núk e comece a criar hoje mesmo.
         </CardDescription>
       </CardHeader>
       <CardContent className="space-y-6">

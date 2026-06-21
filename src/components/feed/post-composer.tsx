@@ -122,7 +122,7 @@ export function PostComposer({
                   />
                   <button
                     onClick={() => setMedia((prev) => prev.filter((u) => u !== url))}
-                    className="absolute right-2 top-2 grid h-7 w-7 place-items-center rounded-full bg-black/60 text-white backdrop-blur hover:bg-black/80"
+                    className="absolute right-2 top-2 grid h-11 w-11 place-items-center rounded-full bg-black/60 text-white backdrop-blur hover:bg-black/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
                     aria-label="Remover imagem"
                   >
                     <X className="h-4 w-4" />
@@ -132,7 +132,7 @@ export function PostComposer({
             </div>
           )}
 
-          <div className="mt-3 flex items-center justify-between gap-2">
+          <div className="mt-3 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
             <div className="flex items-center gap-1">
               <input
                 ref={fileRef}
@@ -165,8 +165,10 @@ export function PostComposer({
                     type="button"
                     onClick={() => setVisibility(opt.value)}
                     title={opt.label}
+                    aria-label={`Visibilidade: ${opt.label}`}
+                    aria-pressed={visibility === opt.value}
                     className={cn(
-                      "flex items-center gap-1 rounded-full px-2.5 py-1 text-xs font-medium transition-colors",
+                      "flex min-h-11 items-center gap-1 rounded-full px-3 py-1 text-xs font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
                       visibility === opt.value
                         ? "bg-nexus-gradient text-white"
                         : "text-muted-foreground hover:text-foreground",
@@ -179,7 +181,7 @@ export function PostComposer({
               </div>
             </div>
 
-            <div className="flex items-center gap-3">
+            <div className="flex items-center justify-end gap-3">
               <span
                 className={cn(
                   "text-xs tabular-nums",

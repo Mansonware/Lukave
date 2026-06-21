@@ -56,7 +56,7 @@ export function LoginForm() {
           <Label htmlFor="password">Senha</Label>
           <Link
             href="/forgot-password"
-            className="text-xs text-muted-foreground transition-colors hover:text-foreground"
+            className="inline-flex min-h-11 items-center text-sm text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
           >
             Esqueceu a senha?
           </Link>

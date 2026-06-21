@@ -1,6 +1,6 @@
 <div align="center">
 
-# NEXUS
+# Núk
 
 **Crie. Conecte. Monetize.**
 
@@ -12,7 +12,7 @@ A plataforma tudo-em-um para criadores de conteúdo, comunidades e monetização
 
 ## Sobre
 
-NEXUS permite que qualquer pessoa **crie conteúdo**, **construa audiência**,
+Núk permite que qualquer pessoa **crie conteúdo**, **construa audiência**,
 **forme comunidades** e **monetize** — tudo em um só lugar, sem depender de
 ferramentas externas. Inspirado no melhor de Discord, TikTok e Patreon, com
 visual premium e dark mode por padrão.
