@@ -24,12 +24,12 @@ O **nuk-plataforma** é uma plataforma social focada em conteúdo e comunidade, 
 
 ## 🖼️ Screenshots
 
-> Adicione aqui as imagens do app (Play Store / iOS):
+> Espaço reservado para imagens do app (adicione os prints reais da Play Store/iOS quando disponíveis).
 
-- `docs/screenshots/home.png`
-- `docs/screenshots/feed.png`
-- `docs/screenshots/profile.png`
-- `docs/screenshots/messages.png`
+- Home / Feed
+- Perfil
+- Mensagens
+- Notificações
 
 ---
 
@@ -53,8 +53,6 @@ O **nuk-plataforma** é uma plataforma social focada em conteúdo e comunidade, 
 - **TailwindCSS**
 - **Prisma + PostgreSQL**
 - **Auth.js (NextAuth)**
-
-> Observação: atualmente este repositório roda com stack web/PWA (Next.js). A versão app mobile nativa (Android/iOS) é o direcionamento de produto.
 
 ---
 
