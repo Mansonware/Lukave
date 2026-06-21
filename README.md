@@ -4,7 +4,7 @@
 
 **A plataforma social mobile para criar, conectar e crescer sua comunidade.**
 
-[![Build](https://img.shields.io/badge/build-passing-brightgreen)](./package.json)
+[![Build Status](https://img.shields.io/badge/build-not_configured-lightgrey)](https://github.com/Mansonware/Nk-Plataforma/actions)
 [![Version](https://img.shields.io/badge/version-0.1.0-blue)](./package.json)
 [![License](https://img.shields.io/badge/license-MIT-purple)](https://opensource.org/license/mit)
 [![Android](https://img.shields.io/badge/platform-Android-informational)](https://developer.android.com/)
