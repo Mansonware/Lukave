@@ -4,10 +4,10 @@
 
 **A plataforma social mobile para criar, conectar e crescer sua comunidade.**
 
-[![Build](https://img.shields.io/badge/build-passing-brightgreen)](#)
-[![Version](https://img.shields.io/badge/version-0.1.0-blue)](#)
-[![License](https://img.shields.io/badge/license-MIT-purple)](#)
-[![Platform](https://img.shields.io/badge/platform-Android%20%7C%20iOS-informational)](#)
+[![Build](https://img.shields.io/badge/build-passing-brightgreen)](./package.json)
+[![Version](https://img.shields.io/badge/version-0.1.0-blue)](./package.json)
+[![License](https://img.shields.io/badge/license-MIT-purple)](https://opensource.org/license/mit)
+[![Platform](https://img.shields.io/badge/platform-Android%20%7C%20iOS-informational)](https://developer.android.com/)
 
 </div>
 
@@ -53,7 +53,7 @@ O **nuk-plataforma** é um app de rede social focado em conteúdo e comunidade, 
 - **Prisma + PostgreSQL**
 - **Auth.js (NextAuth)**
 
-> Observação: este repositório está estruturado com stack web/PWA e pode evoluir junto com o app mobile publicado.
+> Observação: atualmente este repositório roda com stack web/PWA (Next.js). A versão app mobile nativa (Android/iOS) é o direcionamento de produto.
 
 ---
 
