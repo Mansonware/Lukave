@@ -1,93 +1,135 @@
 <div align="center">
 
-# NEXUS
+# nuk-plataforma 📱
 
-**Crie. Conecte. Monetize.**
+**A plataforma social mobile para criar, conectar e crescer sua comunidade.**
 
-A plataforma tudo-em-um para criadores de conteúdo, comunidades e monetização.
+[![Build](https://img.shields.io/badge/build-passing-brightgreen)](#)
+[![Version](https://img.shields.io/badge/version-0.1.0-blue)](#)
+[![License](https://img.shields.io/badge/license-MIT-purple)](#)
+[![Platform](https://img.shields.io/badge/platform-Android%20%7C%20iOS-informational)](#)
 
 </div>
 
 ---
 
-## Sobre
+## 🚀 Sobre o Projeto
 
-NEXUS permite que qualquer pessoa **crie conteúdo**, **construa audiência**,
-**forme comunidades** e **monetize** — tudo em um só lugar, sem depender de
-ferramentas externas. Inspirado no melhor de Discord, TikTok e Patreon, com
-visual premium e dark mode por padrão.
+O **nuk-plataforma** é um app de rede social focado em conteúdo e comunidade, no estilo TikTok, Instagram e Facebook: feed dinâmico, interação entre usuários, descoberta de perfis e construção de audiência.
 
-> **Status:** Fase 1 (MVP) implementada e validada. Veja o
-> [ROADMAP](./ROADMAP.md) para as próximas fases.
+> Objetivo: oferecer uma experiência moderna, rápida e escalável para publicação e consumo de conteúdo social em mobile.
 
-## Stack
+---
 
-Next.js 15 · TypeScript · TailwindCSS · shadcn-style UI · Framer Motion ·
-Prisma · PostgreSQL · Auth.js v5 · Supabase Storage · Stripe.
+## 🖼️ Screenshots
 
-Detalhes em [ARCHITECTURE.md](./ARCHITECTURE.md).
+> Adicione aqui as imagens do app (Play Store / iOS):
 
-## Funcionalidades (Fase 1 — MVP)
+- `docs/screenshots/home.png`
+- `docs/screenshots/feed.png`
+- `docs/screenshots/profile.png`
+- `docs/screenshots/messages.png`
 
-- **Contas**: cadastro, login, recuperação de senha, configurações.
-- **Perfis**: foto, banner, bio, localização, website e links sociais.
-- **Feed**: posts de texto e imagem, curtidas, comentários, compartilhamentos.
-- **Busca**: usuários e conteúdos.
-- **Notificações**: curtidas, comentários e novos seguidores.
-- **Seguidores**: seguir / deixar de seguir.
+---
 
-## Como rodar
+## ✨ Funcionalidades
 
-Pré-requisitos: Node 20+ e um banco PostgreSQL.
+- Feed social com posts e interações
+- Perfil de usuário com dados públicos
+- Curtidas, comentários e notificações
+- Busca de usuários e conteúdos
+- Seguidores e relacionamento entre perfis
+- Mensagens privadas (em evolução)
+- Autenticação (login/cadastro)
+
+---
+
+## 🧱 Tech Stack
+
+- **TypeScript**
+- **Next.js 15**
+- **React 19**
+- **TailwindCSS**
+- **Prisma + PostgreSQL**
+- **Auth.js (NextAuth)**
+
+> Observação: este repositório está estruturado com stack web/PWA e pode evoluir junto com o app mobile publicado.
+
+---
+
+## ✅ Pré-requisitos
+
+- Node.js 20+
+- npm (ou yarn/pnpm)
+- Banco PostgreSQL
+- Android Studio (para fluxo Android)
+- Xcode (para fluxo iOS, em macOS)
+
+---
+
+## 🛠️ Como rodar localmente
 
 ```bash
-# 1. Variáveis de ambiente
-cp .env.example .env
-#    Preencha pelo menos DATABASE_URL e AUTH_SECRET (openssl rand -base64 32)
+# 1) Clonar
+git clone https://github.com/Mansonware/nuk-plataforma.git
+cd nuk-plataforma
 
-# 2. Dependências
+# 2) Variáveis de ambiente
+cp .env.example .env
+
+# 3) Instalar dependências
 npm install
 
-# 3. Banco de dados
-npm run db:push      # cria as tabelas
-npm run db:seed      # (opcional) popula dados de exemplo
+# 4) Banco de dados
+npm run db:push
+npm run db:seed   # opcional
 
-# 4. Desenvolvimento
+# 5) Rodar em desenvolvimento
 npm run dev
 ```
 
-App em `http://localhost:3000`.
-Login de teste (após o seed): `ana@nexus.app` / `nexus1234`.
+Acesse: `http://localhost:3000`
 
-## Scripts
+---
 
-| Script               | Descrição                          |
-| -------------------- | ---------------------------------- |
-| `npm run dev`        | Servidor de desenvolvimento        |
-| `npm run build`      | Build de produção (+ prisma generate) |
-| `npm run start`      | Servidor de produção               |
-| `npm run lint`       | ESLint                             |
-| `npm run typecheck`  | Checagem de tipos (tsc)            |
-| `npm run db:push`    | Sincroniza o schema com o banco    |
-| `npm run db:migrate` | Cria/aplica migrations             |
-| `npm run db:seed`    | Popula dados de exemplo            |
-| `npm run db:studio`  | Prisma Studio                      |
+## 📁 Estrutura de Pastas
 
-## Variáveis de ambiente
+```text
+.
+├── prisma/
+├── public/
+├── scripts/
+├── src/
+│   ├── app/
+│   ├── components/
+│   ├── lib/
+│   ├── server/
+│   └── types/
+├── ARCHITECTURE.md
+├── ROADMAP.md
+└── TODO.md
+```
 
-Veja [`.env.example`](./.env.example). Mínimo para rodar a Fase 1:
+---
 
-- `DATABASE_URL` — conexão PostgreSQL.
-- `AUTH_SECRET` — segredo do Auth.js.
+## 🤝 Como Contribuir
 
-Opcionais (degradam graciosamente se ausentes):
+1. Faça um fork do projeto
+2. Crie uma branch (`feature/minha-feature`, `fix/meu-fix`, `chore/minha-tarefa`)
+3. Commit suas alterações
+4. Abra um Pull Request com contexto claro
 
-- Supabase (upload de mídia) — sem isso, usa placeholder em dev.
-- Stripe (fases 4/5) — sem isso, pagamentos ficam desativados.
-- SMTP (recuperação de senha) — sem isso, o link é logado no console.
+Mais detalhes em [CONTRIBUTING.md](./CONTRIBUTING.md).
 
-## Documentação
+---
 
-- [ARCHITECTURE.md](./ARCHITECTURE.md) — arquitetura e decisões técnicas.
-- [ROADMAP.md](./ROADMAP.md) — fases e planejamento.
-- [TODO.md](./TODO.md) — backlog de tarefas.
+## 📄 Licença
+
+Distribuído sob licença **MIT**.
+
+---
+
+## 👤 Contato / Autor
+
+- GitHub: [@Mansonware](https://github.com/Mansonware)
+- Repositório: [Mansonware/nuk-plataforma](https://github.com/Mansonware/nuk-plataforma)
