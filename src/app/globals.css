@@ -4,6 +4,12 @@
 
 @layer base {
   :root {
+    --font-inter:
+      "Inter", "SF Pro Text", "Segoe UI", system-ui, -apple-system, sans-serif;
+    --font-space-grotesk:
+      "Space Grotesk", "Inter", "SF Pro Display", "Segoe UI", system-ui,
+      sans-serif;
+
     /* NEXUS é dark por padrão; estes tokens são o tema escuro. */
     --background: 222 30% 4%;
     --foreground: 240 17% 96%;
