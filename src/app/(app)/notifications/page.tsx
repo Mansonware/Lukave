@@ -60,8 +60,9 @@ export default async function NotificationsPage() {
                   "flex items-center gap-3 border-b border-border px-4 py-3.5 transition-colors hover:bg-white/[0.02] sm:px-5",
                   !n.read && "bg-primary/[0.06]",
                 )}
+                aria-label={`${actorName} ${c.verb}${!n.read ? " (não lida)" : ""}`}
               >
-                <div className={cn("shrink-0", c.color)}>
+                <div className={cn("shrink-0", c.color)} aria-hidden="true">
                   <Icon className="h-5 w-5" />
                 </div>
                 <Avatar className="h-9 w-9">
@@ -73,9 +74,12 @@ export default async function NotificationsPage() {
                 <div className="min-w-0 flex-1 text-sm">
                   <span className="font-semibold">{actorName}</span>{" "}
                   <span className="text-muted-foreground">{c.verb}</span>
-                  <span className="ml-1 text-xs text-muted-foreground">
+                  <time
+                    dateTime={new Date(n.createdAt).toISOString()}
+                    className="ml-1 text-xs text-muted-foreground"
+                  >
                     · {formatTimeAgo(n.createdAt)}
-                  </span>
+                  </time>
                 </div>
                 {!n.read && (
                   <span className="h-2 w-2 shrink-0 rounded-full bg-nexus-gradient" />

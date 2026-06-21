@@ -1,25 +1,19 @@
 "use client";
 
-import { useRef, useState, useTransition } from "react";
+import { useCallback, useRef, useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
-import { ImagePlus, Loader2, X, Globe, Users, Lock } from "lucide-react";
+import { ImagePlus, Loader2 } from "lucide-react";
 import { toast } from "sonner";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
+import { MediaPreview } from "@/components/feed/media-preview";
+import { VisibilitySelector, type Visibility } from "@/components/feed/visibility-selector";
 import { createPost } from "@/server/actions/posts";
 import { uploadImage } from "@/server/actions/upload";
 import { cn, getInitials } from "@/lib/utils";
 import type { Viewer } from "@/types/post";
-
-type Visibility = "PUBLIC" | "FOLLOWERS" | "PRIVATE";
-
-const VIS_OPTIONS: { value: Visibility; label: string; icon: typeof Globe }[] = [
-  { value: "PUBLIC", label: "Público", icon: Globe },
-  { value: "FOLLOWERS", label: "Seguidores", icon: Users },
-  { value: "PRIVATE", label: "Só eu", icon: Lock },
-];
 
 const MAX_MEDIA = 4;
 const MAX_CHARS = 2000;
@@ -39,26 +33,33 @@ export function PostComposer({
   const [uploading, setUploading] = useState(false);
   const [pending, startTransition] = useTransition();
 
-  async function onPickFiles(e: React.ChangeEvent<HTMLInputElement>) {
-    const files = Array.from(e.target.files ?? []);
-    if (files.length === 0) return;
-    const room = MAX_MEDIA - media.length;
-    if (room <= 0) {
-      toast.error(`Máximo de ${MAX_MEDIA} imagens.`);
-      return;
-    }
+  const handlePickFiles = useCallback(
+    async (e: React.ChangeEvent<HTMLInputElement>) => {
+      const files = Array.from(e.target.files ?? []);
+      if (files.length === 0) return;
+      const room = MAX_MEDIA - media.length;
+      if (room <= 0) {
+        toast.error(`Máximo de ${MAX_MEDIA} imagens.`);
+        return;
+      }
 
-    setUploading(true);
-    for (const file of files.slice(0, room)) {
-      const fd = new FormData();
-      fd.append("file", file);
-      const res = await uploadImage("posts", fd);
-      if (res.ok) setMedia((prev) => [...prev, res.url]);
-      else toast.error(res.error);
-    }
-    setUploading(false);
-    if (fileRef.current) fileRef.current.value = "";
-  }
+      setUploading(true);
+      for (const file of files.slice(0, room)) {
+        const fd = new FormData();
+        fd.append("file", file);
+        const res = await uploadImage("posts", fd);
+        if (res.ok) setMedia((prev) => [...prev, res.url]);
+        else toast.error(res.error);
+      }
+      setUploading(false);
+      if (fileRef.current) fileRef.current.value = "";
+    },
+    [media.length],
+  );
+
+  const handleRemoveMedia = useCallback((url: string) => {
+    setMedia((prev) => prev.filter((u) => u !== url));
+  }, []);
 
   function submit() {
     if (!content.trim() && media.length === 0) {
@@ -100,37 +101,10 @@ export function PostComposer({
             onChange={(e) => setContent(e.target.value.slice(0, MAX_CHARS))}
             placeholder="O que está acontecendo?"
             className="min-h-[64px] border-0 bg-transparent px-0 text-lg focus-visible:ring-0"
+            aria-label="Conteúdo da publicação"
           />
 
-          {media.length > 0 && (
-            <div
-              className={cn(
-                "mt-2 grid gap-1.5",
-                media.length === 1 ? "grid-cols-1" : "grid-cols-2",
-              )}
-            >
-              {media.map((url) => (
-                <div
-                  key={url}
-                  className="relative overflow-hidden rounded-xl border border-border"
-                >
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src={url}
-                    alt="Pré-visualização"
-                    className="h-40 w-full object-cover"
-                  />
-                  <button
-                    onClick={() => setMedia((prev) => prev.filter((u) => u !== url))}
-                    className="absolute right-2 top-2 grid h-7 w-7 place-items-center rounded-full bg-black/60 text-white backdrop-blur hover:bg-black/80"
-                    aria-label="Remover imagem"
-                  >
-                    <X className="h-4 w-4" />
-                  </button>
-                </div>
-              ))}
-            </div>
-          )}
+          <MediaPreview media={media} onRemove={handleRemoveMedia} />
 
           <div className="mt-3 flex items-center justify-between gap-2">
             <div className="flex items-center gap-1">
@@ -140,7 +114,7 @@ export function PostComposer({
                 accept="image/*"
                 multiple
                 hidden
-                onChange={onPickFiles}
+                onChange={handlePickFiles}
               />
               <Button
                 type="button"
@@ -152,31 +126,13 @@ export function PostComposer({
                 aria-label="Adicionar imagem"
               >
                 {uploading ? (
-                  <Loader2 className="animate-spin" />
+                  <Loader2 className="animate-spin" aria-label="Enviando imagem" />
                 ) : (
                   <ImagePlus />
                 )}
               </Button>
 
-              <div className="flex items-center gap-0.5 rounded-full bg-secondary/60 p-0.5">
-                {VIS_OPTIONS.map((opt) => (
-                  <button
-                    key={opt.value}
-                    type="button"
-                    onClick={() => setVisibility(opt.value)}
-                    title={opt.label}
-                    className={cn(
-                      "flex items-center gap-1 rounded-full px-2.5 py-1 text-xs font-medium transition-colors",
-                      visibility === opt.value
-                        ? "bg-nexus-gradient text-white"
-                        : "text-muted-foreground hover:text-foreground",
-                    )}
-                  >
-                    <opt.icon className="h-3.5 w-3.5" />
-                    <span className="hidden sm:inline">{opt.label}</span>
-                  </button>
-                ))}
-              </div>
+              <VisibilitySelector value={visibility} onChange={setVisibility} />
             </div>
 
             <div className="flex items-center gap-3">
@@ -189,6 +145,8 @@ export function PostComposer({
                       ? "text-nexus-orange"
                       : "text-muted-foreground",
                 )}
+                aria-label={`${remaining} caracteres restantes`}
+                aria-live="polite"
               >
                 {remaining}
               </span>

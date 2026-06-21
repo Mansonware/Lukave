@@ -25,14 +25,15 @@ export function SearchBar({ initialQuery = "" }: { initialQuery?: string }) {
   }
 
   return (
-    <div className="relative">
-      <Search className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+    <div className="relative" role="search">
+      <Search className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" aria-hidden="true" />
       <Input
         value={value}
         onChange={(e) => onChange(e.target.value)}
         placeholder="Buscar usuários e conteúdos..."
         className="h-11 pl-10 pr-10"
         autoFocus
+        aria-label="Buscar usuários e conteúdos"
       />
       {value && (
         <button

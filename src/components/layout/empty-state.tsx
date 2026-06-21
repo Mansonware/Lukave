@@ -12,9 +12,9 @@ export function EmptyState({
   children?: React.ReactNode;
 }) {
   return (
-    <div className="flex flex-col items-center justify-center px-6 py-16 text-center">
+    <div className="flex flex-col items-center justify-center px-6 py-16 text-center" role="status">
       <div className="mb-4 grid h-14 w-14 place-items-center rounded-2xl bg-white/[0.04] text-muted-foreground">
-        <Icon className="h-7 w-7" />
+        <Icon className="h-7 w-7" aria-hidden="true" />
       </div>
       <h3 className="font-display text-lg font-semibold">{title}</h3>
       {description && (

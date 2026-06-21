@@ -89,10 +89,11 @@ export function CommentSection({
         </Button>
       </form>
 
-      <div className="mt-4 space-y-4">
+      <div className="mt-4 space-y-4" aria-live="polite">
         {loading ? (
-          <div className="flex justify-center py-4 text-muted-foreground">
+          <div className="flex justify-center py-4 text-muted-foreground" role="status">
             <Loader2 className="h-5 w-5 animate-spin" />
+            <span className="sr-only">Carregando comentários</span>
           </div>
         ) : comments.length === 0 ? (
           <p className="py-2 text-center text-sm text-muted-foreground">

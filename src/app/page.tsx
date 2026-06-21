@@ -1,4 +1,5 @@
 import Link from "next/link";
+import dynamic from "next/dynamic";
 import {
   ArrowRight,
   Users,
@@ -12,8 +13,12 @@ import {
 import { Logo } from "@/components/brand/logo";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { FadeIn } from "@/components/motion/fade-in";
 import { getSession } from "@/lib/session";
+
+const FadeIn = dynamic(
+  () => import("@/components/motion/fade-in").then((m) => ({ default: m.FadeIn })),
+  { ssr: true },
+);
 
 const features = [
   {
