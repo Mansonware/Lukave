@@ -4,11 +4,13 @@ import type { Metadata } from "next";
 
 import { requireUser } from "@/lib/session";
 import { getFeedPosts } from "@/server/queries";
+import { getActiveStories } from "@/server/actions/stories";
 import { PostComposer } from "@/components/feed/post-composer";
 import { InfiniteFeed } from "@/components/feed/infinite-feed";
 import { PageHeader } from "@/components/layout/page-header";
 import { EmptyState } from "@/components/layout/empty-state";
 import { SuggestedUsers } from "@/components/profile/suggested-users";
+import { StoriesBar } from "@/components/stories/stories-bar";
 import type { Viewer } from "@/types/post";
 
 export const metadata: Metadata = { title: "Início" };
@@ -28,13 +30,17 @@ export default async function FeedPage({
     image: user.image,
   };
 
-  const posts = await getFeedPosts({ viewerId: user.id, take: 30 });
+  const [posts, storyGroups] = await Promise.all([
+    getFeedPosts({ viewerId: user.id, take: 30 }),
+    getActiveStories(),
+  ]);
 
   return (
     <div className="flex gap-6">
       <div className="mx-auto w-full max-w-2xl border-x border-border">
         <PageHeader title="Início" description="Seu feed no NEXUS" />
         <PostComposer viewer={viewer} autoFocus={compose === "1"} />
+        <StoriesBar groups={storyGroups} viewer={viewer} />
 
         {posts.length === 0 ? (
           <EmptyState
