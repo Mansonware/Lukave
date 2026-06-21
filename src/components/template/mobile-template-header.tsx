@@ -14,10 +14,10 @@ export function MobileTemplateHeader() {
         </div>
 
         <div className="flex items-center gap-2">
-          <button className="grid h-10 w-10 place-items-center rounded-full border border-white/10 bg-white/5 text-foreground transition-colors hover:bg-white/10">
+          <button className="grid h-10 w-10 place-items-center rounded-full border border-white/10 bg-white/5 text-foreground transition-colors hover:bg-white/10" aria-label="Buscar">
             <Search className="h-4 w-4" />
           </button>
-          <button className="grid h-10 w-10 place-items-center rounded-full border border-white/10 bg-white/5 text-foreground transition-colors hover:bg-white/10">
+          <button className="grid h-10 w-10 place-items-center rounded-full border border-white/10 bg-white/5 text-foreground transition-colors hover:bg-white/10" aria-label="Notificações">
             <Bell className="h-4 w-4" />
           </button>
         </div>

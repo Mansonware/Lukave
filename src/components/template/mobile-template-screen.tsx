@@ -60,15 +60,17 @@ export function MobileTemplateScreen() {
         </section>
       </div>
 
-      <nav className="mt-auto flex items-center justify-between border-t border-white/10 bg-background/90 px-4 py-3">
+      <nav className="mt-auto flex items-center justify-between border-t border-white/10 bg-background/90 px-4 py-3" aria-label="Navegação do template">
         {bottomTabs.map((tab) => (
           <button
             key={tab.label}
+            aria-label={tab.label}
+            aria-current={tab.active ? "page" : undefined}
             className={`flex flex-1 flex-col items-center gap-1 rounded-2xl px-2 py-2 text-[11px] transition-colors ${
               tab.active ? "text-foreground" : "text-muted-foreground"
             }`}
           >
-            <tab.icon className="h-5 w-5" />
+            <tab.icon className="h-5 w-5" aria-hidden="true" />
             {tab.label}
           </button>
         ))}

@@ -94,11 +94,8 @@ export function StoryViewer({
       {/* Backdrop click closes */}
       <div
         className="absolute inset-0"
-        role="button"
-        tabIndex={-1}
-        aria-label="Fechar story"
+        aria-hidden="true"
         onClick={onClose}
-        onKeyDown={(e) => e.key === "Enter" && onClose()}
       />
 
       {/* Story card */}

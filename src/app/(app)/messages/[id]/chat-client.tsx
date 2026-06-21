@@ -91,8 +91,8 @@ export function ChatClient({
       createdAt: new Date(),
       author: {
         id: currentUserId,
-        name: "Você",
-        username: "",
+        name: otherMember ? null : "Você",
+        username: currentUserId,
         image: null,
       },
     };

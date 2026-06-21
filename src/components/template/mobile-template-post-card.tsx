@@ -49,17 +49,17 @@ export function MobileTemplatePostCard({
 
         <p className="text-sm leading-6 text-foreground/85">{post.caption}</p>
 
-        <div className="grid grid-cols-3 gap-2 text-sm text-muted-foreground">
-          <div className="flex items-center justify-center gap-2 rounded-2xl border border-white/10 bg-white/5 px-3 py-2.5">
-            <Heart className="h-4 w-4" />
+        <div className="grid grid-cols-3 gap-2 text-sm text-muted-foreground" role="group" aria-label="Estatísticas da publicação">
+          <div className="flex items-center justify-center gap-2 rounded-2xl border border-white/10 bg-white/5 px-3 py-2.5" aria-label={`${post.stats.likes} curtidas`}>
+            <Heart className="h-4 w-4" aria-hidden="true" />
             {post.stats.likes}
           </div>
-          <div className="flex items-center justify-center gap-2 rounded-2xl border border-white/10 bg-white/5 px-3 py-2.5">
-            <MessageCircle className="h-4 w-4" />
+          <div className="flex items-center justify-center gap-2 rounded-2xl border border-white/10 bg-white/5 px-3 py-2.5" aria-label={`${post.stats.comments} comentários`}>
+            <MessageCircle className="h-4 w-4" aria-hidden="true" />
             {post.stats.comments}
           </div>
-          <div className="flex items-center justify-center gap-2 rounded-2xl border border-white/10 bg-white/5 px-3 py-2.5">
-            <Share2 className="h-4 w-4" />
+          <div className="flex items-center justify-center gap-2 rounded-2xl border border-white/10 bg-white/5 px-3 py-2.5" aria-label={`${post.stats.shares} compartilhamentos`}>
+            <Share2 className="h-4 w-4" aria-hidden="true" />
             {post.stats.shares}
           </div>
         </div>
