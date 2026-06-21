@@ -7,7 +7,8 @@
 [![Build](https://img.shields.io/badge/build-passing-brightgreen)](./package.json)
 [![Version](https://img.shields.io/badge/version-0.1.0-blue)](./package.json)
 [![License](https://img.shields.io/badge/license-MIT-purple)](https://opensource.org/license/mit)
-[![Platform](https://img.shields.io/badge/platform-Android%20%7C%20iOS-informational)](https://developer.android.com/)
+[![Android](https://img.shields.io/badge/platform-Android-informational)](https://developer.android.com/)
+[![iOS](https://img.shields.io/badge/platform-iOS-informational)](https://developer.apple.com/ios/)
 
 </div>
 
@@ -15,9 +16,9 @@
 
 ## 🚀 Sobre o Projeto
 
-O **nuk-plataforma** é um app de rede social focado em conteúdo e comunidade, no estilo TikTok, Instagram e Facebook: feed dinâmico, interação entre usuários, descoberta de perfis e construção de audiência.
+O **nuk-plataforma** é uma plataforma social focada em conteúdo e comunidade, no estilo TikTok, Instagram e Facebook: feed dinâmico, interação entre usuários, descoberta de perfis e construção de audiência.
 
-> Objetivo: oferecer uma experiência moderna, rápida e escalável para publicação e consumo de conteúdo social em mobile.
+> Estado atual: base web/PWA com Next.js. Direção do produto: experiência mobile para Android e iOS.
 
 ---
 
