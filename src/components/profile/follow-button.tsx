@@ -43,6 +43,8 @@ export function FollowButton({
       size={size}
       variant={following ? "outline" : "default"}
       className={cn(className)}
+      aria-pressed={following}
+      aria-label={following ? "Deixar de seguir" : "Seguir"}
     >
       {pending && <Loader2 className="animate-spin" />}
       {following ? "Seguindo" : "Seguir"}

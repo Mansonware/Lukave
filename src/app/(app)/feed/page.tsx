@@ -11,6 +11,7 @@ import { PageHeader } from "@/components/layout/page-header";
 import { EmptyState } from "@/components/layout/empty-state";
 import { SuggestedUsers } from "@/components/profile/suggested-users";
 import { StoriesBar } from "@/components/stories/stories-bar";
+import { SuggestedUsersSkeleton } from "@/components/ui/skeletons";
 import type { Viewer } from "@/types/post";
 
 export const metadata: Metadata = { title: "Início" };
@@ -56,7 +57,7 @@ export default async function FeedPage({
       {/* Right rail (desktop) */}
       <aside className="hidden w-80 shrink-0 py-4 xl:block">
         <div className="sticky top-20 space-y-4">
-          <Suspense fallback={null}>
+          <Suspense fallback={<SuggestedUsersSkeleton />}>
             <SuggestedUsers viewerId={user.id} />
           </Suspense>
         </div>

@@ -111,23 +111,23 @@ export function InfiniteFeed({
   );
 
   return (
-    <div>
+    <div role="feed" aria-busy={loading} aria-label="Feed de publicações">
       {mappedPosts.map((post) => (
         <PostCard key={post.id} viewer={viewer} post={post} />
       ))}
 
-      <div ref={sentinelRef} className="h-1 w-full" />
+      <div ref={sentinelRef} className="h-1 w-full" aria-hidden="true" />
 
-      <div className="px-4 py-4 text-center text-sm sm:px-5">
+      <div className="px-4 py-4 text-center text-sm sm:px-5" aria-live="polite">
         {loading && (
-          <div className="inline-flex items-center gap-2 text-muted-foreground">
+          <div className="inline-flex items-center gap-2 text-muted-foreground" role="status">
             <Loader2 className="h-4 w-4 animate-spin" />
             Carregando mais publicações...
           </div>
         )}
 
         {!loading && error && (
-          <div className="space-y-2 text-muted-foreground">
+          <div className="space-y-2 text-muted-foreground" role="alert">
             <p>{error}</p>
             <Button
               type="button"

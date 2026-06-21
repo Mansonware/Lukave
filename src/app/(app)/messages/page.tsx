@@ -1,4 +1,3 @@
-import { Suspense } from "react";
 import Link from "next/link";
 import { MessageCircle } from "lucide-react";
 import type { Metadata } from "next";
@@ -8,6 +7,7 @@ import { getConversations } from "@/server/queries/messages";
 import { PageHeader } from "@/components/layout/page-header";
 import { EmptyState } from "@/components/layout/empty-state";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { getInitials } from "@/lib/utils";
 import { formatDistanceToNow } from "date-fns";
 import { ptBR } from "date-fns/locale";
 
@@ -29,35 +29,49 @@ export default async function MessagesPage() {
             description="Você ainda não tem conversas. Comece a interagir no perfil de outros usuários."
           />
         ) : (
-          <div className="divide-y divide-border">
+          <div className="divide-y divide-border" role="list" aria-label="Lista de conversas">
             {conversations.map((c) => (
               <Link
                 key={c.id}
                 href={`/messages/${c.id}`}
-                className="flex items-center gap-4 p-4 hover:bg-muted/50 transition-colors"
+                className="flex items-center gap-4 p-4 transition-colors hover:bg-white/[0.02]"
+                role="listitem"
+                aria-label={`Conversa com ${c.otherMember?.name || c.otherMember?.username}${c.unreadCount > 0 ? `, ${c.unreadCount} mensagens não lidas` : ""}`}
               >
-                <Avatar className="h-12 w-12">
+                <Avatar className="h-12 w-12 nexus-ring">
                   <AvatarImage src={c.otherMember?.image || ""} />
-                  <AvatarFallback>{c.otherMember?.name?.[0]?.toUpperCase() || "U"}</AvatarFallback>
+                  <AvatarFallback>
+                    {getInitials(c.otherMember?.name ?? c.otherMember?.username)}
+                  </AvatarFallback>
                 </Avatar>
                 <div className="flex-1 min-w-0">
                   <div className="flex justify-between items-baseline mb-1">
-                    <h3 className="font-semibold truncate">{c.otherMember?.name || c.otherMember?.username}</h3>
+                    <h3 className="font-semibold truncate">
+                      {c.otherMember?.name || c.otherMember?.username}
+                    </h3>
                     {c.lastMessage && (
-                      <span className="text-xs text-muted-foreground whitespace-nowrap ml-2">
+                      <time
+                        dateTime={new Date(c.lastMessage.createdAt).toISOString()}
+                        className="text-xs text-muted-foreground whitespace-nowrap ml-2"
+                      >
                         {formatDistanceToNow(new Date(c.lastMessage.createdAt), {
                           addSuffix: true,
                           locale: ptBR,
                         })}
-                      </span>
+                      </time>
                     )}
                   </div>
                   <div className="flex justify-between items-center gap-2">
-                    <p className={`text-sm truncate ${c.unreadCount > 0 ? "text-foreground font-medium" : "text-muted-foreground"}`}>
+                    <p
+                      className={`text-sm truncate ${c.unreadCount > 0 ? "text-foreground font-medium" : "text-muted-foreground"}`}
+                    >
                       {c.lastMessage?.content || "Nova conversa"}
                     </p>
                     {c.unreadCount > 0 && (
-                      <span className="inline-flex items-center justify-center h-5 min-w-[1.25rem] px-1.5 rounded-full bg-primary text-primary-foreground text-[10px] font-bold">
+                      <span
+                        className="inline-flex items-center justify-center h-5 min-w-[1.25rem] px-1.5 rounded-full bg-primary text-primary-foreground text-[10px] font-bold"
+                        aria-label={`${c.unreadCount} não lidas`}
+                      >
                         {c.unreadCount}
                       </span>
                     )}
