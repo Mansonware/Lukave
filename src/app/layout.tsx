@@ -1,21 +1,8 @@
 import type { Metadata, Viewport } from "next";
-import { Inter, Space_Grotesk } from "next/font/google";
 
 import { Providers } from "@/components/providers";
 import { Toaster } from "@/components/ui/sonner";
 import "./globals.css";
-
-const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-inter",
-  display: "swap",
-});
-
-const spaceGrotesk = Space_Grotesk({
-  subsets: ["latin"],
-  variable: "--font-space-grotesk",
-  display: "swap",
-});
 
 export const metadata: Metadata = {
   title: {
@@ -58,9 +45,7 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="pt-BR" className="dark" suppressHydrationWarning>
-      <body
-        className={`${inter.variable} ${spaceGrotesk.variable} font-sans ambient-bg min-h-dvh`}
-      >
+      <body className="ambient-bg min-h-dvh font-sans">
         <Providers>
           {children}
           <Toaster />
