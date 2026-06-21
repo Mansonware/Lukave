@@ -93,7 +93,7 @@ export default async function ExplorePage({
           {suggested.length === 0 ? (
             <EmptyState
               icon={SearchIcon}
-              title="Busque no NEXUS"
+              title="Busque no Núk"
               description="Encontre criadores e conteúdos por nome, username ou texto."
             />
           ) : (

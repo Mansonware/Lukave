@@ -1,8 +1,8 @@
 {
-  "name": "nexus-plataforma",
+  "name": "nuk",
   "version": "0.1.0",
   "private": true,
-  "description": "NEXUS — Plataforma tudo-em-um para criadores de conteúdo, comunidades e monetização.",
+  "description": "Núk — Plataforma tudo-em-um para criadores de conteúdo, comunidades e monetização.",
   "scripts": {
     "dev": "next dev",
     "build": "prisma generate && next build",

@@ -2,18 +2,18 @@ import type { MetadataRoute } from "next";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "NEXUS — Crie. Conecte. Monetize.",
-    short_name: "NEXUS",
+    name: "Núk — Crie. Conecte. Monetize.",
+    short_name: "Núk",
     description:
       "A plataforma tudo-em-um para criadores de conteúdo, comunidades e monetização.",
     start_url: "/feed",
+    id: "/?source=pwa",
     display: "standalone",
     orientation: "portrait",
     background_color: "#06070b",
     theme_color: "#9165ff",
     categories: ["social", "entertainment"],
     prefer_related_applications: false,
-    screenshots: [],
     icons: [
       {
         src: "/icon.svg",

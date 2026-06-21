@@ -22,7 +22,7 @@ export default async function SettingsPage() {
   const social = (user.socialLinks ?? {}) as SocialLinks;
 
   return (
-    <div className="mx-auto w-full max-w-2xl border-x border-border">
+    <div className="mx-auto w-full max-w-2xl lg:border-x border-white/5 bg-background/20 backdrop-blur-md rounded-none lg:rounded-3xl lg:my-6 overflow-hidden">
       <PageHeader title="Configurações" description="Gerencie sua conta e perfil" />
 
       <div className="p-4 sm:p-5">

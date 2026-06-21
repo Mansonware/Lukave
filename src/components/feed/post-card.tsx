@@ -176,7 +176,7 @@ export function PostCard({
             <button
               onClick={handleLike}
               className={cn(
-                "group flex items-center gap-1.5 rounded-full px-2.5 py-1.5 text-sm transition-colors hover:bg-nexus-pink/10 hover:text-nexus-pink",
+                "group flex min-h-11 items-center gap-1.5 rounded-full px-2.5 py-1.5 text-sm transition-colors hover:bg-nexus-pink/10 hover:text-nexus-pink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
                 liked && "text-nexus-pink",
               )}
               aria-pressed={liked}
@@ -187,7 +187,9 @@ export function PostCard({
 
             <button
               onClick={() => setShowComments((s) => !s)}
-              className="flex items-center gap-1.5 rounded-full px-2.5 py-1.5 text-sm transition-colors hover:bg-accent/10 hover:text-accent"
+              className="flex min-h-11 items-center gap-1.5 rounded-full px-2.5 py-1.5 text-sm transition-colors hover:bg-accent/10 hover:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+              aria-label="Mostrar comentários"
+              aria-expanded={showComments}
             >
               <MessageCircle className="h-[18px] w-[18px]" />
               {comments > 0 && formatCompactNumber(comments)}
@@ -196,7 +198,7 @@ export function PostCard({
             <button
               onClick={handleShare}
               className={cn(
-                "flex items-center gap-1.5 rounded-full px-2.5 py-1.5 text-sm transition-colors hover:bg-nexus-green/10 hover:text-nexus-green",
+                "flex min-h-11 items-center gap-1.5 rounded-full px-2.5 py-1.5 text-sm transition-colors hover:bg-nexus-green/10 hover:text-nexus-green focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
                 shared && "text-nexus-green",
               )}
               aria-pressed={shared}
@@ -207,7 +209,8 @@ export function PostCard({
 
             <Link
               href={`/post/${post.id}`}
-              className="ml-auto flex items-center gap-1.5 rounded-full px-2.5 py-1.5 text-sm transition-colors hover:bg-white/[0.06] hover:text-foreground"
+              className="ml-auto flex min-h-11 items-center gap-1.5 rounded-full px-2.5 py-1.5 text-sm transition-colors hover:bg-white/[0.06] hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+              aria-label="Abrir publicação"
             >
               <Link2 className="h-[18px] w-[18px]" />
             </Link>

@@ -19,8 +19,8 @@ const spaceGrotesk = Space_Grotesk({
 
 export const metadata: Metadata = {
   title: {
-    default: "NEXUS — Crie. Conecte. Monetize.",
-    template: "%s — NEXUS",
+    default: "Núk — Crie. Conecte. Monetize.",
+    template: "%s — Núk",
   },
   description:
     "A plataforma tudo-em-um para criadores de conteúdo, comunidades e monetização.",
@@ -38,7 +38,7 @@ export const metadata: Metadata = {
   },
   appleWebApp: {
     capable: true,
-    title: "NEXUS",
+    title: "Núk",
     statusBarStyle: "black-translucent",
   },
   other: {
@@ -50,7 +50,6 @@ export const viewport: Viewport = {
   themeColor: "#9165ff",
   width: "device-width",
   initialScale: 1,
-  maximumScale: 1,
 };
 
 export default function RootLayout({

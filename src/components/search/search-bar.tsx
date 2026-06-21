@@ -31,13 +31,13 @@ export function SearchBar({ initialQuery = "" }: { initialQuery?: string }) {
         value={value}
         onChange={(e) => onChange(e.target.value)}
         placeholder="Buscar usuários e conteúdos..."
-        className="h-11 pl-10 pr-10"
+        className="pl-10 pr-12"
         autoFocus
       />
       {value && (
         <button
           onClick={() => onChange("")}
-          className="absolute right-3 top-1/2 -translate-y-1/2 rounded-full p-1 text-muted-foreground hover:bg-white/[0.06] hover:text-foreground"
+          className="absolute right-0 top-1/2 grid h-11 w-11 -translate-y-1/2 place-items-center rounded-full text-muted-foreground hover:bg-white/[0.06] hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
           aria-label="Limpar busca"
         >
           <X className="h-4 w-4" />

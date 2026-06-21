@@ -1,4 +1,4 @@
-# TODO — NEXUS
+# TODO — Núk
 
 Lista de tarefas viva. A Fase 1 está concluída; o restante é backlog priorizado.
 

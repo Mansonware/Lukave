@@ -12,15 +12,15 @@ export function EmptyState({
   children?: React.ReactNode;
 }) {
   return (
-    <div className="flex flex-col items-center justify-center px-6 py-16 text-center">
-      <div className="mb-4 grid h-14 w-14 place-items-center rounded-2xl bg-white/[0.04] text-muted-foreground">
-        <Icon className="h-7 w-7" />
+    <div className="flex flex-col items-center justify-center p-8 text-center glass-panel rounded-3xl mx-4 my-8">
+      <div className="mb-6 grid h-16 w-16 place-items-center rounded-2xl bg-nexus-gradient text-white shadow-lg shadow-primary/20">
+        <Icon className="h-8 w-8" />
       </div>
-      <h3 className="font-display text-lg font-semibold">{title}</h3>
+      <h3 className="font-display text-xl font-bold tracking-tight">{title}</h3>
       {description && (
-        <p className="mt-1 max-w-sm text-sm text-muted-foreground">{description}</p>
+        <p className="mt-2 max-w-sm text-base text-muted-foreground leading-relaxed">{description}</p>
       )}
-      {children && <div className="mt-5">{children}</div>}
+      {children && <div className="mt-8">{children}</div>}
     </div>
   );
 }
