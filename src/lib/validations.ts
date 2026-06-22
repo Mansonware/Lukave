@@ -2,6 +2,7 @@ import { z } from "zod";
 
 export const usernameSchema = z
   .string()
+  .trim()
   .min(3, "Mínimo de 3 caracteres")
   .max(20, "Máximo de 20 caracteres")
   .regex(

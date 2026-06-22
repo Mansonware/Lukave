@@ -66,7 +66,7 @@ export function PostCard({
     navigator.clipboard
       ?.writeText(absoluteUrl(`/post/${post.id}`))
       .then(() => toast.success("Link copiado para a área de transferência"))
-      .catch(() => {});
+      .catch(() => toast.error("Não foi possível copiar o link"));
     startTransition(async () => {
       const res = await sharePost(post.id);
       if (!res.ok) {

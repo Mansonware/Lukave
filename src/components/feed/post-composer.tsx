@@ -49,13 +49,17 @@ export function PostComposer({
     }
 
     setUploading(true);
-    for (const file of files.slice(0, room)) {
-      const fd = new FormData();
-      fd.append("file", file);
-      const res = await uploadImage("posts", fd);
+    const results = await Promise.all(
+      files.slice(0, room).map((file) => {
+        const fd = new FormData();
+        fd.append("file", file);
+        return uploadImage("posts", fd);
+      }),
+    );
+    results.forEach((res) => {
       if (res.ok) setMedia((prev) => [...prev, res.url]);
       else toast.error(res.error);
-    }
+    });
     setUploading(false);
     if (fileRef.current) fileRef.current.value = "";
   }

@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { MessageCircle } from "lucide-react";
+import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { startConversation } from "@/server/actions/messages";
 
@@ -14,7 +15,7 @@ export function StartConversationButton({ targetUserId }: { targetUserId: string
     setIsLoading(true);
     const result = await startConversation(targetUserId);
     if (!result.ok) {
-      console.error(result.error);
+      toast.error(result.error || "Erro ao iniciar conversa");
       setIsLoading(false);
       return;
     }

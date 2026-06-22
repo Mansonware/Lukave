@@ -28,12 +28,16 @@ export function CommentSection({
 
   useEffect(() => {
     let active = true;
-    getComments(postId).then((data) => {
-      if (active) {
-        setComments(data);
-        setLoading(false);
-      }
-    });
+    getComments(postId)
+      .then((data) => {
+        if (active) {
+          setComments(data);
+          setLoading(false);
+        }
+      })
+      .catch(() => {
+        if (active) setLoading(false);
+      });
     return () => {
       active = false;
     };

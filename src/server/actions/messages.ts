@@ -86,7 +86,8 @@ export async function startConversation(
     const convo = await getOrCreateConversation(user.id, targetUserId);
     revalidatePath("/messages");
     return { ok: true, data: { conversationId: convo.id } };
-  } catch (error: any) {
-    return { ok: false, error: error.message || "Erro ao criar conversa." };
+  } catch (error: unknown) {
+    const message = error instanceof Error ? error.message : "Erro ao criar conversa.";
+    return { ok: false, error: message };
   }
 }

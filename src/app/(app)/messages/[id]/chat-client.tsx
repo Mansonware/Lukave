@@ -7,6 +7,7 @@ import { Send } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { toast } from "sonner";
 import { markConversationRead, sendMessage, fetchMessages } from "@/server/actions/messages";
 
 type MessageAuthor = {
@@ -50,14 +51,20 @@ export function ChatClient({
   // Mark as read on enter
   useEffect(() => {
     markConversationRead(conversationId);
-  }, [conversationId, messages]);
+  }, [conversationId]);
 
-  // Polling every 3s
+  // Polling every 3s — dependency array must NOT include messages.length
+  // to avoid resetting the interval on every new message
+  const messagesLengthRef = useRef(messages.length);
+  useEffect(() => {
+    messagesLengthRef.current = messages.length;
+  }, [messages.length]);
+
   useEffect(() => {
     const interval = setInterval(async () => {
       try {
         const newMessages = await fetchMessages(conversationId);
-        if (newMessages.length > messages.length) {
+        if (newMessages.length > messagesLengthRef.current) {
           setMessages(newMessages);
         }
       } catch (error) {
@@ -66,7 +73,7 @@ export function ChatClient({
     }, 3000);
 
     return () => clearInterval(interval);
-  }, [conversationId, messages.length]);
+  }, [conversationId]);
 
   const handleSend = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -76,20 +83,21 @@ export function ChatClient({
     setInputValue("");
     setIsSending(true);
 
+    // Optimistic update
+    const optimisticMsg: Message = {
+      id: `temp-${Date.now()}`,
+      content,
+      authorId: currentUserId,
+      createdAt: new Date(),
+      author: {
+        id: currentUserId,
+        name: "Você",
+        username: "voce",
+        image: null,
+      },
+    };
+
     try {
-      // Optimistic update
-      const optimisticMsg: Message = {
-        id: `temp-${Date.now()}`,
-        content,
-        authorId: currentUserId,
-        createdAt: new Date(),
-        author: {
-          id: currentUserId,
-          name: "Você",
-          username: "voce",
-          image: null,
-        },
-      };
       setMessages((prev) => [...prev, optimisticMsg]);
 
       await sendMessage(conversationId, content);
@@ -99,7 +107,9 @@ export function ChatClient({
       setMessages(updatedMessages);
     } catch (error) {
       console.error("Failed to send message", error);
-      // In a real app we might remove the optimistic message on failure
+      // Remove the optimistic message on failure
+      setMessages((prev) => prev.filter((m) => m.id !== optimisticMsg.id));
+      toast.error("Falha ao enviar mensagem. Tente novamente.");
     } finally {
       setIsSending(false);
     }
@@ -123,6 +133,9 @@ export function ChatClient({
       <div 
         ref={scrollRef}
         className="flex-1 overflow-y-auto p-4 space-y-4"
+        role="log"
+        aria-live="polite"
+        aria-label="Mensagens"
       >
         {messages.map((msg, index) => {
           const isMe = msg.authorId === currentUserId;

@@ -21,21 +21,25 @@ export function LoginForm() {
     setLoading(true);
     const form = new FormData(e.currentTarget);
 
-    const res = await signIn("credentials", {
-      email: String(form.get("email") ?? "").toLowerCase(),
-      password: String(form.get("password") ?? ""),
-      redirect: false,
-    });
+    try {
+      const res = await signIn("credentials", {
+        email: String(form.get("email") ?? "").toLowerCase(),
+        password: String(form.get("password") ?? ""),
+        redirect: false,
+      });
 
-    setLoading(false);
-
-    if (res?.error) {
-      toast.error("E-mail ou senha incorretos.");
-      return;
+      if (res?.error) {
+        toast.error("E-mail ou senha incorretos.");
+        return;
+      }
+      toast.success("Bem-vindo de volta!");
+      router.push(params.get("callbackUrl") ?? "/feed");
+      router.refresh();
+    } catch {
+      toast.error("Erro ao conectar. Tente novamente.");
+    } finally {
+      setLoading(false);
     }
-    toast.success("Bem-vindo de volta!");
-    router.push(params.get("callbackUrl") ?? "/feed");
-    router.refresh();
   }
 
   return (
