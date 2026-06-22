@@ -102,4 +102,19 @@
       radial-gradient(60% 50% at 80% -10%, rgba(145, 101, 255, 0.16), transparent 60%),
       radial-gradient(50% 50% at 0% 110%, rgba(67, 140, 255, 0.14), transparent 60%);
   }
+  .ambient-bg-subtle {
+    background-image:
+      radial-gradient(50% 40% at 70% 0%, rgba(145, 101, 255, 0.08), transparent 50%),
+      radial-gradient(40% 40% at 10% 100%, rgba(67, 140, 255, 0.06), transparent 50%);
+  }
+}
+
+/* Smooth skeleton pulse for loading states */
+@keyframes skeleton-pulse {
+  0%, 100% { opacity: 0.06; }
+  50% { opacity: 0.12; }
+}
+.skeleton {
+  @apply rounded-lg bg-white;
+  animation: skeleton-pulse 1.8s ease-in-out infinite;
 }
