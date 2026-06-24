@@ -34,7 +34,7 @@ function UserRow({
   return (
     <div className="flex items-center gap-3 px-4 py-3 transition-colors hover:bg-white/[0.015] sm:px-5">
       <Link href={`/${u.username}`} className="shrink-0">
-        <Avatar className="h-11 w-11 nexus-ring">
+        <Avatar className="h-11 w-11 nuk-ring">
           {u.image && <AvatarImage src={u.image} alt={u.username} />}
           <AvatarFallback>{getInitials(u.name ?? u.username)}</AvatarFallback>
         </Avatar>
@@ -80,7 +80,7 @@ export default async function ExplorePage({
   const suggested = query ? [] : await getSuggestedUsers(user.id, 8);
 
   return (
-    <div className="mx-auto w-full max-w-2xl border-x border-border">
+    <div className="mx-auto w-full max-w-2xl glass-panel lg:my-6 lg:rounded-3xl overflow-hidden">
       <div className="sticky top-14 z-20 border-b border-border bg-background/80 px-4 py-3 backdrop-blur-xl sm:px-5 lg:top-16">
         <SearchBar initialQuery={query} />
       </div>

@@ -37,7 +37,7 @@ export function MobileNav({ unreadCount = 0 }: { unreadCount?: number }) {
               <span className="relative z-10 flex flex-col items-center gap-1">
                 <item.icon className={cn("h-5 w-5 transition-all", active ? "stroke-[2.5] text-primary" : "stroke-2")} />
                 {item.href === "/notifications" && unreadCount > 0 && (
-                  <span className="absolute -right-2 -top-1.5 grid h-4 min-w-4 place-items-center rounded-full bg-nexus-gradient px-1 text-[9px] font-bold text-white shadow-sm">
+                  <span className="absolute -right-2 -top-1.5 grid h-4 min-w-4 place-items-center rounded-full bg-nuk-gradient px-1 text-[9px] font-bold text-white shadow-sm">
                     {unreadCount > 9 ? "9+" : unreadCount}
                   </span>
                 )}

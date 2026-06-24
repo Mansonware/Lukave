@@ -70,7 +70,7 @@ export default async function ProfilePage({
   const socialEntries = Object.entries(social).filter(([, v]) => v);
 
   return (
-    <div className="mx-auto w-full max-w-2xl border-x border-border">
+    <div className="mx-auto w-full max-w-2xl glass-panel lg:my-6 lg:rounded-3xl overflow-hidden">
       {/* Banner */}
       <div className="relative h-40 w-full bg-gradient-to-br from-primary/30 to-accent/20 sm:h-52">
         {profile.bannerUrl && (
@@ -86,7 +86,7 @@ export default async function ProfilePage({
       {/* Cabeçalho */}
       <div className="px-4 pb-4 sm:px-5">
         <div className="flex items-end justify-between">
-          <Avatar className="-mt-12 h-24 w-24 border-4 border-background sm:h-28 sm:w-28">
+          <Avatar className="-mt-12 h-24 w-24 border-4 border-background sm:h-28 sm:w-28 shadow-xl">
             {profile.image && (
               <AvatarImage src={profile.image} alt={profile.username} />
             )}
@@ -116,7 +116,7 @@ export default async function ProfilePage({
 
         <div className="mt-3">
           <div className="flex items-center gap-2">
-            <h1 className="font-display text-xl font-bold">
+            <h1 className="font-display text-2xl font-bold text-gradient drop-shadow-sm">
               {profile.name ?? profile.username}
             </h1>
             {profile.role === "CREATOR" && <Badge>Criador</Badge>}
@@ -187,7 +187,7 @@ export default async function ProfilePage({
       </div>
 
       {/* Publicações */}
-      <div className="border-t border-border">
+      <div className="border-t border-white/10 bg-background/30">
         {posts.length === 0 ? (
           <EmptyState
             icon={FileText}

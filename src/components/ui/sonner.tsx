@@ -14,7 +14,7 @@ export function Toaster(props: ToasterProps) {
           toast:
             "group glass-strong !rounded-xl !border-border !text-foreground",
           description: "!text-muted-foreground",
-          actionButton: "!bg-nexus-gradient !text-white",
+          actionButton: "!bg-nuk-gradient !text-white",
         },
       }}
       {...props}

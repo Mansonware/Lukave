@@ -19,7 +19,7 @@ export async function sendEmail(opts: {
   }
 
   const { error } = await resend.emails.send({
-    from: process.env.EMAIL_FROM ?? "Núk <no-reply@nexus.app>",
+    from: process.env.EMAIL_FROM ?? "Núk <no-reply@nuk.app>",
     to: opts.to,
     subject: opts.subject,
     html: opts.html,

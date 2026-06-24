@@ -12,7 +12,7 @@ export function StartConversationButton({ targetUserId }: { targetUserId: string
 
   const handleStart = async () => {
     setIsLoading(true);
-    const result = await startConversation(targetUserId);
+    const result = await startConversation({ targetUserId });
     if (!result.ok) {
       console.error(result.error);
       setIsLoading(false);

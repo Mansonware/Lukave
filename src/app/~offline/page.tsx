@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 export default function OfflinePage() {
   return (
     <div className="flex min-h-dvh flex-col items-center justify-center p-4 text-center ambient-bg">
-      <div className="flex h-20 w-20 items-center justify-center rounded-full bg-secondary nexus-ring mb-6">
+      <div className="flex h-20 w-20 items-center justify-center rounded-full bg-secondary nuk-ring mb-6">
         <WifiOff className="h-10 w-10 text-muted-foreground" />
       </div>
       <h1 className="text-2xl font-bold tracking-tight mb-2">Você está offline</h1>

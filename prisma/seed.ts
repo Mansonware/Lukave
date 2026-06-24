@@ -7,38 +7,38 @@ const demoUsers = [
   {
     name: "Ana Criadora",
     username: "ana",
-    email: "ana@nexus.app",
+    email: "ana@nuk.app",
     role: "CREATOR" as const,
     bio: "Criadora de conteúdo sobre design e tecnologia. ✨",
     location: "São Paulo, BR",
-    websiteUrl: "https://nexus.app",
+    websiteUrl: "https://nuk.app",
   },
   {
     name: "Bruno Dev",
     username: "bruno",
-    email: "bruno@nexus.app",
+    email: "bruno@nuk.app",
     role: "USER" as const,
     bio: "Full stack dev. Construindo coisas legais.",
   },
   {
     name: "Carla Music",
     username: "carla",
-    email: "carla@nexus.app",
+    email: "carla@nuk.app",
     role: "CREATOR" as const,
     bio: "Música independente 🎵 | Novos lançamentos toda semana",
   },
 ];
 
 const demoPosts = [
-  "Acabei de chegar no NEXUS! Animada para criar e conectar por aqui. 🚀",
+  "Acabei de chegar no Núk! Animada para criar e conectar por aqui. 🚀",
   "Dica do dia: consistência vence intensidade. Publique sempre. 💡",
   "Trabalhando em um novo projeto que vou compartilhar em breve com vocês. 👀",
   "Qual conteúdo vocês querem ver mais por aqui? Me contem nos comentários!",
 ];
 
 async function main() {
-  console.log("🌱 Seeding NEXUS...");
-  const passwordHash = await bcrypt.hash("nexus1234", 12);
+  console.log("🌱 Seeding Núk...");
+  const passwordHash = await bcrypt.hash("nuk1234", 12);
 
   const users: User[] = [];
   for (const u of demoUsers) {
@@ -102,7 +102,7 @@ async function main() {
   }
   console.log(`  ✓ relações de seguidores`);
 
-  console.log("✅ Seed concluído. Login de teste: ana@nexus.app / nexus1234");
+  console.log("✅ Seed concluído. Login de teste: ana@nuk.app / nuk1234");
 }
 
 main()

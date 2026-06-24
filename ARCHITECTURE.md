@@ -1,6 +1,6 @@
-# Arquitetura — NEXUS
+# Arquitetura — Núk
 
-NEXUS é uma plataforma tudo-em-um para criadores de conteúdo, comunidades e
+Núk é uma plataforma tudo-em-um para criadores de conteúdo, comunidades e
 monetização. Este documento descreve a arquitetura técnica, as decisões de
 projeto e como o sistema evolui ao longo das fases.
 
@@ -11,7 +11,7 @@ projeto e como o sistema evolui ao longo das fases.
 
 ## 1. Visão geral
 
-NEXUS é um **monolito modular** construído com **Next.js 15 (App Router)**. Não
+Núk é um **monolito modular** construído com **Next.js 15 (App Router)**. Não
 há uma API REST separada: as leituras acontecem em **React Server Components
 (RSC)** consultando o banco via Prisma, e as escritas são feitas por
 **Server Actions** tipadas e validadas com Zod.

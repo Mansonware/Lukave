@@ -1,4 +1,5 @@
 import { prisma } from "@/lib/prisma";
+import { cache } from "react";
 import type { Prisma } from "@prisma/client";
 
 /** Seleção padrão de autor para cards de post/comentário. */
@@ -8,26 +9,18 @@ const authorSelect = {
   username: true,
   image: true,
   role: true,
-} satisfies Prisma.UserSelect;
+};
 
-/** Inclui dados do post + relações do viewer (curtido/compartilhado por mim). */
-function postInclude(viewerId?: string) {
-  return {
-    author: { select: authorSelect },
-    media: { orderBy: { order: "asc" } },
-    likes: viewerId ? { where: { userId: viewerId }, select: { id: true } } : false,
-    shares: viewerId ? { where: { userId: viewerId }, select: { id: true } } : false,
-  } satisfies Prisma.PostInclude;
-}
+
 
 export type FeedPost = Awaited<ReturnType<typeof getFeedPosts>>[number];
 
-export async function getFeedPosts(opts: {
+export const getFeedPosts = cache(async (opts: {
   viewerId?: string;
   authorId?: string;
   cursor?: string;
   take?: number;
-}) {
+}) => {
   const { viewerId, authorId, cursor, take = 20 } = opts;
 
   const rows = await prisma.post.findMany({
@@ -35,7 +28,12 @@ export async function getFeedPosts(opts: {
       visibility: "PUBLIC",
       ...(authorId ? { authorId } : {}),
     },
-    include: postInclude(viewerId),
+    include: {
+      author: { select: authorSelect },
+      media: { orderBy: { order: "asc" as const } },
+      ...(viewerId ? { likes: { where: { userId: viewerId }, select: { id: true } } } : {}),
+      ...(viewerId ? { shares: { where: { userId: viewerId }, select: { id: true } } } : {}),
+    },
     orderBy: { createdAt: "desc" },
     take: take + 1,
     ...(cursor ? { cursor: { id: cursor }, skip: 1 } : {}),
@@ -50,13 +48,16 @@ export async function getFeedPosts(opts: {
     sharedByMe: Array.isArray(p.shares) ? p.shares.length > 0 : false,
     nextCursor: hasMore ? items[items.length - 1]?.id : null,
   }));
-}
+});
 
-export async function getPostById(id: string, viewerId?: string) {
+export const getPostById = cache(async (id: string, viewerId?: string) => {
   const post = await prisma.post.findUnique({
     where: { id },
     include: {
-      ...postInclude(viewerId),
+      author: { select: authorSelect },
+      media: { orderBy: { order: "asc" as const } },
+      ...(viewerId ? { likes: { where: { userId: viewerId }, select: { id: true } } } : {}),
+      ...(viewerId ? { shares: { where: { userId: viewerId }, select: { id: true } } } : {}),
       comments: {
         include: { author: { select: authorSelect } },
         orderBy: { createdAt: "desc" },
@@ -69,9 +70,9 @@ export async function getPostById(id: string, viewerId?: string) {
     likedByMe: Array.isArray(post.likes) ? post.likes.length > 0 : false,
     sharedByMe: Array.isArray(post.shares) ? post.shares.length > 0 : false,
   };
-}
+});
 
-export async function getProfileByUsername(username: string, viewerId?: string) {
+export const getProfileByUsername = cache(async (username: string, viewerId?: string) => {
   const user = await prisma.user.findUnique({
     where: { username },
     select: {
@@ -107,9 +108,9 @@ export async function getProfileByUsername(username: string, viewerId?: string) 
   }
 
   return { ...user, isFollowing, isMe: viewerId === user.id };
-}
+});
 
-export async function searchAll(query: string, viewerId?: string) {
+export const searchAll = cache(async (query: string, viewerId?: string) => {
   const q = query.trim();
   if (!q) return { users: [], posts: [] };
 
@@ -137,7 +138,12 @@ export async function searchAll(query: string, viewerId?: string) {
         visibility: "PUBLIC",
         content: { contains: q, mode: "insensitive" },
       },
-      include: postInclude(viewerId),
+      include: {
+        author: { select: authorSelect },
+        media: { orderBy: { order: "asc" as const } },
+        ...(viewerId ? { likes: { where: { userId: viewerId }, select: { id: true } } } : {}),
+        ...(viewerId ? { shares: { where: { userId: viewerId }, select: { id: true } } } : {}),
+      },
       orderBy: { createdAt: "desc" },
       take: 20,
     }),
@@ -151,9 +157,9 @@ export async function searchAll(query: string, viewerId?: string) {
       sharedByMe: Array.isArray(p.shares) ? p.shares.length > 0 : false,
     })),
   };
-}
+});
 
-export async function getNotifications(userId: string) {
+export const getNotifications = cache(async (userId: string) => {
   return prisma.notification.findMany({
     where: { recipientId: userId },
     include: {
@@ -162,9 +168,9 @@ export async function getNotifications(userId: string) {
     orderBy: { createdAt: "desc" },
     take: 50,
   });
-}
+});
 
-export async function getSuggestedUsers(viewerId?: string, take = 5) {
+export const getSuggestedUsers = cache(async (viewerId?: string, take = 5) => {
   return prisma.user.findMany({
     where: viewerId
       ? {
@@ -183,4 +189,4 @@ export async function getSuggestedUsers(viewerId?: string, take = 5) {
     orderBy: { followersCount: "desc" },
     take,
   });
-}
+});

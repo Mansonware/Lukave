@@ -1,5 +1,5 @@
 // ──────────────────────────────────────────────────────────────────────────
-// NEXUS — Schema Prisma (Fase 1 — MVP)
+// Núk — Schema Prisma (Fase 1 — MVP)
 //
 // Decisão de arquitetura: modelamos COMPLETAMENTE apenas as entidades da Fase 1.
 // As entidades de fases futuras (Stories, Mensagens, Comunidades, Marketplace,

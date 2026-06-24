@@ -52,7 +52,7 @@ const config: Config = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        nexus: {
+        nuk: {
           purple: "#9165ff",
           blue: "#438cff",
           green: "#42dda0",
@@ -67,8 +67,8 @@ const config: Config = {
         sm: "calc(var(--radius) - 4px)",
       },
       backgroundImage: {
-        "nexus-gradient": "linear-gradient(135deg, #7447e8 0%, #1f6fe5 100%)",
-        "nexus-radial":
+        "nuk-gradient": "linear-gradient(135deg, #7447e8 0%, #1f6fe5 100%)",
+        "nuk-radial":
           "radial-gradient(120% 120% at 50% 0%, rgba(145,101,255,0.18) 0%, rgba(6,7,11,0) 55%)",
       },
       keyframes: {

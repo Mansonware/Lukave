@@ -1,4 +1,5 @@
 import { prisma } from "@/lib/prisma";
+import { cache } from "react";
 
 export async function getConversations(userId: string) {
   const members = await prisma.conversationMember.findMany({
@@ -31,44 +32,36 @@ export async function getConversations(userId: string) {
     },
   });
 
-  const enriched = await Promise.all(
-    members.map(async (m) => {
-      const convo = m.conversation;
-      const otherMember = convo.members[0]?.user;
-      const lastMessage = convo.messages[0];
+  const unreadCounts = await prisma.$queryRaw<{ conversationId: string; unread_count: bigint }[]>`
+    SELECT m."conversationId", COUNT(*) as unread_count
+    FROM "Message" m
+    JOIN "ConversationMember" cm ON cm."conversationId" = m."conversationId"
+    WHERE cm."userId" = ${userId}
+      AND m."authorId" != ${userId}
+      AND (cm."lastReadAt" IS NULL OR m."createdAt" > cm."lastReadAt")
+    GROUP BY m."conversationId"
+  `;
 
-      let unreadCount = 0;
-      if (m.lastReadAt) {
-        unreadCount = await prisma.message.count({
-          where: {
-            conversationId: convo.id,
-            authorId: { not: userId },
-            createdAt: { gt: m.lastReadAt },
-          },
-        });
-      } else {
-        unreadCount = await prisma.message.count({
-          where: {
-            conversationId: convo.id,
-            authorId: { not: userId },
-          },
-        });
-      }
-
-      return {
-        id: convo.id,
-        updatedAt: convo.updatedAt,
-        otherMember,
-        lastMessage,
-        unreadCount,
-      };
-    })
+  const unreadMap = new Map(
+    unreadCounts.map((row) => [row.conversationId, Number(row.unread_count)])
   );
 
-  return enriched;
+  return members.map((m) => {
+    const convo = m.conversation;
+    const otherMember = convo.members[0]?.user;
+    const lastMessage = convo.messages[0];
+
+    return {
+      id: convo.id,
+      updatedAt: convo.updatedAt,
+      otherMember,
+      lastMessage,
+      unreadCount: unreadMap.get(convo.id) || 0,
+    };
+  });
 }
 
-export async function getMessages(conversationId: string, userId: string) {
+export const getMessages = cache(async (conversationId: string, userId: string) => {
   // Ensure the user is a member of the conversation
   const member = await prisma.conversationMember.findUnique({
     where: {
@@ -99,7 +92,7 @@ export async function getMessages(conversationId: string, userId: string) {
   });
 
   return messages;
-}
+});
 
 export async function getOrCreateConversation(userId: string, targetId: string) {
   if (userId === targetId) {

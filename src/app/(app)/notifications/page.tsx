@@ -13,13 +13,13 @@ import { cn, formatTimeAgo, getInitials } from "@/lib/utils";
 export const metadata: Metadata = { title: "Notificações" };
 
 const config = {
-  LIKE: { icon: Heart, color: "text-nexus-pink", verb: "curtiu sua publicação" },
+  LIKE: { icon: Heart, color: "text-nuk-pink", verb: "curtiu sua publicação" },
   COMMENT: {
     icon: MessageCircle,
     color: "text-accent",
     verb: "comentou na sua publicação",
   },
-  FOLLOW: { icon: UserPlus, color: "text-nexus-green", verb: "começou a seguir você" },
+  FOLLOW: { icon: UserPlus, color: "text-nuk-green", verb: "começou a seguir você" },
 } as const;
 
 export default async function NotificationsPage() {
@@ -27,7 +27,7 @@ export default async function NotificationsPage() {
   const notifications = await getNotifications(user.id);
 
   return (
-    <div className="mx-auto w-full max-w-2xl border-x border-border">
+    <div className="mx-auto w-full max-w-2xl glass-panel lg:my-6 lg:rounded-3xl overflow-hidden">
       <PageHeader
         title="Notificações"
         action={notifications.some((n) => !n.read) ? <MarkAllReadButton /> : undefined}
@@ -77,7 +77,7 @@ export default async function NotificationsPage() {
                   </span>
                 </div>
                 {!n.read && (
-                  <span className="h-2 w-2 shrink-0 rounded-full bg-nexus-gradient" />
+                  <span className="h-2 w-2 shrink-0 rounded-full bg-nuk-gradient" />
                 )}
               </Link>
             );

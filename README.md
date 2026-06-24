@@ -57,7 +57,7 @@ npm run dev
 ```
 
 App em `http://localhost:3000`.
-Login de teste (após o seed): `ana@nexus.app` / `nexus1234`.
+Login de teste (após o seed): `ana@nuk.app` / `nuk1234`.
 
 ## Scripts
 

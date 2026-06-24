@@ -1,4 +1,4 @@
-# Roadmap — NEXUS
+# Roadmap — Núk
 
 A plataforma é construída em 6 fases. A **Fase 1 (MVP)** está implementada.
 As demais estão planejadas, com abstrações leves já preparadas no código.

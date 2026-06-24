@@ -81,7 +81,7 @@ export default async function LandingPage() {
         <section className="container relative pt-28 pb-16 text-center md:pt-48 md:pb-32 flex flex-col items-center">
           <FadeIn>
             <Badge variant="outline" className="mb-8 gap-2 py-1.5 px-3 border-white/10 bg-white/5 backdrop-blur-md">
-              <span className="h-1.5 w-1.5 rounded-full bg-nexus-green animate-pulse" />
+              <span className="h-1.5 w-1.5 rounded-full bg-nuk-green animate-pulse" />
               A nova casa dos criadores
             </Badge>
           </FadeIn>
@@ -134,7 +134,7 @@ export default async function LandingPage() {
             {features.map((f, i) => (
               <FadeIn key={f.title} delay={i * 0.05}>
                 <div className="glass-strong group h-full rounded-[1.5rem] p-8 transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:border-white/15">
-                  <div className="mb-6 grid h-12 w-12 place-items-center rounded-xl bg-nexus-gradient text-white shadow-lg shadow-primary/20">
+                  <div className="mb-6 grid h-12 w-12 place-items-center rounded-xl bg-nuk-gradient text-white shadow-lg shadow-primary/20">
                     <f.icon className="h-6 w-6" />
                   </div>
                   <h3 className="mb-2 font-display text-xl font-bold tracking-tight">

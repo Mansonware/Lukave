@@ -4,7 +4,7 @@
 
 @layer base {
   :root {
-    /* NEXUS Premium Dark Theme */
+    /* Núk Premium Dark Theme */
     --background: 240 5% 4%; /* Quase preto absoluto, tom frio sutil */
     --foreground: 0 0% 98%;
 
@@ -101,9 +101,9 @@
     @apply bg-card/60 backdrop-blur-lg border border-white/5 shadow-sm;
   }
   .text-gradient {
-    @apply bg-nexus-gradient bg-clip-text text-transparent;
+    @apply bg-nuk-gradient bg-clip-text text-transparent;
   }
-  .nexus-ring {
+  .nuk-ring {
     @apply ring-1 ring-white/10;
   }
 }

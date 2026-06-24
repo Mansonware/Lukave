@@ -26,12 +26,17 @@ export function FollowButton({
     const next = !following;
     setFollowing(next);
     startTransition(async () => {
-      const res = await toggleFollow(targetUserId);
-      if (!res.ok) {
-        setFollowing(!next);
-        toast.error(res.error);
-      } else {
-        setFollowing(res.data!.following);
+      try {
+        const res = await toggleFollow({ targetUserId });
+        if (!res.ok) {
+          setFollowing(initialFollowing);
+          toast.error(res.error || "Erro ao seguir usuário.");
+        } else if (res.data) {
+          setFollowing(res.data.following);
+        }
+      } catch (error) {
+        setFollowing(initialFollowing);
+        toast.error("Erro ao seguir usuário.");
       }
     });
   }

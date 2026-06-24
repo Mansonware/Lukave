@@ -49,16 +49,16 @@ export function ChatClient({
 
   // Mark as read on enter
   useEffect(() => {
-    markConversationRead(conversationId);
+    markConversationRead({ conversationId });
   }, [conversationId, messages]);
 
   // Polling every 3s
   useEffect(() => {
     const interval = setInterval(async () => {
       try {
-        const newMessages = await fetchMessages(conversationId);
-        if (newMessages.length > messages.length) {
-          setMessages(newMessages);
+        const res = await fetchMessages({ conversationId });
+        if (res.ok && res.data && res.data.length > messages.length) {
+          setMessages(res.data);
         }
       } catch (error) {
         console.error("Error polling messages", error);
@@ -92,11 +92,13 @@ export function ChatClient({
       };
       setMessages((prev) => [...prev, optimisticMsg]);
 
-      await sendMessage(conversationId, content);
+      await sendMessage({ conversationId, content });
       
       // Fetch latest after sending to get actual ID and exact timestamp
-      const updatedMessages = await fetchMessages(conversationId);
-      setMessages(updatedMessages);
+      const res = await fetchMessages({ conversationId });
+      if (res.ok && res.data) {
+        setMessages(res.data);
+      }
     } catch (error) {
       console.error("Failed to send message", error);
       // In a real app we might remove the optimistic message on failure

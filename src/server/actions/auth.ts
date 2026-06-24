@@ -11,118 +11,92 @@ import {
   forgotPasswordSchema,
   resetPasswordSchema,
 } from "@/lib/validations";
-import type { ActionResult } from "@/server/action-result";
+import { publicFormAction } from "@/lib/action-wrapper";
 
-export async function registerUser(
-  _prev: ActionResult | undefined,
-  formData: FormData,
-): Promise<ActionResult> {
-  const parsed = registerSchema.safeParse({
-    name: formData.get("name"),
+export const registerUser = publicFormAction(
+  registerSchema,
+  async (formData) => ({
+    name: formData.get("name") as string,
     username: String(formData.get("username") ?? "").toLowerCase(),
     email: String(formData.get("email") ?? "").toLowerCase(),
-    password: formData.get("password"),
-  });
+    password: formData.get("password") as string,
+  }),
+  async (data) => {
+    const { name, email, password } = data;
+    let { username } = data;
 
-  if (!parsed.success) {
-    return {
-      ok: false,
-      error: "Verifique os campos do formulário.",
-      fieldErrors: parsed.error.flatten().fieldErrors,
-    };
-  }
+    const existingEmail = await prisma.user.findUnique({ where: { email } });
+    if (existingEmail) {
+      return { ok: false, error: "Este e-mail já está em uso." };
+    }
 
-  const { name, email, password } = parsed.data;
-  let { username } = parsed.data;
+    const existingUsername = await prisma.user.findUnique({
+      where: { username },
+    });
+    if (existingUsername) {
+      username = deriveUsername(username);
+    }
 
-  const existingEmail = await prisma.user.findUnique({ where: { email } });
-  if (existingEmail) {
-    return { ok: false, error: "Este e-mail já está em uso." };
-  }
+    const passwordHash = await bcrypt.hash(password, 12);
 
-  const existingUsername = await prisma.user.findUnique({
-    where: { username },
-  });
-  if (existingUsername) {
-    username = deriveUsername(username);
-  }
-
-  const passwordHash = await bcrypt.hash(password, 12);
-
-  await prisma.user.create({
-    data: { name, username, email, passwordHash },
-  });
-
-  return { ok: true };
-}
-
-export async function requestPasswordReset(
-  _prev: ActionResult | undefined,
-  formData: FormData,
-): Promise<ActionResult> {
-  const parsed = forgotPasswordSchema.safeParse({
-    email: String(formData.get("email") ?? "").toLowerCase(),
-  });
-
-  if (!parsed.success) {
-    return { ok: false, error: "E-mail inválido." };
-  }
-
-  const { email } = parsed.data;
-  const user = await prisma.user.findUnique({ where: { email } });
-
-  // Resposta idêntica exista ou não o usuário (evita enumeração de e-mails).
-  if (user) {
-    const token = randomBytes(32).toString("hex");
-    const expires = new Date(Date.now() + 1000 * 60 * 60); // 1h
-
-    await prisma.passwordResetToken.deleteMany({ where: { email } });
-    await prisma.passwordResetToken.create({
-      data: { email, token, expires },
+    await prisma.user.create({
+      data: { name, username, email, passwordHash },
     });
 
-    const resetUrl = absoluteUrl(`/reset-password?token=${token}`);
-    const tpl = passwordResetEmail(resetUrl);
-    await sendEmail({ to: email, ...tpl });
+    return { ok: true };
   }
+);
 
-  return { ok: true };
-}
+export const requestPasswordReset = publicFormAction(
+  forgotPasswordSchema,
+  async (formData) => ({
+    email: String(formData.get("email") ?? "").toLowerCase(),
+  }),
+  async ({ email }) => {
+    const user = await prisma.user.findUnique({ where: { email } });
 
-export async function resetPassword(
-  _prev: ActionResult | undefined,
-  formData: FormData,
-): Promise<ActionResult> {
-  const parsed = resetPasswordSchema.safeParse({
-    token: formData.get("token"),
-    password: formData.get("password"),
-  });
+    if (user) {
+      const token = randomBytes(32).toString("hex");
+      const expires = new Date(Date.now() + 1000 * 60 * 60);
 
-  if (!parsed.success) {
-    return {
-      ok: false,
-      error: "Verifique os campos.",
-      fieldErrors: parsed.error.flatten().fieldErrors,
-    };
+      await prisma.passwordResetToken.deleteMany({ where: { email } });
+      await prisma.passwordResetToken.create({
+        data: { email, token, expires },
+      });
+
+      const resetUrl = absoluteUrl(`/reset-password?token=${token}`);
+      const tpl = passwordResetEmail(resetUrl);
+      await sendEmail({ to: email, ...tpl });
+    }
+
+    return { ok: true };
   }
+);
 
-  const { token, password } = parsed.data;
-  const record = await prisma.passwordResetToken.findUnique({
-    where: { token },
-  });
+export const resetPassword = publicFormAction(
+  resetPasswordSchema,
+  async (formData) => ({
+    token: formData.get("token") as string,
+    password: formData.get("password") as string,
+  }),
+  async ({ token, password }) => {
+    const record = await prisma.passwordResetToken.findUnique({
+      where: { token },
+    });
 
-  if (!record || record.expires < new Date()) {
-    return { ok: false, error: "Token inválido ou expirado." };
+    if (!record || record.expires < new Date()) {
+      return { ok: false, error: "Token inválido ou expirado." };
+    }
+
+    const passwordHash = await bcrypt.hash(password, 12);
+    await prisma.user.update({
+      where: { email: record.email },
+      data: { passwordHash },
+    });
+    await prisma.passwordResetToken.deleteMany({
+      where: { email: record.email },
+    });
+
+    return { ok: true };
   }
-
-  const passwordHash = await bcrypt.hash(password, 12);
-  await prisma.user.update({
-    where: { email: record.email },
-    data: { passwordHash },
-  });
-  await prisma.passwordResetToken.deleteMany({
-    where: { email: record.email },
-  });
-
-  return { ok: true };
-}
+);

@@ -94,7 +94,8 @@ export function PostCard({
   if (deleted) return null;
 
   return (
-    <article className="border-b border-border px-4 py-4 transition-colors hover:bg-white/[0.015] sm:px-5">
+    <article className="border-b border-white/5 px-4 py-4 transition-all duration-300 hover:bg-white/[0.02] sm:px-5 relative group">
+      <div className="absolute inset-x-0 -bottom-px h-px bg-gradient-to-r from-transparent via-primary/20 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
       <div className="flex gap-3">
         <Link href={`/${post.author.username}`} className="shrink-0">
           <Avatar className="h-11 w-11 nexus-ring">
@@ -154,7 +155,7 @@ export function PostCard({
           {post.media.length > 0 && (
             <div
               className={cn(
-                "mt-3 grid gap-1.5 overflow-hidden rounded-2xl border border-border",
+                "mt-3 grid gap-1.5 overflow-hidden rounded-2xl border border-white/10 shadow-lg",
                 post.media.length === 1 ? "grid-cols-1" : "grid-cols-2",
               )}
             >
@@ -176,7 +177,7 @@ export function PostCard({
             <button
               onClick={handleLike}
               className={cn(
-                "group flex min-h-11 items-center gap-1.5 rounded-full px-2.5 py-1.5 text-sm transition-colors hover:bg-nexus-pink/10 hover:text-nexus-pink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
+                "group/btn flex min-h-11 items-center gap-1.5 rounded-full px-2.5 py-1.5 text-sm transition-all duration-300 hover:bg-nexus-pink/10 hover:text-nexus-pink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring hover:scale-[1.02]",
                 liked && "text-nexus-pink",
               )}
               aria-pressed={liked}

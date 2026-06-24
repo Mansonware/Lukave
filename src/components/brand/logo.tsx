@@ -17,7 +17,7 @@ export function Logo({
       className={cn("flex min-h-11 items-center gap-2.5", className)}
       aria-label="Núk, início"
     >
-      <span className="grid h-8 w-8 place-items-center rounded-lg border border-primary/60 bg-nexus-gradient/20 bg-gradient-to-br from-primary/40 to-accent/10 text-sm font-bold text-white shadow-[inset_0_0_12px_rgba(145,101,255,0.35)]">
+      <span className="grid h-8 w-8 place-items-center rounded-lg border border-primary/60 bg-nuk-gradient/20 bg-gradient-to-br from-primary/40 to-accent/10 text-sm font-bold text-white shadow-[inset_0_0_12px_rgba(145,101,255,0.35)]">
         N
       </span>
       {withWordmark && (

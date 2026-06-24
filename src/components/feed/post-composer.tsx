@@ -88,7 +88,7 @@ export function PostComposer({
   return (
     <div className="border-b border-border px-4 py-4 sm:px-5">
       <div className="flex gap-3">
-        <Avatar className="h-11 w-11 nexus-ring">
+        <Avatar className="h-11 w-11 nuk-ring">
           {viewer.image && <AvatarImage src={viewer.image} alt={viewer.username} />}
           <AvatarFallback>{getInitials(viewer.name ?? viewer.username)}</AvatarFallback>
         </Avatar>
@@ -170,7 +170,7 @@ export function PostComposer({
                     className={cn(
                       "flex min-h-11 items-center gap-1 rounded-full px-3 py-1 text-xs font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
                       visibility === opt.value
-                        ? "bg-nexus-gradient text-white"
+                        ? "bg-nuk-gradient text-white"
                         : "text-muted-foreground hover:text-foreground",
                     )}
                   >
@@ -188,7 +188,7 @@ export function PostComposer({
                   remaining < 0
                     ? "text-destructive"
                     : remaining < 100
-                      ? "text-nexus-orange"
+                      ? "text-nuk-orange"
                       : "text-muted-foreground",
                 )}
               >

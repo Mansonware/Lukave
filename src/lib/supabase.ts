@@ -5,7 +5,7 @@ const anonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 const serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
 
 export const SUPABASE_BUCKET =
-  process.env.SUPABASE_STORAGE_BUCKET ?? "nexus-media";
+  process.env.SUPABASE_STORAGE_BUCKET ?? "nuk-media";
 
 export const isSupabaseConfigured = Boolean(url && anonKey);
 

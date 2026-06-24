@@ -32,7 +32,7 @@ export default async function FeedPage({
 
   return (
     <div className="flex gap-6">
-      <div className="mx-auto w-full max-w-2xl lg:border-x border-white/5 bg-background/20 backdrop-blur-md rounded-none lg:rounded-3xl lg:my-6 overflow-hidden">
+      <div className="mx-auto w-full max-w-2xl glass-panel rounded-none lg:rounded-3xl lg:my-6 overflow-hidden">
         <PageHeader title="Início" description="Seu feed no Núk" />
         <PostComposer viewer={viewer} autoFocus={compose === "1"} />
 

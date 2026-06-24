@@ -129,7 +129,7 @@ export function ProfileForm({ user }: ProfileFormProps) {
             <button
               type="button"
               onClick={() => avatarRef.current?.click()}
-              className="absolute -bottom-1 -right-1 grid h-11 w-11 place-items-center rounded-full bg-nexus-gradient text-white shadow focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+              className="absolute -bottom-1 -right-1 grid h-11 w-11 place-items-center rounded-full bg-nuk-gradient text-white shadow focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
               aria-label="Alterar foto"
             >
               {uploading === "image" ? (

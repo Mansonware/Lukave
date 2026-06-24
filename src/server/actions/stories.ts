@@ -6,52 +6,42 @@ import { prisma } from "@/lib/prisma";
 import { limiters, rateLimit } from "@/lib/rate-limit";
 import { requireUser } from "@/lib/session";
 import { createStorySchema } from "@/lib/validations";
-import type { ActionResult } from "@/server/action-result";
+import { authAction } from "@/lib/action-wrapper";
 import type { StoryGroup, StoryMediaType } from "@/types/story";
+import { cache } from "react";
 
 const STORY_DURATION_MS = 24 * 60 * 60 * 1000;
 
-export async function createStory(input: {
-  mediaUrl: string;
-  mediaType: StoryMediaType;
-}): Promise<ActionResult<{ id: string; expiresAt: Date }>> {
-  const user = await requireUser();
+export const createStory = authAction(
+  createStorySchema,
+  async ({ mediaUrl, mediaType }, { user }) => {
+    const rl = await rateLimit(limiters.createStory, user.id);
+    if (!rl.ok) return rl;
 
-  const rl = await rateLimit(limiters.createStory, user.id);
-  if (!rl.ok) return rl;
+    const expiresAt = new Date(Date.now() + STORY_DURATION_MS);
+    const story = await prisma.story.create({
+      data: {
+        authorId: user.id,
+        mediaUrl,
+        mediaType: mediaType || "IMAGE",
+        expiresAt,
+      },
+    });
 
-  const parsed = createStorySchema.safeParse(input);
-  if (!parsed.success) {
+    revalidatePath("/feed");
+    revalidatePath(`/${user.username}`);
+
     return {
-      ok: false,
-      error: "Story inválido.",
-      fieldErrors: parsed.error.flatten().fieldErrors,
+      ok: true,
+      data: {
+        id: story.id,
+        expiresAt: story.expiresAt,
+      },
     };
   }
+);
 
-  const expiresAt = new Date(Date.now() + STORY_DURATION_MS);
-  const story = await prisma.story.create({
-    data: {
-      authorId: user.id,
-      mediaUrl: parsed.data.mediaUrl,
-      mediaType: parsed.data.mediaType,
-      expiresAt,
-    },
-  });
-
-  revalidatePath("/feed");
-  revalidatePath(`/${user.username}`);
-
-  return {
-    ok: true,
-    data: {
-      id: story.id,
-      expiresAt: story.expiresAt,
-    },
-  };
-}
-
-export async function getActiveStories(): Promise<StoryGroup[]> {
+export const getActiveStories = cache(async (): Promise<StoryGroup[]> => {
   const user = await requireUser();
   const now = new Date();
 
@@ -121,4 +111,4 @@ export async function getActiveStories(): Promise<StoryGroup[]> {
       if (a.isOwn !== b.isOwn) return a.isOwn ? -1 : 1;
       return b.latestCreatedAt.getTime() - a.latestCreatedAt.getTime();
     });
-}
+});

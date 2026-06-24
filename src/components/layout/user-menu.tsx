@@ -23,7 +23,7 @@ export function UserMenu({
   return (
     <DropdownMenu>
       <DropdownMenuTrigger className="rounded-full outline-none ring-offset-background focus-visible:ring-2 focus-visible:ring-ring">
-        <Avatar className="h-9 w-9 nexus-ring">
+        <Avatar className="h-9 w-9 nuk-ring">
           {user.image && <AvatarImage src={user.image} alt={user.username} />}
           <AvatarFallback>{getInitials(user.name ?? user.username)}</AvatarFallback>
         </Avatar>
