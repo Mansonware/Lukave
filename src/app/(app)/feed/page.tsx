@@ -31,8 +31,9 @@ export default async function FeedPage({
   const posts = await getFeedPosts({ viewerId: user.id, take: 30 });
 
   return (
-    <div className="flex gap-6">
-      <div className="mx-auto w-full max-w-2xl glass-panel rounded-none lg:rounded-3xl lg:my-6 overflow-hidden">
+    <div className="flex min-w-0 gap-6">
+      {/* Feed principal — edge-to-edge no mobile, card arredondado em sm+ */}
+      <div className="mx-auto w-full max-w-2xl min-w-0 glass-panel border-x-0 sm:border-x border-t-0 sm:border-t rounded-none sm:rounded-3xl sm:my-4 overflow-hidden">
         <PageHeader title="Início" description="Seu feed no Núk" />
         <PostComposer viewer={viewer} autoFocus={compose === "1"} />
 

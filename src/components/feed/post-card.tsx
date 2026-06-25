@@ -94,7 +94,7 @@ export function PostCard({
   if (deleted) return null;
 
   return (
-    <article className="border-b border-white/5 px-4 py-4 transition-all duration-300 hover:bg-white/[0.02] sm:px-5 relative group">
+    <article className="border-b border-white/5 px-3 py-3.5 transition-colors duration-200 hover:bg-white/[0.02] active:bg-white/[0.03] sm:px-5 sm:py-4 relative group">
       <div className="absolute inset-x-0 -bottom-px h-px bg-gradient-to-r from-transparent via-primary/20 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
       <div className="flex gap-3">
         <Link href={`/${post.author.username}`} className="shrink-0">
@@ -110,7 +110,7 @@ export function PostCard({
 
         <div className="min-w-0 flex-1">
           <div className="flex items-center justify-between gap-2">
-            <div className="flex min-w-0 items-center gap-1.5 text-sm">
+            <div className="flex min-w-0 flex-wrap items-center gap-x-1.5 gap-y-0.5 text-sm">
               <Link
                 href={`/${post.author.username}`}
                 className="truncate font-semibold hover:underline"
@@ -131,7 +131,7 @@ export function PostCard({
 
             {isOwner && (
               <DropdownMenu>
-                <DropdownMenuTrigger className="rounded-lg p-1 text-muted-foreground outline-none hover:bg-white/[0.06] hover:text-foreground">
+                <DropdownMenuTrigger className="rounded-lg p-1.5 text-muted-foreground outline-none hover:bg-white/[0.06] hover:text-foreground active:bg-white/[0.1]">
                   <MoreHorizontal className="h-4 w-4" />
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end">
@@ -147,15 +147,18 @@ export function PostCard({
           </div>
 
           {post.content && (
-            <p className="mt-1 whitespace-pre-wrap break-words text-[15px] leading-relaxed text-foreground/90">
+            <p className="mt-1.5 whitespace-pre-wrap break-words text-[15px] leading-relaxed text-foreground/90">
               {post.content}
             </p>
           )}
 
           {post.media.length > 0 && (
+            // Edge-to-edge no mobile: margens negativas cancelam o padding do
+            // article (px-3 = 12px) + a coluna do avatar (44px) + gap (12px) = 68px
+            // à esquerda e 12px à direita. Em sm+ volta a ficar contido e arredondado.
             <div
               className={cn(
-                "mt-3 grid gap-1.5 overflow-hidden rounded-2xl border border-white/10 shadow-lg",
+                "mt-3 grid gap-0.5 overflow-hidden border-y border-white/5 w-[100vw] relative left-1/2 -translate-x-1/2 sm:static sm:w-auto sm:translate-x-0 sm:gap-1 sm:rounded-2xl sm:border sm:border-white/10 sm:shadow-lg",
                 post.media.length === 1 ? "grid-cols-1" : "grid-cols-2",
               )}
             >
@@ -165,20 +168,20 @@ export function PostCard({
                   key={m.id}
                   src={m.url}
                   alt="Mídia da publicação"
-                  className="h-full max-h-[520px] w-full object-cover"
+                  className="h-full max-h-[480px] w-full object-cover"
                   loading="lazy"
                 />
               ))}
             </div>
           )}
 
-          {/* Ações */}
-          <div className="mt-3 flex items-center gap-1 text-muted-foreground">
+          {/* Ações — min-h-11 garante 44px de touch target */}
+          <div className="mt-2 flex items-center gap-0.5 text-muted-foreground">
             <button
               onClick={handleLike}
               className={cn(
-                "group/btn flex min-h-11 items-center gap-1.5 rounded-full px-2.5 py-1.5 text-sm transition-all duration-300 hover:bg-nexus-pink/10 hover:text-nexus-pink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring hover:scale-[1.02]",
-                liked && "text-nexus-pink",
+                "group/btn flex min-h-11 items-center gap-1.5 rounded-full px-2.5 py-2 text-sm transition-all duration-200 hover:bg-nuk-pink/10 hover:text-nuk-pink active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
+                liked && "text-nuk-pink",
               )}
               aria-pressed={liked}
             >
@@ -188,7 +191,7 @@ export function PostCard({
 
             <button
               onClick={() => setShowComments((s) => !s)}
-              className="flex min-h-11 items-center gap-1.5 rounded-full px-2.5 py-1.5 text-sm transition-colors hover:bg-accent/10 hover:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+              className="flex min-h-11 items-center gap-1.5 rounded-full px-2.5 py-2 text-sm transition-all duration-200 hover:bg-accent/10 hover:text-accent active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
               aria-label="Mostrar comentários"
               aria-expanded={showComments}
             >
@@ -199,8 +202,8 @@ export function PostCard({
             <button
               onClick={handleShare}
               className={cn(
-                "flex min-h-11 items-center gap-1.5 rounded-full px-2.5 py-1.5 text-sm transition-colors hover:bg-nexus-green/10 hover:text-nexus-green focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
-                shared && "text-nexus-green",
+                "flex min-h-11 items-center gap-1.5 rounded-full px-2.5 py-2 text-sm transition-all duration-200 hover:bg-nuk-green/10 hover:text-nuk-green active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
+                shared && "text-nuk-green",
               )}
               aria-pressed={shared}
             >
@@ -210,7 +213,7 @@ export function PostCard({
 
             <Link
               href={`/post/${post.id}`}
-              className="ml-auto flex min-h-11 items-center gap-1.5 rounded-full px-2.5 py-1.5 text-sm transition-colors hover:bg-white/[0.06] hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+              className="ml-auto flex min-h-11 items-center gap-1.5 rounded-full px-2.5 py-2 text-sm transition-colors hover:bg-white/[0.06] hover:text-foreground active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
               aria-label="Abrir publicação"
             >
               <Link2 className="h-[18px] w-[18px]" />
@@ -220,7 +223,7 @@ export function PostCard({
       </div>
 
       {showComments && (
-        <div className="mt-3 -mx-4 sm:-mx-5">
+        <div className="mt-3 -mx-3 sm:-mx-5">
           <CommentSection
             postId={post.id}
             viewer={viewer}

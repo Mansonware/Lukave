@@ -14,15 +14,15 @@ import { changePassword } from "@/server/actions/profile";
 import type { ActionResult } from "@/server/action-result";
 
 import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-  DialogClose,
-} from "@/components/ui/dialog";
+  Drawer,
+  DrawerContent,
+  DrawerDescription,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+  DrawerClose,
+} from "@/components/ui/drawer";
 import { deleteAccount } from "@/server/actions/profile";
 
 function SaveButton() {
@@ -126,29 +126,31 @@ export function SecurityForm() {
             </p>
           </div>
 
-          <Dialog>
-            <DialogTrigger asChild>
+          <Drawer>
+            <DrawerTrigger asChild>
               <Button variant="destructive">Excluir Conta</Button>
-            </DialogTrigger>
-            <DialogContent>
-              <DialogHeader>
-                <DialogTitle>Você tem certeza absoluta?</DialogTitle>
-                <DialogDescription>
-                  Esta ação não pode ser desfeita. Isso excluirá permanentemente sua conta
-                  e removerá seus dados de nossos servidores.
-                </DialogDescription>
-              </DialogHeader>
-              <DialogFooter className="gap-2 sm:gap-0 mt-4">
-                <DialogClose asChild>
-                  <Button variant="outline" disabled={isDeleting}>Cancelar</Button>
-                </DialogClose>
-                <Button variant="destructive" onClick={handleDeleteAccount} disabled={isDeleting}>
-                  {isDeleting && <Loader2 className="animate-spin mr-2 h-4 w-4" />}
-                  Sim, excluir minha conta
-                </Button>
-              </DialogFooter>
-            </DialogContent>
-          </Dialog>
+            </DrawerTrigger>
+            <DrawerContent>
+              <div className="mx-auto w-full max-w-sm pb-safe">
+                <DrawerHeader>
+                  <DrawerTitle>Você tem certeza absoluta?</DrawerTitle>
+                  <DrawerDescription>
+                    Esta ação não pode ser desfeita. Isso excluirá permanentemente sua conta
+                    e removerá seus dados de nossos servidores.
+                  </DrawerDescription>
+                </DrawerHeader>
+                <DrawerFooter className="gap-2 sm:gap-0 mt-4">
+                  <DrawerClose asChild>
+                    <Button variant="outline" disabled={isDeleting}>Cancelar</Button>
+                  </DrawerClose>
+                  <Button variant="destructive" onClick={handleDeleteAccount} disabled={isDeleting}>
+                    {isDeleting && <Loader2 className="animate-spin mr-2 h-4 w-4" />}
+                    Sim, excluir minha conta
+                  </Button>
+                </DrawerFooter>
+              </div>
+            </DrawerContent>
+          </Drawer>
         </div>
       </div>
     </div>

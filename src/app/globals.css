@@ -69,9 +69,23 @@
     font-feature-settings: "rlig" 1, "calt" 1;
     overscroll-behavior-y: none;
     -webkit-tap-highlight-color: transparent;
+    overflow-x: hidden;
   }
   html {
     scroll-behavior: smooth;
+  }
+  /* Prevent iOS auto-zoom on input focus — requires font-size >= 16px */
+  input,
+  select,
+  textarea {
+    font-size: max(16px, 1rem);
+  }
+  
+  /* App-like feel for interactive elements */
+  a, button, [role="button"] {
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
   }
 }
 
@@ -116,6 +130,11 @@
     -ms-overflow-style: none;
     scrollbar-width: none;
   }
+  /* Inner scroll container: touch-friendly with contained overscroll */
+  .scroll-touch {
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
+  }
   .ambient-bg {
     background-image:
       radial-gradient(45% 45% at 80% -10%, rgba(145, 101, 255, 0.12), transparent 100%),
@@ -124,5 +143,15 @@
   .no-select {
     user-select: none;
     -webkit-user-select: none;
+  }
+  /* Safe-area helpers para experiência app (notch / home indicator) */
+  .pb-safe {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+  .pt-safe {
+    padding-top: env(safe-area-inset-top);
+  }
+  .min-h-safe-dvh {
+    min-height: calc(100dvh - env(safe-area-inset-bottom));
   }
 }

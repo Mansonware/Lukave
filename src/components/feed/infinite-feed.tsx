@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { Loader2, RefreshCcw } from "lucide-react";
+import { Loader2, RefreshCcw, Sparkles } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { PostCard } from "@/components/feed/post-card";
@@ -143,7 +143,13 @@ export function InfiniteFeed({
         )}
 
         {!loading && !error && !hasMore && (
-          <p className="text-muted-foreground">Você chegou ao fim do feed.</p>
+          <div className="flex flex-col items-center gap-1.5 py-2 text-muted-foreground">
+            <span className="grid h-9 w-9 place-items-center rounded-full border border-white/5 bg-white/[0.03] text-primary">
+              <Sparkles className="h-4 w-4" />
+            </span>
+            <p className="text-sm font-medium text-foreground/80">Você está em dia ✨</p>
+            <p className="text-xs">Não há mais publicações por agora.</p>
+          </div>
         )}
       </div>
     </div>
