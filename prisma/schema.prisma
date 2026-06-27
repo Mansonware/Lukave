@@ -37,6 +37,11 @@ enum MediaType {
   VIDEO
 }
 
+enum VideoType {
+  SHORT // vertical, até ~60s (reels/shorts)
+  LONG  // horizontal, longa duração
+}
+
 enum NotificationType {
   LIKE
   COMMENT
@@ -75,8 +80,9 @@ model User {
   sessions Session[]
 
   // Conteúdo & social
-  posts     Post[]
-  stories   Story[]
+  posts       Post[]
+  stories     Story[]
+  mediaAssets MediaAsset[]
   comments  Comment[]
   likes     Like[]
   shares    Share[]
@@ -154,6 +160,7 @@ model Post {
   likesCount    Int @default(0)
   commentsCount Int @default(0)
   sharesCount   Int @default(0)
+  viewsCount    Int @default(0)
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -169,28 +176,36 @@ model Post {
 }
 
 model PostMedia {
-  id     String    @id @default(cuid())
-  postId String
-  url    String
-  type   MediaType @default(IMAGE)
-  order  Int       @default(0)
-  post   Post      @relation(fields: [postId], references: [id], onDelete: Cascade)
+  id           String     @id @default(cuid())
+  postId       String
+  url          String
+  type         MediaType  @default(IMAGE)
+  order        Int        @default(0)
+  videoType    VideoType? // apenas quando type = VIDEO
+  mediaAssetId String?    // referência ao MediaAsset no R2/Supabase (opcional)
+
+  post       Post        @relation(fields: [postId], references: [id], onDelete: Cascade)
+  mediaAsset MediaAsset? @relation(fields: [mediaAssetId], references: [id], onDelete: SetNull)
 
   @@index([postId])
+  @@index([mediaAssetId])
 }
 
 model Story {
-  id        String   @id @default(cuid())
-  authorId  String
-  mediaUrl  String
-  mediaType String
-  expiresAt DateTime
-  createdAt DateTime @default(now())
+  id           String   @id @default(cuid())
+  authorId     String
+  mediaUrl     String
+  mediaType    String
+  expiresAt    DateTime
+  createdAt    DateTime @default(now())
+  mediaAssetId String?  // referência ao MediaAsset no R2/Supabase (opcional)
 
-  author User @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  author     User        @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  mediaAsset MediaAsset? @relation(fields: [mediaAssetId], references: [id], onDelete: SetNull)
 
   @@index([authorId, expiresAt])
   @@index([expiresAt])
+  @@index([mediaAssetId])
 }
 
 model Comment {
@@ -287,6 +302,40 @@ model Message {
 
   @@index([conversationId, createdAt])
   @@index([authorId])
+}
+
+// ── Mídia (R2 / Supabase / CDN externo) ─────────────────────────
+//
+// MediaAsset centraliza os metadados de cada arquivo armazenado.
+// O binário fica no bucket (R2 ou Supabase); o banco salva apenas
+// provider, chave e URL pública — nunca o arquivo em si.
+//
+// Relações opcionais (nullable): PostMedia e Story podem apontar
+// para um MediaAsset quando o upload for feito via R2/Supabase.
+// Campos legados (url em PostMedia, mediaUrl em Story) permanecem
+// funcionais enquanto a migração gradual acontece.
+
+model MediaAsset {
+  id              String    @id @default(cuid())
+  provider        String    // "r2" | "supabase" | "external"
+  bucket          String?
+  key             String?   // caminho no bucket, ex: "posts/abc123/file.mp4"
+  url             String    // URL pública / CDN
+  mimeType        String    // ex: "image/webp", "video/mp4"
+  sizeBytes       Int?
+  width           Int?
+  height          Int?
+  durationSeconds Int?      // apenas para vídeos
+  ownerId         String
+
+  createdAt DateTime @default(now())
+
+  owner     User       @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+  postMedia PostMedia[]
+  stories   Story[]
+
+  @@index([ownerId])
+  @@index([createdAt])
 }
 
 // ── Notificações ────────────────────────────────────────────────
