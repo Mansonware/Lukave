@@ -27,16 +27,11 @@ export function MobileNav({ unreadCount = 0 }: { unreadCount?: number }) {
           active ? "text-foreground" : "text-muted-foreground hover:text-foreground/80",
         )}
       >
-        {active && (
-          <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-            <div className="h-10 w-10 rounded-full bg-primary/20 blur-lg" />
-          </div>
-        )}
         <span className="relative z-10 flex flex-col items-center gap-1">
           <item.icon
             className={cn(
               "h-5 w-5 transition-all duration-300",
-              active ? "stroke-[2.5] text-primary -translate-y-0.5" : "stroke-2",
+              active ? "stroke-[2.5] text-primary -translate-y-0.5" : "stroke-[1.5]",
             )}
           />
           {item.href === "/notifications" && unreadCount > 0 && (

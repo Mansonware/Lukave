@@ -79,7 +79,8 @@ export default async function LandingPage() {
       <main className="flex-1">
         {/* HERO */}
         <section className="container relative pt-20 pb-24 text-center md:pt-32">
-          <FadeIn>
+          <FadeIn>clear
+            
             <Badge variant="outline" className="mb-6 gap-2 py-1.5">
               <span className="h-1.5 w-1.5 rounded-full bg-nexus-green" />
               A nova casa dos criadores

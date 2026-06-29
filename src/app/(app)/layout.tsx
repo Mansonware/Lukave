@@ -40,7 +40,7 @@ export default async function AppLayout({
         </header>
 
         {/* safe-area-inset-bottom garante que o conteúdo não vaze atrás da bottom nav */}
-        <main className="flex-1 pb-[calc(5rem_+_env(safe-area-inset-bottom))] pt-4 lg:pb-10 lg:pt-8 lg:px-8">
+        <main className="flex-1 pb-[calc(5rem_+_env(safe-area-inset-bottom))] lg:pb-10 lg:pt-8 lg:px-8">
           {children}
         </main>
       </div>

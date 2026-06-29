@@ -8,7 +8,7 @@ export function PageHeader({
   action?: React.ReactNode;
 }) {
   return (
-    <div className="sticky top-14 z-20 flex items-center justify-between gap-3 border-b border-border bg-background/80 px-4 py-3 backdrop-blur-xl sm:px-5 lg:top-16">
+    <div className="flex items-center justify-between gap-3 border-b border-border/50 bg-background/80 px-4 py-3 backdrop-blur-xl sm:px-5 lg:sticky lg:top-16 lg:z-20 lg:border-border">
       <div>
         <h1 className="font-display text-lg font-bold">{title}</h1>
         {description && (
