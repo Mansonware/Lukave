@@ -1,6 +1,6 @@
 <div align="center">
 
-# NEXUS
+# NUUK
 
 **Crie. Conecte. Monetize.**
 
