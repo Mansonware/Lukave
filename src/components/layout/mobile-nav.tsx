@@ -23,7 +23,7 @@ export function MobileNav({ unreadCount = 0 }: { unreadCount?: number }) {
         href={item.href}
         aria-label={item.label}
         className={cn(
-          "relative flex h-full min-w-[44px] flex-1 flex-col items-center justify-center gap-1 text-[10px] font-medium transition-all duration-200 active:scale-95",
+          "relative flex h-full min-w-[48px] flex-1 flex-col items-center justify-center gap-1 text-[10px] font-medium transition-all duration-200 active:scale-95",
           active ? "text-foreground" : "text-muted-foreground hover:text-foreground/80",
         )}
       >
@@ -54,7 +54,7 @@ export function MobileNav({ unreadCount = 0 }: { unreadCount?: number }) {
         {leftItems.map(renderItem)}
 
         {/* FAB central — abre compositor de post */}
-        <div className="relative flex h-full min-w-[44px] flex-1 items-center justify-center">
+        <div className="relative flex h-full min-w-[48px] flex-1 items-center justify-center">
           <Link
             href="/feed?compose=1"
             aria-label="Criar publicação"

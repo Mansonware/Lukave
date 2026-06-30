@@ -33,16 +33,14 @@ export default async function FeedPage({
   return (
     <div className="flex min-w-0 justify-center gap-6">
       <div className="w-full min-w-0 max-w-2xl">
-        {/* Header + compositor: padding lateral no mobile, zero no desktop */}
-        <div className="space-y-4 px-3 sm:px-0">
-          <PageHeader title="Início" description="Seu feed no NEXUS" />
-          <PostComposer viewer={viewer} autoFocus={compose === "1"} />
-        </div>
+        {/* PageHeader e PostComposer têm px-4 próprio — sem wrapper extra */}
+        <PageHeader title="Início" description="Seu feed no NEXUS" />
+        <PostComposer viewer={viewer} autoFocus={compose === "1"} />
 
         {/* Feed: edge-to-edge no mobile (sem borda lateral), card no sm+ */}
         <div className="mt-4">
           {posts.length === 0 ? (
-            <div className="px-3 sm:px-0">
+            <div className="px-4">
               <EmptyState
                 icon={Sparkles}
                 title="Seu feed está vazio"
