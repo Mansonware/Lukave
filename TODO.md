@@ -1,77 +1,58 @@
-# TODO — NEXUS
+<div align="center">
+  <img src="./public/icon.svg" width="72" alt="Lukave" />
 
-Lista de tarefas viva. A Fase 1 está concluída; o restante é backlog priorizado.
+  # Backlog — Lukave
 
-## ✅ Fase 1 — MVP (concluído)
+  **Lista viva de evolução, mantendo somente o que faz sentido com o estado atual do código.**
 
-### Infraestrutura
-- [x] Scaffold Next.js 15 + TypeScript + Tailwind + design system
-- [x] Prisma schema (Fase 1) + cliente singleton
-- [x] Auth.js v5 (split edge/node, Credentials, JWT)
-- [x] Middleware de proteção de rotas
-- [x] Abstração de Storage (Supabase) com fallback em dev
-- [x] Configuração segura do Stripe (sem fluxo de pagamento)
-- [x] Envio de e-mail com degradação graciosa (log em dev)
-- [x] Seed de desenvolvimento
-- [x] Validação: typecheck, lint e build passando
-
-### Contas
-- [x] Cadastro com validação (Zod)
-- [x] Login (Credentials)
-- [x] Recuperação de senha (token persistido + reset)
-- [x] Configurações da conta (perfil + troca de senha)
-
-### Perfis
-- [x] Foto, banner, bio, localização, website
-- [x] Links sociais (twitter, instagram, youtube, tiktok, github)
-- [x] Página pública `/[username]` com contadores
-
-### Feed
-- [x] Composer (texto + até 4 imagens + visibilidade)
-- [x] Curtidas (otimistas)
-- [x] Comentários (inline + página de detalhe)
-- [x] Compartilhamentos (+ cópia de link)
-- [x] Exclusão de publicação (autor/admin)
-
-### Busca
-- [x] Busca de usuários e conteúdos com abas
-- [x] Sugestões de quem seguir
-
-### Notificações
-- [x] Curtidas, comentários, seguidores
-- [x] Marcar todas como lidas + badge de não lidas
+  <p>
+    <a href="./README.md"><strong>README</strong></a>
+    &nbsp;·&nbsp;
+    <a href="./ARCHITECTURE.md">Arquitetura</a>
+    &nbsp;·&nbsp;
+    <a href="./ROADMAP.md">Roadmap</a>
+  </p>
+</div>
 
 ---
 
-## ⬜ Próximos passos imediatos (pré-Fase 2)
+## ✅ Entregue no código
 
-- [ ] Paginação infinita no feed (cursor já existe em `getFeedPosts`)
-- [ ] Rate limiting nas actions de escrita
-- [ ] Testes: Vitest (unit/actions) + Playwright (e2e do fluxo de auth)
-- [ ] OAuth Google/GitHub (modelos `Account` já preparados)
-- [ ] Verificação de e-mail
-- [ ] Integração real de e-mail (Resend/SMTP) em `lib/mail.ts`
+### Fundação social
+- [x] Auth.js v5 com credenciais e sessões JWT
+- [x] Feed com posts, curtidas, comentários e compartilhamentos
+- [x] Busca, seguidores e notificações
 
-## ⬜ Fase 2 — Social
-- [ ] Stories (modelo + UI + expiração)
-- [ ] Mensagens privadas (modelos + realtime)
-- [ ] Feed inteligente / recomendações
+### Expansões já presentes
+- [x] Stories com expiração de 24h
+- [x] Mensagens privadas 1:1 com polling
+- [x] Marketplace de produtos digitais (modelos, queries e actions)
+- [x] Checkout Stripe
+- [x] Webhook Stripe para confirmação/expiração de pedido
+- [x] Biblioteca de compras
+- [x] Download protegido com URL assinada/fallback
+- [x] Rate limiting opcional com Upstash em ações sensíveis
 
-## ⬜ Fase 3 — Comunidades
-- [ ] Comunidades (públicas/privadas/assinatura)
-- [ ] Eventos, enquetes, conteúdo fixado
+---
+
+## 🟡 Próximo ciclo (alta prioridade)
+
+- [ ] Realtime para mensagens (WebSocket/Supabase Realtime)
+- [ ] Robustecer stories (suporte operacional completo para vídeo, métricas e ciclo de vida)
+- [ ] Cobertura de testes para fluxos de mensagens, marketplace e webhook
+- [ ] Hardening de pagamentos (idempotência ampliada, reconciliação e monitoramento)
+
+## 🟡 Ciclo seguinte (produto)
+
+- [ ] Comunidades (públicas, privadas e por assinatura)
 - [ ] Moderação e denúncias
+- [ ] Assinaturas com Stripe Billing
+- [ ] Melhorias de descoberta/recomendação no feed
 
-## ⬜ Fase 4 — Marketplace
-- [ ] Produtos digitais + loja do criador
-- [ ] Carrinho, checkout (Stripe), biblioteca
+## ⬜ Melhorias transversais
 
-## ⬜ Fase 5 — Monetização
-- [ ] Assinaturas (Stripe Billing) + webhooks
-- [ ] Gorjetas
-- [ ] Programa de criadores + ranking
-
-## ⬜ Fase 6 — Expansão
-- [ ] Lives e chamadas em grupo
-- [ ] Recomendações por IA
-- [ ] Gamificação (badges, conquistas, níveis)
+- [ ] Observabilidade (logs estruturados, métricas e alertas)
+- [ ] Internacionalização (i18n)
+- [ ] OAuth Google/GitHub (ativação de providers)
+- [ ] Verificação de e-mail
+- [ ] Estratégia de testes e2e mais ampla
