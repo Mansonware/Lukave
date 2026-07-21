@@ -24,7 +24,7 @@ export default async function AppLayout({
   };
 
   return (
-    <div className="mx-auto flex w-full max-w-7xl">
+    <div className="flex w-full lg:mx-auto lg:max-w-7xl">
       <Sidebar unreadCount={unreadCount} />
 
       <div className="flex min-h-dvh w-full flex-col">
@@ -39,7 +39,10 @@ export default async function AppLayout({
           <UserMenu user={safeUser} />
         </header>
 
-        <main className="flex-1 pb-24 lg:pb-10">{children}</main>
+        {/* safe-area-inset-bottom garante que o conteúdo não vaze atrás da bottom nav */}
+        <main className="flex-1 pb-[calc(5rem_+_env(safe-area-inset-bottom))] lg:pb-10 lg:pt-8 lg:px-8">
+          {children}
+        </main>
       </div>
 
       <MobileNav unreadCount={unreadCount} />

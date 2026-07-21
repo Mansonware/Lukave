@@ -122,7 +122,7 @@ export function PostComposer({
                   />
                   <button
                     onClick={() => setMedia((prev) => prev.filter((u) => u !== url))}
-                    className="absolute right-2 top-2 grid h-7 w-7 place-items-center rounded-full bg-black/60 text-white backdrop-blur hover:bg-black/80"
+                    className="absolute right-2 top-2 grid h-8 w-8 place-items-center rounded-full bg-black/60 text-white backdrop-blur transition-transform hover:bg-black/80 active:scale-95"
                     aria-label="Remover imagem"
                   >
                     <X className="h-4 w-4" />
@@ -166,7 +166,7 @@ export function PostComposer({
                     onClick={() => setVisibility(opt.value)}
                     title={opt.label}
                     className={cn(
-                      "flex items-center gap-1 rounded-full px-2.5 py-1 text-xs font-medium transition-colors",
+                      "flex items-center gap-1 rounded-full px-3 py-1.5 text-xs font-medium transition-all active:scale-95",
                       visibility === opt.value
                         ? "bg-nexus-gradient text-white"
                         : "text-muted-foreground hover:text-foreground",
@@ -195,7 +195,6 @@ export function PostComposer({
               <Button
                 onClick={submit}
                 disabled={pending || uploading || (!content.trim() && media.length === 0)}
-                size="sm"
               >
                 {pending && <Loader2 className="animate-spin" />}
                 Publicar

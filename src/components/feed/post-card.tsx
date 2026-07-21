@@ -130,8 +130,8 @@ export function PostCard({
 
             {isOwner && (
               <DropdownMenu>
-                <DropdownMenuTrigger className="rounded-lg p-1 text-muted-foreground outline-none hover:bg-white/[0.06] hover:text-foreground">
-                  <MoreHorizontal className="h-4 w-4" />
+                <DropdownMenuTrigger className="rounded-lg p-2 -mr-2 text-muted-foreground outline-none transition-all hover:bg-white/[0.06] hover:text-foreground active:scale-95">
+                  <MoreHorizontal className="h-5 w-5" />
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end">
                   <DropdownMenuItem
@@ -176,7 +176,7 @@ export function PostCard({
             <button
               onClick={handleLike}
               className={cn(
-                "group flex items-center gap-1.5 rounded-full px-2.5 py-1.5 text-sm transition-colors hover:bg-nexus-pink/10 hover:text-nexus-pink",
+                "group flex items-center gap-1.5 rounded-full p-2.5 -ml-2.5 text-sm transition-all hover:bg-nexus-pink/10 hover:text-nexus-pink active:scale-95",
                 liked && "text-nexus-pink",
               )}
               aria-pressed={liked}
@@ -187,7 +187,7 @@ export function PostCard({
 
             <button
               onClick={() => setShowComments((s) => !s)}
-              className="flex items-center gap-1.5 rounded-full px-2.5 py-1.5 text-sm transition-colors hover:bg-accent/10 hover:text-accent"
+              className="flex items-center gap-1.5 rounded-full p-2.5 text-sm transition-all hover:bg-accent/10 hover:text-accent active:scale-95"
             >
               <MessageCircle className="h-[18px] w-[18px]" />
               {comments > 0 && formatCompactNumber(comments)}
@@ -196,7 +196,7 @@ export function PostCard({
             <button
               onClick={handleShare}
               className={cn(
-                "flex items-center gap-1.5 rounded-full px-2.5 py-1.5 text-sm transition-colors hover:bg-nexus-green/10 hover:text-nexus-green",
+                "flex items-center gap-1.5 rounded-full p-2.5 text-sm transition-all hover:bg-nexus-green/10 hover:text-nexus-green active:scale-95",
                 shared && "text-nexus-green",
               )}
               aria-pressed={shared}
@@ -207,7 +207,7 @@ export function PostCard({
 
             <Link
               href={`/post/${post.id}`}
-              className="ml-auto flex items-center gap-1.5 rounded-full px-2.5 py-1.5 text-sm transition-colors hover:bg-white/[0.06] hover:text-foreground"
+              className="ml-auto flex items-center gap-1.5 rounded-full p-2.5 -mr-2.5 text-sm transition-all hover:bg-white/[0.06] hover:text-foreground active:scale-95"
             >
               <Link2 className="h-[18px] w-[18px]" />
             </Link>

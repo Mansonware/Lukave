@@ -23,9 +23,16 @@ yarn-error.log*
 .pnpm-debug.log*
 
 # env files
-.env
-.env*.local
-.env.production
+.env*
+!.env.example
+
+# agents & skills
+.agents/
+skills-lock.json
+
+# pwa
+public/sw.js
+public/workbox-*.js
 
 # vercel
 .vercel

@@ -31,23 +31,31 @@ export default async function FeedPage({
   const posts = await getFeedPosts({ viewerId: user.id, take: 30 });
 
   return (
-    <div className="flex gap-6">
-      <div className="mx-auto w-full max-w-2xl border-x border-border">
+    <div className="flex min-w-0 justify-center gap-6">
+      <div className="w-full min-w-0 max-w-2xl">
+        {/* PageHeader e PostComposer têm px-4 próprio — sem wrapper extra */}
         <PageHeader title="Início" description="Seu feed no NEXUS" />
         <PostComposer viewer={viewer} autoFocus={compose === "1"} />
 
-        {posts.length === 0 ? (
-          <EmptyState
-            icon={Sparkles}
-            title="Seu feed está vazio"
-            description="Faça sua primeira publicação ou siga criadores para ver conteúdo aqui."
-          />
-        ) : (
-          <InfiniteFeed initialPosts={posts} viewer={viewer} />
-        )}
+        {/* Feed: edge-to-edge no mobile (sem borda lateral), card no sm+ */}
+        <div className="mt-4">
+          {posts.length === 0 ? (
+            <div className="px-4">
+              <EmptyState
+                icon={Sparkles}
+                title="Seu feed está vazio"
+                description="Faça sua primeira publicação ou siga criadores para ver conteúdo aqui."
+              />
+            </div>
+          ) : (
+            <div className="overflow-hidden sm:glass sm:rounded-xl">
+              <InfiniteFeed initialPosts={posts} viewer={viewer} />
+            </div>
+          )}
+        </div>
       </div>
 
-      {/* Right rail (desktop) */}
+      {/* Right rail: só desktop */}
       <aside className="hidden w-80 shrink-0 py-4 xl:block">
         <div className="sticky top-20 space-y-4">
           <Suspense fallback={null}>
