@@ -1,86 +1,60 @@
-# Roadmap — NEXUS
+<div align="center">
+  <img src="./public/icon.svg" width="72" alt="Lukave" />
 
-A plataforma é construída em 6 fases. A **Fase 1 (MVP)** está implementada.
-As demais estão planejadas, com abstrações leves já preparadas no código.
+  # Roadmap — Lukave
 
-Legenda: ✅ concluído · 🟡 em andamento · ⬜ planejado
+  **Evolução planejada a partir do que já existe no código hoje.**
 
----
+  <p>
+    <a href="./README.md"><strong>README</strong></a>
+    &nbsp;·&nbsp;
+    <a href="./ARCHITECTURE.md">Arquitetura</a>
+    &nbsp;·&nbsp;
+    <a href="./TODO.md">Backlog</a>
+  </p>
+</div>
 
-## ✅ Fase 1 — MVP
-
-Base social e de identidade da plataforma.
-
-- ✅ **Contas**: cadastro, login, recuperação de senha (token persistido),
-  configurações da conta, troca de senha.
-- ✅ **Perfis**: foto, banner, bio, localização, website, links sociais.
-- ✅ **Feed**: publicação de texto e imagem, curtidas, comentários,
-  compartilhamentos (com cópia de link).
-- ✅ **Busca**: usuários e conteúdos, com abas e debounce.
-- ✅ **Notificações**: curtidas, comentários e novos seguidores.
-- ✅ **Seguidores**: seguir / deixar de seguir (necessário para o feed e
-  notificações já no MVP).
+Legenda: ✅ concluído · 🟡 próximo ciclo · ⬜ planejado
 
 ---
 
-## ⬜ Fase 2 — Social
+## Capacidades já entregues (base atual)
 
-Aprofundar a camada social e o consumo de conteúdo.
-
-- ⬜ **Stories**: imagens e vídeos curtos com expiração automática (24h).
-  - Modelo `Story(authorId, mediaUrl, mediaType, expiresAt)` + job de limpeza.
-- ⬜ **Mensagens**: chat privado 1:1 com envio de imagens.
-  - Modelos `Conversation`, `ConversationMember`, `Message`.
-  - Realtime via Supabase Realtime ou WebSocket.
-- ⬜ **Feed inteligente**: conteúdos recomendados (sinais de engajamento +
-  grafo de seguidores).
-
----
-
-## ⬜ Fase 3 — Comunidades
-
-- ⬜ Comunidades **públicas**, **privadas** e **por assinatura**.
-  - Modelos `Community`, `CommunityMember` (papéis: OWNER/ADMIN/MOD/MEMBER).
-- ⬜ Recursos internos: posts da comunidade, **eventos**, **enquetes**,
-  conteúdo **fixado**.
-- ⬜ **Moderação**: administradores, moderadores, **denúncias** (`Report`).
+| Área | Status | Escopo atual |
+| --- | :---: | --- |
+| Base social do MVP | ✅ | Contas, perfis, feed, comentários, curtidas, compartilhamentos, busca, seguidores e notificações. |
+| Stories | ✅ | Modelo e ações com expiração de 24h (`Story`, `createStory`, `getActiveStories`). |
+| Mensagens privadas 1:1 | ✅ | Conversas, membros, mensagens, leitura e atualização por polling. |
+| Marketplace de produtos digitais | ✅ | Modelos `Product/Order/OrderItem/LibraryItem`, queries e actions de domínio. |
+| Checkout Stripe | ✅ | Criação de sessão de pagamento (`createCheckoutSession`). |
+| Webhook Stripe | ✅ | Processamento de `checkout.session.completed` e `checkout.session.expired`. |
+| Biblioteca e download protegido | ✅ | Controle de posse e endpoint com URL assinada/fallback. |
 
 ---
 
-## ⬜ Fase 4 — Marketplace
+## Próximos ciclos (incrementais)
 
-Reaproveita o `lib/stripe.ts` já presente.
+### 🟡 Ciclo 1 — Social em tempo real e UX
+- Realtime para mensagens (substituir/combinar com polling).
+- Stories com ciclo de vida mais robusto (vídeo, visualização, limpeza operacional).
+- Melhorias de descoberta no feed (ranking/sinais de relevância).
 
-- ⬜ **Loja do criador**: produtos digitais.
-  - Tipos: cursos, e-books, templates, prompts de IA, arquivos digitais.
-  - Modelos `Product`, `Order`, `OrderItem`, `LibraryItem`.
-- ⬜ Carrinho, checkout (Stripe Checkout), **biblioteca de compras**.
-- ⬜ Entrega de arquivos via URLs assinadas do Supabase Storage.
+### 🟡 Ciclo 2 — Comunidades e moderação
+- Espaços de comunidade (públicos, privados e por assinatura).
+- Papéis e ferramentas de moderação.
+- Fluxos de denúncia e governança de conteúdo.
 
----
-
-## ⬜ Fase 5 — Monetização
-
-- ⬜ **Assinaturas mensais** (planos Básico, Pro, Premium) via Stripe Billing.
-  - Modelo `Subscription` + webhooks de status.
-- ⬜ **Programa de criadores**: recompensa por engajamento, ranking.
-- ⬜ **Gorjetas**: apoio financeiro direto (`Tip`).
+### 🟡 Ciclo 3 — Monetização avançada
+- Assinaturas com Stripe Billing e gestão de plano/ciclo de cobrança.
+- Hardening de pagamentos (retries, reconciliação, antifraude e trilha operacional).
+- Evolução de experiência do criador (ofertas e conversão).
 
 ---
 
-## ⬜ Fase 6 — Expansão
+## Melhorias transversais
 
-- ⬜ **Lives** e **chamadas em grupo** (WebRTC / serviço de streaming).
-- ⬜ **Recomendações por IA** (Claude) para feed e descoberta.
-- ⬜ **Gamificação**: conquistas, badges, níveis e pontos.
-
----
-
-## Dívidas técnicas / melhorias transversais
-
-- Rate limiting (Upstash) em actions sensíveis.
-- Paginação infinita no feed (cursor já suportado em `getFeedPosts`).
-- Testes automatizados (Vitest + Playwright).
-- Verificação de e-mail e OAuth (Google/GitHub) — modelos já preparados.
-- Observabilidade (logs estruturados, Sentry).
-- Internacionalização (i18n).
+- ⬜ Observabilidade (logs estruturados, tracing e alertas).
+- ⬜ Testes ampliados (unit, integração e e2e cobrindo fluxos críticos).
+- ⬜ Internacionalização (i18n).
+- ⬜ OAuth social e verificação de e-mail (quando ativados no produto).
+- ⬜ Evolução de performance (cache, paginação e tuning de queries).
