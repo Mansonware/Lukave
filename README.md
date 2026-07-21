@@ -1,93 +1,169 @@
 <div align="center">
 
-# NUUK
+# Lukave
 
-**Crie. Conecte. Monetize.**
+**Crie, conecte e monetize em um só lugar.**
 
-A plataforma tudo-em-um para criadores de conteúdo, comunidades e monetização.
+Plataforma social moderna para criadores de conteúdo, comunidades e futuras camadas de monetização, construída com Next.js, TypeScript e Prisma.
 
 </div>
 
 ---
 
-## Sobre
+## Visão geral
 
-NEXUS permite que qualquer pessoa **crie conteúdo**, **construa audiência**,
-**forme comunidades** e **monetize** — tudo em um só lugar, sem depender de
-ferramentas externas. Inspirado no melhor de Discord, TikTok e Patreon, com
-visual premium e dark mode por padrão.
+O **Lukave** é uma plataforma web focada em presença digital, publicação de conteúdo e relacionamento com audiência. O projeto foi estruturado como um **monolito modular** com **Next.js 15 App Router**, priorizando produtividade, tipagem ponta a ponta e evolução em fases.
 
-> **Status:** Fase 1 (MVP) implementada e validada. Veja o
-> [ROADMAP](./ROADMAP.md) para as próximas fases.
+Hoje, o repositório já entrega a **Fase 1 (MVP)** com base sólida de autenticação, perfis, feed social, busca e notificações. As próximas expansões estão documentadas no [ROADMAP.md](./ROADMAP.md).
 
-## Stack
+## Principais recursos
 
-Next.js 15 · TypeScript · TailwindCSS · shadcn-style UI · Framer Motion ·
-Prisma · PostgreSQL · Auth.js v5 · Supabase Storage · Stripe.
+### MVP já implementado
 
-Detalhes em [ARCHITECTURE.md](./ARCHITECTURE.md).
+- **Autenticação completa** com cadastro, login e recuperação de senha.
+- **Perfis de usuário** com avatar, banner, bio, localização, website e links sociais.
+- **Feed social** com publicações de texto e imagem.
+- **Interações** com curtidas, comentários e compartilhamentos.
+- **Busca** de usuários e conteúdos.
+- **Sistema de seguidores** para conexão entre perfis.
+- **Notificações** para eventos relevantes da plataforma.
 
-## Funcionalidades (Fase 1 — MVP)
+### Estrutura preparada para evolução
 
-- **Contas**: cadastro, login, recuperação de senha, configurações.
-- **Perfis**: foto, banner, bio, localização, website e links sociais.
-- **Feed**: posts de texto e imagem, curtidas, comentários, compartilhamentos.
-- **Busca**: usuários e conteúdos.
-- **Notificações**: curtidas, comentários e novos seguidores.
-- **Seguidores**: seguir / deixar de seguir.
+O projeto já possui base técnica para futuras fases, incluindo:
 
-## Como rodar
+- **Stories, mensagens privadas e feed inteligente**.
+- **Comunidades públicas, privadas e por assinatura**.
+- **Marketplace para produtos digitais**.
+- **Assinaturas, gorjetas e monetização para criadores**.
+- **Lives, recomendações por IA e gamificação**.
 
-Pré-requisitos: Node 20+ e um banco PostgreSQL.
+## Stack principal
+
+- **Framework:** Next.js 15
+- **Linguagem:** TypeScript
+- **UI:** React 19, Tailwind CSS, Radix UI, Framer Motion
+- **Autenticação:** Auth.js / NextAuth v5
+- **Banco de dados:** PostgreSQL
+- **ORM:** Prisma
+- **Storage:** Supabase Storage
+- **Pagamentos:** Stripe
+- **Validação:** Zod
+- **Testes:** Vitest
+
+Para detalhes técnicos e decisões de arquitetura, veja [ARCHITECTURE.md](./ARCHITECTURE.md).
+
+## Como executar localmente
+
+### Pré-requisitos
+
+- **Node.js 20+**
+- **npm**
+- **PostgreSQL** disponível localmente ou em provedor externo
+
+### 1. Clone e instale dependências
 
 ```bash
-# 1. Variáveis de ambiente
-cp .env.example .env
-#    Preencha pelo menos DATABASE_URL e AUTH_SECRET (openssl rand -base64 32)
-
-# 2. Dependências
 npm install
+```
 
-# 3. Banco de dados
-npm run db:push      # cria as tabelas
-npm run db:seed      # (opcional) popula dados de exemplo
+### 2. Configure as variáveis de ambiente
 
-# 4. Desenvolvimento
+Copie o arquivo de exemplo:
+
+```bash
+cp .env.example .env
+```
+
+Preencha pelo menos estas variáveis:
+
+- `DATABASE_URL`
+- `AUTH_SECRET`
+
+Variáveis opcionais habilitam integrações extras, como Google/GitHub OAuth, Supabase Storage, Stripe, Resend e Upstash Redis.
+
+### 3. Gere o banco e dados iniciais
+
+```bash
+npm run db:push
+npm run db:seed
+```
+
+> O seed é opcional, mas útil para desenvolvimento local.
+
+### 4. Inicie o ambiente de desenvolvimento
+
+```bash
 npm run dev
 ```
 
-App em `http://localhost:3000`.
-Login de teste (após o seed): `ana@nexus.app` / `nexus1234`.
+A aplicação ficará disponível em **http://localhost:3000**.
 
-## Scripts
+## Scripts disponíveis
 
-| Script               | Descrição                          |
-| -------------------- | ---------------------------------- |
-| `npm run dev`        | Servidor de desenvolvimento        |
-| `npm run build`      | Build de produção (+ prisma generate) |
-| `npm run start`      | Servidor de produção               |
-| `npm run lint`       | ESLint                             |
-| `npm run typecheck`  | Checagem de tipos (tsc)            |
-| `npm run db:push`    | Sincroniza o schema com o banco    |
-| `npm run db:migrate` | Cria/aplica migrations             |
-| `npm run db:seed`    | Popula dados de exemplo            |
-| `npm run db:studio`  | Prisma Studio                      |
+| Comando | Descrição |
+| --- | --- |
+| `npm run dev` | Inicia o servidor de desenvolvimento |
+| `npm run build` | Gera a build de produção |
+| `npm run start` | Inicia a aplicação em modo produção |
+| `npm run lint` | Executa o ESLint |
+| `npm run typecheck` | Faz a checagem de tipos com TypeScript |
+| `npm run test` | Executa os testes com Vitest |
+| `npm run db:generate` | Gera o client do Prisma |
+| `npm run db:push` | Sincroniza o schema com o banco |
+| `npm run db:migrate` | Cria/aplica migrations no banco |
+| `npm run db:studio` | Abre o Prisma Studio |
+| `npm run db:seed` | Popula o banco com dados de exemplo |
 
-## Variáveis de ambiente
+## Estrutura do projeto
 
-Veja [`.env.example`](./.env.example). Mínimo para rodar a Fase 1:
+```text
+prisma/
+src/
+  app/
+  components/
+  lib/
+  server/
+  types/
+public/
+scripts/
+```
 
-- `DATABASE_URL` — conexão PostgreSQL.
-- `AUTH_SECRET` — segredo do Auth.js.
+Arquivos úteis para navegação:
 
-Opcionais (degradam graciosamente se ausentes):
+- [ARCHITECTURE.md](./ARCHITECTURE.md) — visão técnica e decisões de arquitetura.
+- [ROADMAP.md](./ROADMAP.md) — fases futuras do produto.
+- [TODO.md](./TODO.md) — backlog e melhorias planejadas.
+- [`.env.example`](./.env.example) — referência de configuração local.
 
-- Supabase (upload de mídia) — sem isso, usa placeholder em dev.
-- Stripe (fases 4/5) — sem isso, pagamentos ficam desativados.
-- SMTP (recuperação de senha) — sem isso, o link é logado no console.
+## Arquitetura em resumo
 
-## Documentação
+A aplicação segue uma abordagem de **monolito modular**:
 
-- [ARCHITECTURE.md](./ARCHITECTURE.md) — arquitetura e decisões técnicas.
-- [ROADMAP.md](./ROADMAP.md) — fases e planejamento.
-- [TODO.md](./TODO.md) — backlog de tarefas.
+- **React Server Components** para leituras.
+- **Server Actions** para mutações.
+- **Prisma** como camada de acesso a dados.
+- **Auth.js v5** para autenticação.
+- **Zod** para validação.
+- **Supabase** e **Stripe** como integrações externas opcionais.
+
+Essa estrutura favorece simplicidade operacional, boa experiência de desenvolvimento e crescimento incremental por fases.
+
+## Status do projeto
+
+- **Fase atual:** MVP implementado
+- **Branch padrão:** `main`
+- **Deploy/Homepage configurada:** GitHub Pages / ambiente publicado informado no repositório
+
+## Próximos passos
+
+Se você quiser evoluir o projeto, a ordem natural é:
+
+1. reforçar testes automatizados;
+2. habilitar rate limiting e observabilidade;
+3. expandir a camada social;
+4. ativar marketplace e monetização.
+
+## Licença
+
+Este repositório não possui uma licença definida no momento. Se o projeto for aberto para uso público mais amplo, vale adicionar uma licença explícita.
