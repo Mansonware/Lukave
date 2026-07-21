@@ -1,0 +1,99 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 500" role="img" aria-labelledby="title description">
+  <title id="title">Lukave — plataforma para criadores</title>
+  <desc id="description">Ilustração animada de uma rede social para criadores, comunidades e monetização.</desc>
+  <defs>
+    <linearGradient id="background" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#070A12"/>
+      <stop offset="0.55" stop-color="#10152B"/>
+      <stop offset="1" stop-color="#0B1020"/>
+    </linearGradient>
+    <linearGradient id="primary" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#A78BFA"/>
+      <stop offset="0.5" stop-color="#60A5FA"/>
+      <stop offset="1" stop-color="#22D3EE"/>
+    </linearGradient>
+    <linearGradient id="surface" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#1E293B" stop-opacity=".85"/>
+      <stop offset="1" stop-color="#0F172A" stop-opacity=".65"/>
+    </linearGradient>
+    <filter id="blur"><feGaussianBlur stdDeviation="28"/></filter>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="18" stdDeviation="22" flood-color="#020617" flood-opacity=".58"/>
+    </filter>
+    <clipPath id="cardClip"><rect x="714" y="99" width="365" height="302" rx="24"/></clipPath>
+  </defs>
+
+  <rect width="1200" height="500" rx="28" fill="url(#background)"/>
+  <g opacity=".55" filter="url(#blur)">
+    <circle cx="164" cy="46" r="100" fill="#7C3AED"><animate attributeName="cx" values="164;250;164" dur="8s" repeatCount="indefinite"/></circle>
+    <circle cx="1012" cy="428" r="136" fill="#0891B2"><animate attributeName="cy" values="428;358;428" dur="9s" repeatCount="indefinite"/></circle>
+  </g>
+
+  <g opacity=".2" stroke="#94A3B8" stroke-width="1">
+    <path d="M0 100H1200M0 200H1200M0 300H1200M0 400H1200"/>
+    <path d="M100 0V500M200 0V500M300 0V500M400 0V500M500 0V500M600 0V500M700 0V500M800 0V500M900 0V500M1000 0V500M1100 0V500"/>
+  </g>
+
+  <g transform="translate(74 72)">
+    <g>
+      <rect width="62" height="62" rx="19" fill="#0B1224" stroke="url(#primary)" stroke-width="2"/>
+      <path d="M20 43V19l22 24V19" fill="none" stroke="url(#primary)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+    </g>
+    <text x="82" y="29" fill="#F8FAFC" font-family="Arial, Helvetica, sans-serif" font-size="27" font-weight="700" letter-spacing="2">LUKAVE</text>
+    <text x="82" y="52" fill="#94A3B8" font-family="Arial, Helvetica, sans-serif" font-size="14" letter-spacing="1.5">CREATOR PLATFORM</text>
+
+    <text x="0" y="159" fill="#F8FAFC" font-family="Arial, Helvetica, sans-serif" font-size="54" font-weight="700">Crie conexões.</text>
+    <text x="0" y="223" fill="url(#primary)" font-family="Arial, Helvetica, sans-serif" font-size="54" font-weight="700">Construa seu espaço.</text>
+    <text x="0" y="272" fill="#CBD5E1" font-family="Arial, Helvetica, sans-serif" font-size="19">Uma base social moderna para criadores, comunidades</text>
+    <text x="0" y="301" fill="#CBD5E1" font-family="Arial, Helvetica, sans-serif" font-size="19">e experiências de monetização que evoluem com você.</text>
+
+    <g transform="translate(0 342)">
+      <rect width="190" height="47" rx="14" fill="url(#primary)"/>
+      <text x="24" y="30" fill="#06111F" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="700">MVP DISPONÍVEL</text>
+      <circle cx="165" cy="23.5" r="5" fill="#082F49"><animate attributeName="opacity" values="1;.25;1" dur="1.8s" repeatCount="indefinite"/></circle>
+      <text x="214" y="30" fill="#94A3B8" font-family="Arial, Helvetica, sans-serif" font-size="15">Next.js · TypeScript · Prisma</text>
+    </g>
+  </g>
+
+  <g filter="url(#shadow)">
+    <rect x="714" y="99" width="365" height="302" rx="24" fill="url(#surface)" stroke="#334155"/>
+    <g clip-path="url(#cardClip)">
+      <rect x="714" y="99" width="365" height="48" fill="#111C33"/>
+      <circle cx="742" cy="123" r="6" fill="#FB7185"/>
+      <circle cx="764" cy="123" r="6" fill="#FBBF24"/>
+      <circle cx="786" cy="123" r="6" fill="#34D399"/>
+      <rect x="814" y="115" width="190" height="16" rx="8" fill="#24324D"/>
+
+      <g transform="translate(741 171)">
+        <circle cx="22" cy="22" r="22" fill="#312E81"/>
+        <path d="M14 28c3-9 13-9 16 0M18 18a4 4 0 1 0 8 0 4 4 0 0 0-8 0" fill="none" stroke="#C4B5FD" stroke-width="2" stroke-linecap="round"/>
+        <rect x="58" y="3" width="100" height="12" rx="6" fill="#E2E8F0"/>
+        <rect x="58" y="24" width="64" height="9" rx="4.5" fill="#64748B"/>
+        <rect x="0" y="64" width="300" height="9" rx="4.5" fill="#94A3B8" opacity=".75"/>
+        <rect x="0" y="82" width="257" height="9" rx="4.5" fill="#64748B" opacity=".75"/>
+        <rect x="0" y="111" width="300" height="61" rx="13" fill="#172554"/>
+        <path d="M17 153c29-32 51-3 73-26 25-25 48 18 74 4 32-18 59-32 119 11v30H17z" fill="#2563EB" opacity=".58"/>
+        <circle cx="249" cy="137" r="20" fill="#7C3AED" opacity=".8"><animate attributeName="r" values="20;25;20" dur="3s" repeatCount="indefinite"/></circle>
+        <g transform="translate(0 197)" fill="#94A3B8">
+          <rect width="44" height="9" rx="4.5"/><rect x="69" width="44" height="9" rx="4.5"/><rect x="138" width="44" height="9" rx="4.5"/>
+        </g>
+      </g>
+      <rect x="699" y="145" width="395" height="2" fill="url(#primary)" opacity=".8">
+        <animate attributeName="y" values="145;401;145" dur="5s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" values="0;.9;0" dur="5s" repeatCount="indefinite"/>
+      </rect>
+    </g>
+  </g>
+
+  <g fill="none" stroke="url(#primary)" stroke-linecap="round">
+    <path d="M620 208C661 208 664 186 702 186" stroke-width="2" opacity=".7" stroke-dasharray="5 9">
+      <animate attributeName="stroke-dashoffset" values="0;-28" dur="1.4s" repeatCount="indefinite"/>
+    </path>
+    <circle cx="620" cy="208" r="7" fill="#A78BFA" stroke="none"><animate attributeName="r" values="7;11;7" dur="2.4s" repeatCount="indefinite"/></circle>
+  </g>
+
+  <g transform="translate(960 427)">
+    <circle r="5" fill="#22C55E"><animate attributeName="opacity" values="1;.3;1" dur="1.8s" repeatCount="indefinite"/></circle>
+    <text x="15" y="5" fill="#A7F3D0" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="700" letter-spacing="1">BUILDING THE CREATOR ECONOMY</text>
+  </g>
+</svg>

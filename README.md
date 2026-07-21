@@ -1,169 +1,220 @@
 <div align="center">
+  <img src="./public/icon.svg" width="84" alt="Lukave" />
 
-# Lukave
+  # Lukave
 
-**Crie, conecte e monetize em um só lugar.**
+  ### Crie. Conecte. Evolua.
 
-Plataforma social moderna para criadores de conteúdo, comunidades e futuras camadas de monetização, construída com Next.js, TypeScript e Prisma.
+  **A plataforma social para criadores, comunidades e novas formas de monetização.**
+
+  <p>
+    <a href="#comece-em-minutos"><strong>Começar agora</strong></a>
+    &nbsp;·&nbsp;
+    <a href="./ARCHITECTURE.md">Arquitetura</a>
+    &nbsp;·&nbsp;
+    <a href="./ROADMAP.md">Roadmap</a>
+    &nbsp;·&nbsp;
+    <a href="./TODO.md">Backlog</a>
+  </p>
+
+  <p>
+    <img src="https://img.shields.io/badge/status-MVP-22C55E?style=flat-square" alt="Status: MVP" />
+    <img src="https://img.shields.io/badge/Next.js-15-111827?style=flat-square&logo=nextdotjs" alt="Next.js 15" />
+    <img src="https://img.shields.io/badge/TypeScript-strict-3178C6?style=flat-square&logo=typescript&logoColor=white" alt="TypeScript strict" />
+    <img src="https://img.shields.io/badge/license-not%20defined-64748B?style=flat-square" alt="Licença não definida" />
+  </p>
+</div>
+
+<br />
+
+<p align="center">
+  <img src="./public/readme-hero.svg" alt="Lukave — plataforma para criadores" width="100%" />
+</p>
+
+> [!NOTE]
+> O SVG acima possui animações nativas. Caso o seu visualizador não as suporte, ele continua exibindo uma versão estática do conceito visual.
+
+## O que é o Lukave?
+
+O **Lukave** é uma plataforma web para pessoas que criam, compartilham e cultivam comunidades. Ele reúne identidade digital, publicação de conteúdo e interação social em uma experiência única — com uma arquitetura preparada para incorporar produtos, assinaturas e monetização de forma progressiva.
+
+O produto está na **Fase 1 (MVP)**: uma fundação social completa, construída para ser rápida de evoluir e simples de operar.
+
+<table>
+  <tr>
+    <td width="33%" valign="top">
+      <h3>✦ Criação</h3>
+      Publicações de texto e imagem, com uma experiência pensada para compartilhar ideias e construir presença.
+    </td>
+    <td width="33%" valign="top">
+      <h3>◌ Conexão</h3>
+      Perfis, seguidores, busca, comentários e notificações para aproximar criadores e audiência.
+    </td>
+    <td width="33%" valign="top">
+      <h3>↗ Evolução</h3>
+      Base preparada para comunidades, marketplace, assinaturas e novas experiências sociais.
+    </td>
+  </tr>
+</table>
+
+## Capacidades atuais
+
+| Área | O que já está disponível |
+| --- | --- |
+| **Identidade** | Cadastro, login, troca e recuperação de senha, configurações de conta. |
+| **Perfil** | Avatar, banner, bio, localização, website e links sociais. |
+| **Conteúdo** | Feed com posts de texto/imagem, curtidas, comentários e compartilhamentos. |
+| **Descoberta** | Busca por usuários e conteúdos, com abas e debounce. |
+| **Relacionamentos** | Seguir/deixar de seguir e contadores de audiência. |
+| **Engajamento** | Notificações de curtidas, comentários e novos seguidores. |
+
+## Próxima evolução do produto
+
+A fundação técnica já considera os próximos ciclos de crescimento:
+
+```text
+MVP Social  ──►  Conversas & Stories  ──►  Comunidades  ──►  Marketplace  ──►  Monetização
+     ✓                  planejado             planejado          planejado          planejado
+```
+
+- **Social:** stories, mensagens privadas e recomendações de conteúdo.
+- **Comunidades:** espaços públicos, privados e por assinatura, com moderação.
+- **Marketplace:** produtos digitais, checkout e biblioteca de compras.
+- **Monetização:** planos, gorjetas e programa de criadores.
+
+Consulte o [roadmap completo](./ROADMAP.md) para as fases, prioridades e dívidas técnicas.
+
+## Stack e arquitetura
+
+<div align="center">
+
+| Interface | Aplicação | Dados e serviços |
+| :---: | :---: | :---: |
+| React 19 · Tailwind CSS · Radix UI · Framer Motion | Next.js 15 · App Router · Server Actions · Zod | PostgreSQL · Prisma · Auth.js · Supabase · Stripe |
 
 </div>
 
----
+O Lukave adota um **monolito modular**: leituras usam React Server Components, mutações são realizadas por Server Actions tipadas e o Prisma centraliza o acesso ao PostgreSQL. Essa abordagem reduz a superfície operacional sem limitar a evolução do produto.
 
-## Visão geral
+```text
+Browser / PWA
+      │
+      ├── React Server Components  →  consultas
+      └── Server Actions           →  mutações validadas
+                                      │
+                              Prisma ORM + PostgreSQL
+                                      │
+                     Auth.js · Supabase Storage · Stripe
+```
 
-O **Lukave** é uma plataforma web focada em presença digital, publicação de conteúdo e relacionamento com audiência. O projeto foi estruturado como um **monolito modular** com **Next.js 15 App Router**, priorizando produtividade, tipagem ponta a ponta e evolução em fases.
+Veja as decisões, estrutura de diretórios e práticas de segurança em [ARCHITECTURE.md](./ARCHITECTURE.md).
 
-Hoje, o repositório já entrega a **Fase 1 (MVP)** com base sólida de autenticação, perfis, feed social, busca e notificações. As próximas expansões estão documentadas no [ROADMAP.md](./ROADMAP.md).
-
-## Principais recursos
-
-### MVP já implementado
-
-- **Autenticação completa** com cadastro, login e recuperação de senha.
-- **Perfis de usuário** com avatar, banner, bio, localização, website e links sociais.
-- **Feed social** com publicações de texto e imagem.
-- **Interações** com curtidas, comentários e compartilhamentos.
-- **Busca** de usuários e conteúdos.
-- **Sistema de seguidores** para conexão entre perfis.
-- **Notificações** para eventos relevantes da plataforma.
-
-### Estrutura preparada para evolução
-
-O projeto já possui base técnica para futuras fases, incluindo:
-
-- **Stories, mensagens privadas e feed inteligente**.
-- **Comunidades públicas, privadas e por assinatura**.
-- **Marketplace para produtos digitais**.
-- **Assinaturas, gorjetas e monetização para criadores**.
-- **Lives, recomendações por IA e gamificação**.
-
-## Stack principal
-
-- **Framework:** Next.js 15
-- **Linguagem:** TypeScript
-- **UI:** React 19, Tailwind CSS, Radix UI, Framer Motion
-- **Autenticação:** Auth.js / NextAuth v5
-- **Banco de dados:** PostgreSQL
-- **ORM:** Prisma
-- **Storage:** Supabase Storage
-- **Pagamentos:** Stripe
-- **Validação:** Zod
-- **Testes:** Vitest
-
-Para detalhes técnicos e decisões de arquitetura, veja [ARCHITECTURE.md](./ARCHITECTURE.md).
-
-## Como executar localmente
+## Comece em minutos
 
 ### Pré-requisitos
 
-- **Node.js 20+**
-- **npm**
-- **PostgreSQL** disponível localmente ou em provedor externo
+- Node.js **20+**
+- npm
+- Uma instância PostgreSQL local ou remota
 
-### 1. Clone e instale dependências
+### Instalação
 
 ```bash
+# 1. Instale as dependências
 npm install
-```
 
-### 2. Configure as variáveis de ambiente
-
-Copie o arquivo de exemplo:
-
-```bash
+# 2. Crie a configuração local
 cp .env.example .env
-```
 
-Preencha pelo menos estas variáveis:
+# 3. Configure DATABASE_URL e AUTH_SECRET no arquivo .env
+# Gere um segredo com: openssl rand -base64 32
 
-- `DATABASE_URL`
-- `AUTH_SECRET`
-
-Variáveis opcionais habilitam integrações extras, como Google/GitHub OAuth, Supabase Storage, Stripe, Resend e Upstash Redis.
-
-### 3. Gere o banco e dados iniciais
-
-```bash
+# 4. Crie o schema no banco e, opcionalmente, dados de demonstração
 npm run db:push
 npm run db:seed
-```
 
-> O seed é opcional, mas útil para desenvolvimento local.
-
-### 4. Inicie o ambiente de desenvolvimento
-
-```bash
+# 5. Inicie a aplicação
 npm run dev
 ```
 
-A aplicação ficará disponível em **http://localhost:3000**.
+Acesse **http://localhost:3000**.
 
-## Scripts disponíveis
+<details>
+  <summary><strong>Variáveis de ambiente</strong></summary>
+  <br />
 
-| Comando | Descrição |
+  Necessárias para o núcleo do MVP:
+
+  | Variável | Finalidade |
+  | --- | --- |
+  | `DATABASE_URL` | String de conexão com PostgreSQL. |
+  | `AUTH_SECRET` | Segredo usado pelo Auth.js para proteger sessões. |
+
+  Integrações opcionais: OAuth com Google/GitHub, Supabase Storage, Stripe, Resend e Upstash Redis. Consulte [`.env.example`](./.env.example) para a referência completa.
+</details>
+
+<details>
+  <summary><strong>Dados de demonstração</strong></summary>
+  <br />
+
+  Após executar `npm run db:seed`, use:
+
+  ```text
+  E-mail: ana@nexus.app
+  Senha: nexus1234
+  ```
+</details>
+
+## Comandos úteis
+
+| Comando | Finalidade |
 | --- | --- |
-| `npm run dev` | Inicia o servidor de desenvolvimento |
-| `npm run build` | Gera a build de produção |
-| `npm run start` | Inicia a aplicação em modo produção |
-| `npm run lint` | Executa o ESLint |
-| `npm run typecheck` | Faz a checagem de tipos com TypeScript |
-| `npm run test` | Executa os testes com Vitest |
-| `npm run db:generate` | Gera o client do Prisma |
-| `npm run db:push` | Sincroniza o schema com o banco |
-| `npm run db:migrate` | Cria/aplica migrations no banco |
-| `npm run db:studio` | Abre o Prisma Studio |
-| `npm run db:seed` | Popula o banco com dados de exemplo |
+| `npm run dev` | Inicia o ambiente de desenvolvimento. |
+| `npm run build` | Gera a build de produção e o client Prisma. |
+| `npm run start` | Executa a aplicação compilada. |
+| `npm run lint` | Executa a análise estática com ESLint. |
+| `npm run typecheck` | Verifica os tipos TypeScript sem gerar arquivos. |
+| `npm run test` | Executa os testes com Vitest. |
+| `npm run db:push` | Sincroniza o schema Prisma com o banco. |
+| `npm run db:migrate` | Cria e aplica migrations no desenvolvimento. |
+| `npm run db:seed` | Popula dados de demonstração. |
+| `npm run db:studio` | Abre a interface do Prisma Studio. |
 
-## Estrutura do projeto
+## Estrutura do repositório
 
 ```text
-prisma/
+prisma/                 # Schema, migrations e seed do banco
+public/                 # Ícones, manifest e ativos estáticos
 src/
-  app/
-  components/
-  lib/
-  server/
-  types/
-public/
-scripts/
+├── app/                # Rotas, layouts e páginas (App Router)
+├── components/         # Design system e componentes por domínio
+├── lib/                # Clientes, validações e utilitários
+├── server/             # Queries e Server Actions
+└── types/              # Tipos compartilhados
 ```
 
-Arquivos úteis para navegação:
+## Qualidade e segurança
 
-- [ARCHITECTURE.md](./ARCHITECTURE.md) — visão técnica e decisões de arquitetura.
-- [ROADMAP.md](./ROADMAP.md) — fases futuras do produto.
-- [TODO.md](./TODO.md) — backlog e melhorias planejadas.
-- [`.env.example`](./.env.example) — referência de configuração local.
+- Tipagem estrita com **TypeScript**.
+- Validação de entradas via **Zod**.
+- Senhas protegidas com **bcrypt**.
+- Rotas autenticadas protegidas no middleware e revalidadas nas actions.
+- Uploads com limite de tamanho e allowlist de tipos de imagem.
+- Arquitetura pronta para rate limiting, observabilidade e OAuth.
 
-## Arquitetura em resumo
+## Documentação
 
-A aplicação segue uma abordagem de **monolito modular**:
+| Documento | Conteúdo |
+| --- | --- |
+| [ARCHITECTURE.md](./ARCHITECTURE.md) | Arquitetura, decisões técnicas e modelo de dados. |
+| [ROADMAP.md](./ROADMAP.md) | Fases do produto e visão de longo prazo. |
+| [TODO.md](./TODO.md) | Pendências e oportunidades de melhoria. |
+| [`.env.example`](./.env.example) | Todas as variáveis de ambiente disponíveis. |
 
-- **React Server Components** para leituras.
-- **Server Actions** para mutações.
-- **Prisma** como camada de acesso a dados.
-- **Auth.js v5** para autenticação.
-- **Zod** para validação.
-- **Supabase** e **Stripe** como integrações externas opcionais.
+---
 
-Essa estrutura favorece simplicidade operacional, boa experiência de desenvolvimento e crescimento incremental por fases.
-
-## Status do projeto
-
-- **Fase atual:** MVP implementado
-- **Branch padrão:** `main`
-- **Deploy/Homepage configurada:** GitHub Pages / ambiente publicado informado no repositório
-
-## Próximos passos
-
-Se você quiser evoluir o projeto, a ordem natural é:
-
-1. reforçar testes automatizados;
-2. habilitar rate limiting e observabilidade;
-3. expandir a camada social;
-4. ativar marketplace e monetização.
-
-## Licença
-
-Este repositório não possui uma licença definida no momento. Se o projeto for aberto para uso público mais amplo, vale adicionar uma licença explícita.
+<div align="center">
+  <sub>Construído com Next.js, TypeScript e uma visão de produto centrada em criadores.</sub>
+  <br />
+  <sub>Este repositório ainda não possui uma licença definida.</sub>
+</div>
