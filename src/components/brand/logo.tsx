@@ -15,14 +15,14 @@ export function Logo({
     <Link
       href={href}
       className={cn("flex items-center gap-2.5", className)}
-      aria-label="NEXUS, início"
+      aria-label="Lukave, início"
     >
-      <span className="grid h-8 w-8 place-items-center rounded-lg border border-primary/60 bg-nexus-gradient/20 bg-gradient-to-br from-primary/40 to-accent/10 text-sm font-bold text-white shadow-[inset_0_0_12px_rgba(145,101,255,0.35)]">
-        N
+      <span className="grid h-8 w-8 place-items-center rounded-xl border border-primary/50 bg-gradient-to-br from-primary to-accent text-sm font-black text-white shadow-lg shadow-primary/20">
+        L
       </span>
       {withWordmark && (
-        <span className="font-display text-lg font-bold tracking-[0.18em]">
-          NEXUS
+        <span className="font-display text-lg font-bold tracking-[0.14em]">
+          LUKAVE
         </span>
       )}
     </Link>
