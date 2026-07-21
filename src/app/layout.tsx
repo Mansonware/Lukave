@@ -19,11 +19,11 @@ const spaceGrotesk = Space_Grotesk({
 
 export const metadata: Metadata = {
   title: {
-    default: "NEXUS — Crie. Conecte. Monetize.",
-    template: "%s — NEXUS",
+    default: "Lukave — Conecte ideias. Crie possibilidades.",
+    template: "%s — Lukave",
   },
   description:
-    "A plataforma tudo-em-um para criadores de conteúdo, comunidades e monetização.",
+    "Rede social, comunidades, conteúdo e monetização em uma experiência moderna para criadores e pessoas.",
   metadataBase: new URL(
     process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000",
   ),
@@ -38,7 +38,7 @@ export const metadata: Metadata = {
   },
   appleWebApp: {
     capable: true,
-    title: "NEXUS",
+    title: "Lukave",
     statusBarStyle: "black-translucent",
   },
   other: {
