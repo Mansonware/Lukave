@@ -3,7 +3,7 @@
 
   # Lukave
 
-  ### Crie. Conecte. Evolua.
+  ### Conecte e Evolua
 
   **A plataforma social para criadores, comunidades e novas formas de monetização.**
 
